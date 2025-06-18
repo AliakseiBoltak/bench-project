@@ -1,8 +1,10 @@
 # Maven specific
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+/logs/
+dump.rdb
 
-# Eclipse and other IDEs
+# IDEs specific
 *.classpath
 *.project
 *.settings/
@@ -25,10 +27,6 @@ Desktop.ini
 
 # Compiled files
 *.class
-
-# Maven build
-/logs/
-dump.rdb
 
 # Package distributions
 *.jar
