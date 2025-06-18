@@ -1,0 +1,50 @@
+# Maven specific
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse and other IDEs
+*.classpath
+*.project
+*.settings/
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.sw?
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Logs
+*.log
+
+# Compiled files
+*.class
+
+# Maven build
+/logs/
+dump.rdb
+
+# Package distributions
+*.jar
+*.war
+*.ear
+
+# Test reports
+/test-output/
+.surefire-*
+
+# Local configuration files
+*.local
+*.env
+.env.*
+
+# Others
+*.bak
+*.tmp
+*.old
