@@ -8,10 +8,6 @@ public class TestModule extends AbstractModule {
 
     @Override
     public void configure() {
-        try {
-            bind(UserDataDao.class).to(UserDataJsonDao.class);
-        } catch (Exception e) {
-            addError(e.getMessage());
-        }
+        bind(UserDataDao.class).to(UserDataJsonDao.class);
     }
 }

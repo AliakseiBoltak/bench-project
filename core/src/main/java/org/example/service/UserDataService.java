@@ -23,7 +23,7 @@ public class UserDataService {
         return testUsers.stream()
                 .filter(user -> user.getUsertype().equals(type))
                 .findFirst()
-                .get();
+                .orElseThrow(() -> new IllegalArgumentException("No user found with type: " + type));
     }
 
 }

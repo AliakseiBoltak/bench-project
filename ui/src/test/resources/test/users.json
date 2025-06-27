@@ -2,21 +2,21 @@
   {
     "usertype": "private",
     "username": "alice",
-    "password": "password123"
+    "password": ""
   },
   {
     "usertype": "business",
     "username": "diana",
-    "password": "letmein007"
+    "password": ""
   },
   {
     "usertype": "admin",
     "username": "bob",
-    "password": "secret456"
+    "password": ""
   },
   {
     "usertype": "suspended",
     "username": "charlie",
-    "password": "qwerty789"
+    "password": ""
   }
 ]

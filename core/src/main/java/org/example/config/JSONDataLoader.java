@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import org.example.exception.DataException;
 
 import java.io.*;
-import java.net.URL;
 
 public class JSONDataLoader {
     private final Gson gson = new GsonBuilder().create();
@@ -22,30 +21,16 @@ public class JSONDataLoader {
 
     public <T> T getData(String dataPath, Class<T> genericType)
     {
-        Reader reader = null;
-        try
+        try (InputStream inputStream = JSONDataLoader.class.getResource(dataPath) == null
+                ? getFileInputStream(dataPath)
+                : getInputStream(dataPath);
+             Reader reader = new InputStreamReader(inputStream))
         {
-            URL url = JSONDataLoader.class.getResource(dataPath);
-            InputStream inputStream = url == null ? getFileInputStream(dataPath) : getInputStream(dataPath);
-            reader = new InputStreamReader(inputStream);
             return gson.fromJson(reader, genericType);
         }
         catch (IOException e)
         {
             throw new DataException(e);
-        }
-        finally
-        {
-            if (reader != null)
-            {
-                try
-                {
-                    reader.close();
-                }
-                catch (IOException e)
-                {
-                }
-            }
         }
     }
 
