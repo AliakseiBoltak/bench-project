@@ -6,6 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
 
+import static org.example.constants.Constants.TEST_DATA_PATH;
+
 @Guice(modules = {TestModule.class})
 public class UITest {
 
@@ -15,11 +17,6 @@ public class UITest {
     }
 
     private final UserDataService userDataService;
-
-    private static final String ENV = System.getProperty("env") != null && !System.getProperty("env").isEmpty()
-            ? System.getProperty("env") : "test";
-    private static final String TEST_DATA_PATH = System.getProperty("user.dir") + "/src/test/resources/"
-            + ENV + "/users.json";
     private static final String TEST_USER_TYPE =  "suspended";
 
     @Test
