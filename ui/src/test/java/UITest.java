@@ -14,7 +14,7 @@ public class UITest {
         this.userDataService = userDataService;
     }
 
-    private UserDataService userDataService;
+    private final UserDataService userDataService;
 
     private static final String ENV = System.getProperty("env") != null && !System.getProperty("env").isEmpty()
             ? System.getProperty("env") : "test";
