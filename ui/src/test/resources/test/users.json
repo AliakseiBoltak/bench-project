@@ -1,0 +1,22 @@
+[
+  {
+    "usertype": "private",
+    "username": "alice",
+    "password": ""
+  },
+  {
+    "usertype": "business",
+    "username": "diana",
+    "password": ""
+  },
+  {
+    "usertype": "admin",
+    "username": "bob",
+    "password": ""
+  },
+  {
+    "usertype": "suspended",
+    "username": "charlie",
+    "password": ""
+  }
+]
