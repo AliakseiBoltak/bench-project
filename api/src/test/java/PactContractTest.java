@@ -1,5 +1,6 @@
 import au.com.dius.pact.consumer.MockServer;
 import au.com.dius.pact.consumer.dsl.PactBuilder;
+import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
 import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.V4Pact;
@@ -22,6 +23,13 @@ class PactContractTest {
 
     @Pact(consumer = "ReqresConsumer", provider = "ReqresProvider")
     public V4Pact createPact(PactBuilder builder) {
+
+        PactDslJsonBody responseBody = new PactDslJsonBody()
+                .stringType("name", "morpheus")
+                .stringType("job", "leader")
+                .stringType("id", "123")
+                .datetime("createdAt", "yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
         return builder
                 .usingLegacyDsl()
                 .given("A request to create a user")
@@ -32,12 +40,7 @@ class PactContractTest {
                 .willRespondWith()
                 .status(201)
                 .headers(Map.of("Content-Type", "application/json"))
-                .body("{\n" +
-                        "  \"name\": \"morpheus\",\n" +
-                        "  \"job\": \"leader\",\n" +
-                        "  \"id\": \"123\",\n" +
-                        "  \"createdAt\": \"2025-07-01T12:18:57.123Z\"\n" +
-                        "}")
+                .body(responseBody)
                 .toPact(V4Pact.class);
     }
 
