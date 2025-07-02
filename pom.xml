@@ -15,7 +15,7 @@
         <module>core</module>
     </modules>
 
-    <description>Java framework for API and UI test automation</description>
+    <description>Java framework for test automation</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
