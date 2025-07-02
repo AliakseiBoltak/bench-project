@@ -38,8 +38,9 @@ public class UITest {
     @Test
     public void loginTest() {
         LOGGER.info("Starting UI test....");
-        loginMissions.loginWithCredentials(
-                BaseUiTest.BASE_URL + "login",
+        loginMissions
+                .navigateToLoginPage(BaseUiTest.BASE_URL + "/login")
+                .loginWithCredentials(
                 user.getUsername(),
                 user.getPassword());
 //        Assert.assertTrue(

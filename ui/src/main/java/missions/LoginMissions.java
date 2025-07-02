@@ -14,8 +14,12 @@ public class LoginMissions {
         this.loginPage = loginPage;
     }
 
-    public LoginMissions loginWithCredentials(String url, String username, String password) {
+    public LoginMissions navigateToLoginPage(String url) {
         open(url);
+        return this;
+    }
+
+    public LoginMissions loginWithCredentials(String username, String password) {
         loginPage.enterEmail(username)
                 .enterPassword(password)
                 .clickOnLoginButton();
