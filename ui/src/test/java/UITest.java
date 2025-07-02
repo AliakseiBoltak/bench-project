@@ -23,7 +23,7 @@ public class UITest {
     }
 
     private User user;
-    private UserDataService userDataService;
+    private final UserDataService userDataService;
     private final LoginMissions loginMissions;
     private static final String TEST_USER_TYPE = "suspended";
     private static final Logger LOGGER = LogManager.getLogger(UITest.class);

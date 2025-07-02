@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class LoginMissions {
 
-    private LoginPage loginPage;
+    private final LoginPage loginPage;
 
     @Inject
     public LoginMissions(final LoginPage loginPage) {
