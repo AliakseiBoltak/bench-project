@@ -13,6 +13,7 @@
         <module>ui</module>
         <module>api</module>
         <module>core</module>
+        <module>performance</module>
     </modules>
 
     <description>Java framework for test automation</description>
