@@ -5,12 +5,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
+import static constants.Constants.BASE_URI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RestAssuredTest {
 
-    private static final String CREATE_USER_URI = "https://reqres.in/api/users";
+    private static final String CREATE_USER_URI = "/api/users";
     private static final String USER_NAME = "John Doe";
     private static final String USER_JOB = "Software Engineer";
     private static final Logger LOGGER = LogManager.getLogger(RestAssuredTest.class);
@@ -23,7 +24,9 @@ class RestAssuredTest {
         CreateUserRequest createUserRequest = new CreateUserRequest(USER_NAME, USER_JOB);
 
         CreateUserResponse createUserResponse = RestAssured
-                .given().log().everything()
+                .given()
+                .baseUri(BASE_URI)
+                .log().everything()
                 .contentType("application/json")
                 .header("x-api-key", "reqres-free-v1")
                 .body(createUserRequest)
