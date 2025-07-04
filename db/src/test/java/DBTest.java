@@ -1,5 +1,6 @@
 import constants.Constants;
 import model.OrderUserData;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -23,6 +24,14 @@ class DBTest {
         LOGGER.info("Setting up DBTest class.");
         conn = DriverManager.getConnection(Constants.DB_TEST_URL, Constants.DB_TEST_USER, Constants.DB_TEST_PASSWORD);
         LOGGER.info("DB Connection established. - " + conn.getMetaData().getURL());
+    }
+
+    @AfterClass
+    void tearDown() throws SQLException {
+        if (conn != null && !conn.isClosed()) {
+            conn.close();
+            LOGGER.info("DB Connection closed.");
+        }
     }
 
     @Test
