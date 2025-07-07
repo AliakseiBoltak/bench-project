@@ -2,10 +2,6 @@ package org.example.exception;
 
 public class PathException extends RuntimeException {
 
-    public PathException(String message) {
-        super(message);
-    }
-
     public PathException(Throwable cause) {
         super(cause);
     }
