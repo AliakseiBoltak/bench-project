@@ -12,12 +12,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static org.testng.Assert.assertFalse;
+import static queries.QueriesBank.SELECT_ORDERS_WITH_USERS_JOIN_QUERY;
 
 class DBTest {
 
     private static final Logger LOGGER = LogManager.getLogger(DBTest.class);
     private static Connection conn;
-
 
     @BeforeClass
     void setUp() throws SQLException {
@@ -36,14 +36,12 @@ class DBTest {
 
     @Test
     void simpleDbTest() throws SQLException {
-        String sql = "SELECT o.id AS order_id, u.username, u.email, o.product, o.amount, o.order_date " +
-                "FROM orders o JOIN users u ON o.user_id = u.id";
 
-        LOGGER.info("Executing SQL query: " + sql);
+        LOGGER.info("Executing SQL query: " + SELECT_ORDERS_WITH_USERS_JOIN_QUERY);
 
         try (
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql);
+                ResultSet rs = stmt.executeQuery(SELECT_ORDERS_WITH_USERS_JOIN_QUERY);
         ) {
             List<OrderUserData> orderUserDataResults = new ArrayList<>();
             while (rs.next()) {

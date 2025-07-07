@@ -2,6 +2,7 @@ package org.example.service;
 
 import com.google.inject.Inject;
 import org.example.dao.UserDataDao;
+import org.example.exception.DataException;
 import org.example.guice.TestModule;
 import org.example.model.User;
 import org.testng.annotations.Guice;
@@ -30,7 +31,7 @@ public class UserDataService {
         return testUsers.stream()
                 .filter(user -> user.getUsertype().equals(type))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No user found with type: " + type));
+                .orElseThrow(() -> new DataException("No user found with type: " + type));
     }
 
 }

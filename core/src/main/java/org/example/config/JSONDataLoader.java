@@ -30,9 +30,8 @@ public class JSONDataLoader {
         }
         catch (IOException e)
         {
-            throw new DataException(e);
+            throw new DataException(e.getMessage());
         }
     }
-
 
 }
