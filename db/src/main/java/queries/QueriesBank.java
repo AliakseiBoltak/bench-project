@@ -6,7 +6,7 @@ import static constants.Constants.SQL_QUERIES_PATH;
 
 public class QueriesBank {
 
-    public static String SELECT_ORDERS_WITH_USERS_JOIN_QUERY =
+    public static final String SELECT_ORDERS_WITH_USERS_JOIN_QUERY =
             FileManager.readFileAsString(SQL_QUERIES_PATH +
                     "select_orders_with_user_join_query.sql");
 }

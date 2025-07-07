@@ -12,7 +12,7 @@ public class FileManager {
         try {
             return new String(Files.readAllBytes(Paths.get(filePath)));
         } catch (IOException e) {
-            throw new PathException(e.getMessage());
+            throw new PathException(e);
         }
     }
 
@@ -20,7 +20,7 @@ public class FileManager {
         try {
             return Files.readAllBytes(Paths.get(filePath));
         } catch (IOException e) {
-            throw new PathException(e.getMessage());
+            throw new PathException(e);
         }
     }
 
@@ -28,7 +28,7 @@ public class FileManager {
         try {
             Files.write(Paths.get(filePath), content.getBytes());
         } catch (IOException e) {
-            throw new PathException(e.getMessage());
+            throw new PathException(e);
         }
     }
 }
