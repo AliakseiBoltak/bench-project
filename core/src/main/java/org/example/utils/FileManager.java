@@ -17,27 +17,18 @@ public class FileManager {
 
     public static String readFileAsString(String filePath) {
         try {
-            return new String(Files.readAllBytes(Paths.get(filePath)));
+            return Files.readString(Paths.get(filePath));
         } catch (IOException e) {
-            LOGGER.error("Error reading file at path: {}", filePath, e);
+            LOGGER.error("Error reading from file at path: {}", filePath, e);
             throw new PathException(e);
         }
     }
 
-    public static byte[] readFileAsBytes(String filePath) {
-        try {
-            return Files.readAllBytes(Paths.get(filePath));
-        } catch (IOException e) {
-            LOGGER.error("Error reading file at path: {}", filePath, e);
-            throw new PathException(e);
-        }
-    }
-
-    public static void writeFile(String filePath, String content) {
+    public static void writeStringToFile(String filePath, String content) {
         try {
             Files.write(Paths.get(filePath), content.getBytes());
         } catch (IOException e) {
-            LOGGER.error("Error reading file at path: {}", filePath, e);
+            LOGGER.error("Error writing to file at path: {}", filePath, e);
             throw new PathException(e);
         }
     }

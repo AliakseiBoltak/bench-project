@@ -35,13 +35,13 @@ class DBTest {
     }
 
     @Test
-    void simpleDbTest() throws SQLException {
+    void getOrdersWithUsers() throws SQLException {
 
         LOGGER.info("Executing SQL query: " + SELECT_ORDERS_WITH_USERS_JOIN_QUERY);
 
         try (
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(SELECT_ORDERS_WITH_USERS_JOIN_QUERY);
+                ResultSet rs = stmt.executeQuery(SELECT_ORDERS_WITH_USERS_JOIN_QUERY)
         ) {
             List<OrderUserData> orderUserDataResults = new ArrayList<>();
             while (rs.next()) {
