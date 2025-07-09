@@ -6,11 +6,13 @@ import org.example.guice.TestModule;
 import org.example.model.User;
 import org.example.service.UserDataService;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.example.constants.Constants.TEST_DATA_PATH;
 
 @Guice(modules = {TestModule.class})

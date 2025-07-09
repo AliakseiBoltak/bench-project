@@ -12,6 +12,10 @@
 
     <artifactId>ui</artifactId>
 
+    <properties>
+        <suiteXmlFile>ui-suite</suiteXmlFile>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.example</groupId>

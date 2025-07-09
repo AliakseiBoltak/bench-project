@@ -12,6 +12,10 @@
 
     <artifactId>db</artifactId>
 
+    <properties>
+        <suiteXmlFile>db-suite</suiteXmlFile>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.example</groupId>

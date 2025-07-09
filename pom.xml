@@ -13,7 +13,6 @@
         <module>ui</module>
         <module>api</module>
         <module>core</module>
-        <module>performance</module>
         <module>db</module>
     </modules>
 
@@ -48,7 +47,6 @@
                             <allure.results.directory>${project.build.directory}/allure-results
                             </allure.results.directory>
                         </systemPropertyVariables>
-                        <useSystemClassLoader>false</useSystemClassLoader>
                     </configuration>
                     <dependencies>
                         <dependency>
