@@ -12,6 +12,10 @@
 
     <artifactId>api</artifactId>
 
+    <properties>
+        <suiteXmlFile>api-suite</suiteXmlFile>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.example</groupId>
