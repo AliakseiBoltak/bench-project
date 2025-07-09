@@ -24,6 +24,9 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <core.library.version>1.2-SNAPSHOT</core.library.version>
+        <aspectj.version>1.9.20.1</aspectj.version>
+        <allure.version>2.24.0</allure.version>
+        <allure.results.directory>target/allure-results</allure.results.directory>
     </properties>
 
     <build>
@@ -34,10 +37,17 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.5.3</version>
                     <configuration>
-                        <systemPropertyVariables>
-                            <allure.results.directory>target/allure-results</allure.results.directory>
-                        </systemPropertyVariables>
+                        <argLine>
+                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        </argLine>
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjweaver</artifactId>
+                            <version>${aspectj.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
                 <plugin>
                     <groupId>io.qameta.allure</groupId>
@@ -46,7 +56,7 @@
                     <configuration>
                         <reportVersion>2.30.0</reportVersion>
                         <resultsDirectory>allure-results</resultsDirectory>
-                        <reportDirectory>allure-report</reportDirectory>
+                        <reportDirectory>target/allure-report</reportDirectory>
                     </configuration>
                 </plugin>
             </plugins>
