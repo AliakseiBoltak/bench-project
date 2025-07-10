@@ -1,54 +1,48 @@
 import com.google.inject.Inject;
+import io.qameta.allure.Allure;
 import missions.LoginMissions;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.example.guice.TestModule;
 import org.example.model.User;
 import org.example.service.UserDataService;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
+import pages.HomePage;
 
-import static com.codeborne.selenide.Selenide.$;
 import static org.example.constants.Constants.TEST_DATA_PATH;
 
 @Guice(modules = {TestModule.class})
-public class UITest {
+public class UITest extends BaseUiTest {
 
     @Inject
-    public UITest(final UserDataService userDataService, final LoginMissions loginMissions) {
+    public UITest(final UserDataService userDataService, final LoginMissions loginMissions,
+                  final HomePage homePage) {
         this.userDataService = userDataService;
         this.loginMissions = loginMissions;
+        this.homePage = homePage;
     }
 
     private User user;
     private final UserDataService userDataService;
     private final LoginMissions loginMissions;
+    private final HomePage homePage;
     private static final String TEST_USER_TYPE = "suspended";
-    private static final Logger LOGGER = LogManager.getLogger(UITest.class);
-
 
     @BeforeClass
     public void loginTestSetUp() {
-        LOGGER.info("Get user for testing...");
+        Allure.step("Get User For Testing: " + TEST_USER_TYPE);
         user = userDataService.getTestUserByType(TEST_USER_TYPE, TEST_DATA_PATH);
     }
 
     @Test
     public void loginTest() {
-        LOGGER.info("Starting UI test....");
         loginMissions
                 .navigateToLoginPage(BaseUiTest.BASE_URL + "/login")
                 .loginWithCredentials(
-                user.getUsername(),
-                user.getPassword());
-//        Assert.assertTrue(
-//                $(By.xpath("//h2[text()='Home']")).isDisplayed(),
-//                "Login failed! Expected to see 'Home' header after login, but it was not found."
-//        );
-        LOGGER.info("Finishing UI test....");
+                        user.getUsername(),
+                        user.getPassword());
+        Assert.assertTrue(homePage.checkIfHomePageLoaded(), "Login failed!");
     }
 }

@@ -27,6 +27,12 @@
             <artifactId>selenide</artifactId>
             <version>7.9.3</version>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-selenide</artifactId>
+            <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>
