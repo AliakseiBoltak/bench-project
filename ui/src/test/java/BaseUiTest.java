@@ -16,7 +16,7 @@ public class BaseUiTest {
 
     protected static final String DEFAULT_BROWSER = "chrome";
     protected static final String BASE_URL = "https://github.com/";
-    protected static final int WAIT_FOR_ELEMENT_MILLISECONDS_TIMEOUT = 20000; // 20 seconds
+    protected static final int WAIT_FOR_ELEMENT_MILLISECONDS_TIMEOUT = 15000; // 15 seconds
 
     @BeforeClass
     public void setUpAllureSelenide() {

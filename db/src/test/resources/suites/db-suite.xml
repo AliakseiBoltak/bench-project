@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="DB Suite">
+<suite name="DB Suite" parallel="classes">
     <test name="Get Orders With Users Test">
         <classes>
             <class name="DBTest"/>

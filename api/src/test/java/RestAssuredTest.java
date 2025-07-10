@@ -1,8 +1,7 @@
+import io.qameta.allure.Allure;
 import io.restassured.RestAssured;
 import model.requests.CreateUserRequest;
 import model.responses.CreateUserResponse;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -13,12 +12,11 @@ class RestAssuredTest {
     private static final String CREATE_USER_URI = "/api/users";
     private static final String USER_NAME = "John Doe";
     private static final String USER_JOB = "Software Engineer";
-    private static final Logger LOGGER = LogManager.getLogger(RestAssuredTest.class);
 
     @Test
     void checkCreatedUserTest() {
 
-        LOGGER.info("Starting create a user test ...");
+        Allure.step("Starting create a user test ...");
 
         CreateUserRequest createUserRequest = new CreateUserRequest(USER_NAME, USER_JOB);
 
@@ -42,6 +40,6 @@ class RestAssuredTest {
         assertNotNull(createUserResponse.getId());
         assertNotNull(createUserResponse.getCreatedAt());
 
-        LOGGER.info("Finishing create a user test ...");
+        Allure.step("Finishing create a user test ...");
     }
 }

@@ -7,6 +7,6 @@ public class Constants {
 
     public static final String ENV = System.getProperty("env") != null && !System.getProperty("env").isEmpty()
             ? System.getProperty("env") : "test";
-    public static final String TEST_DATA_PATH = System.getProperty("user.dir") + "/src/test/resources/"
+    public static final String TEST_DATA_PATH = System.getProperty("user.dir") + "/src/test/resources/users/"
             + ENV + "/users.json";
 }

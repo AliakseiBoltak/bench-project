@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="UI Suite">
+<suite name="UI Suite" parallel="classes">
     <listeners>
         <listener class-name="listeners.AllureListener"/>
     </listeners>
