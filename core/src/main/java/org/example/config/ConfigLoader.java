@@ -21,6 +21,18 @@ public class ConfigLoader {
         return config.getString("baseUrl");
     }
 
+    public String getDbUrl() {
+        return config.getString("db.url");
+    }
+
+    public String getDbUsername() {
+        return config.getString("db.username");
+    }
+
+    public String getDbPassword() {
+        return config.getString("db.password");
+    }
+
     public Config getRawConfig() {
         return config;
     }

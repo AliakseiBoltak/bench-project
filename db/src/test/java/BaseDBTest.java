@@ -1,6 +1,6 @@
-import constants.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.config.ConfigLoader;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -19,11 +19,12 @@ public abstract class BaseDBTest {
 
     @BeforeClass
     public static void setUpClass() {
+        ConfigLoader loader = new ConfigLoader(System.getProperty("env", "default"));
         try {
             Connection conn = DriverManager.getConnection(
-                    Constants.DB_TEST_URL,
-                    Constants.DB_TEST_USER,
-                    Constants.DB_TEST_PASSWORD
+                    loader.getDbUrl(),
+                    loader.getDbUsername(),
+                    loader.getDbPassword()
             );
             threadLocalConnection.set(conn);
             LOGGER.info("DB Connection established. - " + conn.getMetaData().getURL());
