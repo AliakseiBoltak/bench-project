@@ -25,7 +25,7 @@ public class UserDataService {
         return new ArrayList<>(userDataJsonDao.findUserData(path));
     }
 
-    public User getTestUserByType(String type, String path)
+    public User getUserByType(String type, String path)
     {
         List<User> testUsers = getUsersData(path);
         return testUsers.stream()

@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import static org.example.constants.Constants.ENV;
+
 public abstract class BaseDBTest {
 
     protected static ThreadLocal<Connection> threadLocalConnection = new ThreadLocal<>();
@@ -19,7 +21,7 @@ public abstract class BaseDBTest {
 
     @BeforeClass
     public static void setUpClass() {
-        ConfigLoader loader = new ConfigLoader(System.getProperty("env", "default"));
+        ConfigLoader loader = new ConfigLoader(ENV);
         try {
             Connection conn = DriverManager.getConnection(
                     loader.getDbUrl(),

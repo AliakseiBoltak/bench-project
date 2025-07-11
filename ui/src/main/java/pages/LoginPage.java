@@ -16,7 +16,8 @@ public class LoginPage {
         return this;
     }
 
-    public void clickOnLoginButton() {
+    public HomePage clickOnLoginButton() {
         $(By.name("commit")).click();
+        return new HomePage();
     }
 }

@@ -5,7 +5,9 @@ import io.restassured.specification.RequestSpecification;
 import org.example.config.ConfigLoader;
 import org.testng.annotations.BeforeClass;
 
-public abstract class BaseTest {
+import static org.example.constants.Constants.ENV;
+
+public abstract class BaseAPITest {
 
     protected RequestSpecification baseRequestSpec;
     protected String baseUri ;
@@ -13,7 +15,7 @@ public abstract class BaseTest {
     @BeforeClass
     public void setup() {
 
-        baseUri = new ConfigLoader(System.getProperty("env", "default")).getBaseUrl();
+        baseUri = new ConfigLoader(ENV).getBaseUrl();
 
         baseRequestSpec = RestAssured
                 .given()

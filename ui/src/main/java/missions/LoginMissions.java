@@ -1,6 +1,7 @@
 package missions;
 
 import com.google.inject.Inject;
+import pages.HomePage;
 import pages.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -19,10 +20,9 @@ public class LoginMissions {
         return this;
     }
 
-    public LoginMissions loginWithCredentials(String username, String password) {
-        loginPage.enterEmail(username)
+    public HomePage loginWithCredentials(String username, String password) {
+        return loginPage.enterEmail(username)
                 .enterPassword(password)
                 .clickOnLoginButton();
-        return this;
     }
 }

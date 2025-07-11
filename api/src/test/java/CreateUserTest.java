@@ -9,7 +9,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-class CreateUserTest extends BaseTest {
+class CreateUserTest extends BaseAPITest {
 
     @DataProvider
     public Object[][] userDataProvider() {
