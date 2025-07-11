@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class BaseDBTest {
+public abstract class BaseDBTest {
 
     protected static ThreadLocal<Connection> threadLocalConnection = new ThreadLocal<>();
     private static final Logger LOGGER = LogManager.getLogger(BaseDBTest.class);

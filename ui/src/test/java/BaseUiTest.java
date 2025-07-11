@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-public class BaseUiTest {
+public abstract class BaseUiTest {
 
     protected static final String DEFAULT_BROWSER = "chrome";
     protected static final String BASE_URL = "https://github.com/";

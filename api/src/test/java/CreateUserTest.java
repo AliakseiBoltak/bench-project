@@ -1,7 +1,7 @@
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import model.requests.CreateUserRequest;
 import model.responses.CreateUserResponse;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static constants.Constants.*;
@@ -9,25 +9,26 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-class CreateUserTest {
+class CreateUserTest extends BaseTest {
 
-    private static final String USER_NAME = "John Doe";
-    private static final String USER_JOB = "Software Engineer";
+    @DataProvider
+    public Object[][] userDataProvider() {
+        return new Object[][] {
+                {"John Doe", "Software Engineer"},
+                {"Jane Smith", "QA Engineer"}
+        };
+    }
 
-    @Test
-    void checkUserCreatedWithExpectedNameAndJobTest() {
+    @Test(dataProvider = "userDataProvider", description = "Checks user creation returns expected name/job")
+    void checkUserCreatedWithExpectedNameAndJobTest(String name, String job) {
 
         CreateUserRequest createUserRequest = CreateUserRequest.builder()
-                .name(USER_NAME)
-                .job(USER_JOB)
+                .name(name)
+                .job(job)
                 .build();
 
-        CreateUserResponse createUserResponse = RestAssured
-                .given()
-                .baseUri(BASE_URI)
-                .log().all()
-                .contentType(ContentType.JSON)
-                .header(X_API_KEY_HEADER, X_API_KEY_VALUE)
+        CreateUserResponse createUserResponse = RestAssured.given()
+                .spec(baseRequestSpec)
                 .body(createUserRequest)
                 .when()
                 .post(USER_URI)
@@ -44,13 +45,11 @@ class CreateUserTest {
         assertNotNull(createUserResponse.getCreatedAt());
     }
 
-    @Test
+    @Test(description = "Checks that users JSON response matches the schema")
     void checkUsersJsonSchemaTest() {
 
         RestAssured.given()
-                .baseUri(BASE_URI)
-                .log().all()
-                .contentType(ContentType.JSON)
+                .spec(baseRequestSpec)
                 .when()
                 .get(USER_URI)
                 .then()
