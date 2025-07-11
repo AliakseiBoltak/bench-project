@@ -1,8 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="API Suite" parallel="classes">
+    <listeners>
+        <listener class-name="org.example.listeners.AllureListener"/>
+    </listeners>
     <test name="Create User Test">
         <classes>
-            <class name="RestAssuredTest"/>
+            <class name="CreateUserTest"/>
         </classes>
     </test>
 </suite>

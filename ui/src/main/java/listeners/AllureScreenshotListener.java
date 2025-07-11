@@ -2,7 +2,6 @@ package listeners;
 
 import com.codeborne.selenide.Screenshots;
 import io.qameta.allure.Allure;
-import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
@@ -10,22 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class AllureListener implements ITestListener {
-
-    @Override
-    public void onTestStart(ITestResult result) {
-        Allure.step("Starting test: " + result.getName());
-    }
-
-    @Override
-    public void onFinish(ITestContext context) {
-        Allure.step("Finishing test: " + context.getName());
-    }
-
-    @Override
-    public void onTestSuccess(ITestResult result) {
-        Allure.step("Test passed: " + result.getName());
-    }
+public class AllureScreenshotListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
@@ -38,11 +22,6 @@ public class AllureListener implements ITestListener {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public void onTestSkipped(ITestResult result) {
-        Allure.step("Test skipped: " + result.getName());
     }
 
 }

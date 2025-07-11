@@ -1,8 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="DB Suite" parallel="classes">
-    <test name="Get Orders With Users Test">
+    <listeners>
+        <listener class-name="org.example.listeners.AllureListener"/>
+    </listeners>
+    <test name="Get Orders For User Test">
         <classes>
-            <class name="DBTest"/>
+            <class name="GetOrdersForUsersTest"/>
         </classes>
     </test>
 </suite>

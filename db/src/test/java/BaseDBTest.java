@@ -1,5 +1,4 @@
 import constants.Constants;
-import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterClass;
@@ -27,7 +26,7 @@ public class BaseDBTest {
                     Constants.DB_TEST_PASSWORD
             );
             threadLocalConnection.set(conn);
-            Allure.step("DB Connection established. - " + conn.getMetaData().getURL());
+            LOGGER.info("DB Connection established. - " + conn.getMetaData().getURL());
         } catch (SQLException e) {
             LOGGER.error("Failed to establish DB Connection: " + e.getMessage());
             throw new RuntimeException(e);
@@ -41,7 +40,7 @@ public class BaseDBTest {
             try {
                 if (!conn.isClosed()) {
                     conn.close();
-                    Allure.step("DB Connection closed");
+                    LOGGER.info("DB Connection closed");
                 }
             } catch (SQLException e) {
                 LOGGER.error("Failed to close DB Connection: " + e.getMessage());
