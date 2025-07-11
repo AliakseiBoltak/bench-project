@@ -1,12 +1,13 @@
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import model.requests.CreateUserRequest;
 import model.responses.CreateUserResponse;
 import org.testng.annotations.Test;
 
-import static constants.Constants.CREATE_USER_URI;
+import static constants.Constants.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-import static constants.Constants.BASE_URI;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 class CreateUserTest {
 
@@ -14,7 +15,7 @@ class CreateUserTest {
     private static final String USER_JOB = "Software Engineer";
 
     @Test
-    void checkCreatedUserTest() {
+    void checkUserCreatedWithExpectedNameAndJobTest() {
 
         CreateUserRequest createUserRequest = new CreateUserRequest(USER_NAME, USER_JOB);
 
@@ -22,11 +23,11 @@ class CreateUserTest {
                 .given()
                 .baseUri(BASE_URI)
                 .log().all()
-                .contentType("application/json")
-                .header("x-api-key", "reqres-free-v1")
+                .contentType(ContentType.JSON)
+                .header(X_API_KEY_HEADER, X_API_KEY_VALUE)
                 .body(createUserRequest)
                 .when()
-                .post(CREATE_USER_URI)
+                .post(USER_URI)
                 .then()
                 .log().all()
                 .statusCode(201)
@@ -38,5 +39,21 @@ class CreateUserTest {
         assertEquals(createUserResponse.getName(), createUserRequest.getName());
         assertNotNull(createUserResponse.getId());
         assertNotNull(createUserResponse.getCreatedAt());
+    }
+
+    @Test
+    void checkUsersJsonSchemaTest() {
+
+        RestAssured.given()
+                .baseUri(BASE_URI)
+                .log().all()
+                .contentType(ContentType.JSON)
+                .when()
+                .get(USER_URI)
+                .then()
+                .log().all()
+                .assertThat()
+                .body(matchesJsonSchemaInClasspath("schemas/getUsersSchema.json"));
+
     }
 }

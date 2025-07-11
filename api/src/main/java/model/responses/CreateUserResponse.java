@@ -1,16 +1,17 @@
 package model.responses;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateUserResponse {
-    private int id;
-    private String name;
-    private String job;
-    private String createdAt;
-
+    int id;
+    String name;
+    String job;
+    String createdAt;
 }

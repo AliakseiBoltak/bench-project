@@ -1,14 +1,15 @@
 package model.requests;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateUserRequest {
-
-    private String name;
-    private String job;
+    String name;
+    String job;
 }
