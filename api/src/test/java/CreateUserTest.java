@@ -17,7 +17,10 @@ class CreateUserTest {
     @Test
     void checkUserCreatedWithExpectedNameAndJobTest() {
 
-        CreateUserRequest createUserRequest = new CreateUserRequest(USER_NAME, USER_JOB);
+        CreateUserRequest createUserRequest = CreateUserRequest.builder()
+                .name(USER_NAME)
+                .job(USER_JOB)
+                .build();
 
         CreateUserResponse createUserResponse = RestAssured
                 .given()
