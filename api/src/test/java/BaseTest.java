@@ -8,16 +8,16 @@ import org.testng.annotations.BeforeClass;
 public abstract class BaseTest {
 
     protected RequestSpecification baseRequestSpec;
-    protected String BASE_URI;
+    protected String baseUri ;
 
     @BeforeClass
     public void setup() {
 
-        BASE_URI = new ConfigLoader(System.getProperty("env", "default")).getBaseUrl();
+        baseUri = new ConfigLoader(System.getProperty("env", "default")).getBaseUrl();
 
         baseRequestSpec = RestAssured
                 .given()
-                .baseUri(BASE_URI)
+                .baseUri(baseUri)
                 .log().all()
                 .contentType(ContentType.JSON)
                 .header(Constants.X_API_KEY_HEADER, Constants.X_API_KEY_VALUE);
