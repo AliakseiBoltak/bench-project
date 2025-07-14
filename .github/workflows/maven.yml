@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: CI for API tests
 
 on:
   push:
@@ -39,5 +39,8 @@ jobs:
 
       - name: Run API tests
         run: |
+          cd core
+          mvn clean install
+          cd ..
           cd api
           mvn clean test
