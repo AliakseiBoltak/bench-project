@@ -31,15 +31,15 @@ public class LoginTest extends BaseUiTest {
     @DataProvider
     public Object[][] allUserTypes() {
         return Arrays.stream(UserTypes.values())
-                .map(type -> new Object[]{type})
+                .map(type -> new Object[]{type.name().toLowerCase()})
                 .toArray(Object[][]::new);
     }
 
     @Test(dataProvider = "allUserTypes",
-          description = "Test login functionality with different user types")
-    public void loginTest(UserTypes userType) {
-        User user = userDataService.getUserByTypeFromJson(userType.name().toLowerCase(), USERS_TEST_DATA_PATH);
-        Allure.step("Perform login with user: " + userType.name());
+            description = "Test login functionality with different user types")
+    public void loginTest(String userType) {
+        User user = userDataService.getUserByTypeFromJson(userType, USERS_TEST_DATA_PATH);
+        Allure.step("Perform login with user: " + userType);
         HomePage homePage = loginMissions
                 .navigateToLoginPage(baseUrl + "/login")
                 .loginWithCredentials(
