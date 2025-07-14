@@ -23,7 +23,7 @@ public class AllureScreenshotListener implements ITestListener {
             try {
                 Allure.addAttachment("Screenshot on Failure", Files.newInputStream(screenshot.toPath()));
             } catch (IOException e) {
-                LOGGER.error("Failed to attach screenshot: " + e.getMessage());
+                LOGGER.error("Failed to attach screenshot", e);
                 e.printStackTrace();
             }
         }
