@@ -1,12 +1,15 @@
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import io.qameta.allure.Allure;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.qameta.allure.selenide.LogType;
 import org.example.config.ConfigLoader;
+import org.example.guice.ConfigModule;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 
 import java.util.logging.Level;
 
@@ -18,14 +21,15 @@ public abstract class BaseUiTest {
 
     protected String browser;
     protected String baseUrl;
+    protected ConfigLoader configLoader;
     protected static final int WAIT_FOR_ELEMENT_MILLISECONDS_TIMEOUT = 15000;
 
-    @BeforeClass
+    @BeforeSuite
     public void setUp() {
-        ConfigLoader loader = new ConfigLoader(ENV);
-        browser = loader.getBrowser();
-        baseUrl = loader.getBaseUrl();
-
+        Injector injector = Guice.createInjector(new ConfigModule(ENV));
+        configLoader = injector.getInstance(ConfigLoader.class);
+        browser = configLoader.getBrowser();
+        baseUrl = configLoader.getBaseUrl();
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(true)

@@ -2,6 +2,8 @@ package listeners;
 
 import com.codeborne.selenide.Screenshots;
 import io.qameta.allure.Allure;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
@@ -11,6 +13,8 @@ import java.nio.file.Files;
 
 public class AllureScreenshotListener implements ITestListener {
 
+    private static final Logger LOGGER = LogManager.getLogger(AllureScreenshotListener.class);
+
     @Override
     public void onTestFailure(ITestResult result) {
         Allure.step("Test failed: " + result.getName());
@@ -19,6 +23,7 @@ public class AllureScreenshotListener implements ITestListener {
             try {
                 Allure.addAttachment("Screenshot on Failure", Files.newInputStream(screenshot.toPath()));
             } catch (IOException e) {
+                LOGGER.error("Failed to attach screenshot: " + e.getMessage());
                 e.printStackTrace();
             }
         }
