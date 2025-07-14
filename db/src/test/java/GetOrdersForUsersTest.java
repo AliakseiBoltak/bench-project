@@ -10,7 +10,7 @@ import static queries.QueriesBank.SELECT_ORDERS_FOR_USERS_JOIN_QUERY;
 
 class GetOrdersForUsersTest extends BaseDBTest {
 
-    @Test
+    @Test (description = "Test to retrieve orders with user data from the database")
     void getOrdersWithUsers() throws SQLException {
 
         Allure.step("Executing SQL query: " + SELECT_ORDERS_FOR_USERS_JOIN_QUERY);
