@@ -40,8 +40,5 @@ jobs:
       - name: Run API tests
         run: |
           mvn clean install -DskipTests=true
-          cd core
-          mvn clean install
-          cd ..
           cd api
           mvn clean test
