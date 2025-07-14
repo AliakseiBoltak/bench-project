@@ -21,10 +21,6 @@ public class ConfigLoader {
         return config.getString("baseUrl");
     }
 
-    public String getBrowser() {
-        return config.getString("browser");
-    }
-
     public String getDbUrl() {
         return config.getString("db.url");
     }

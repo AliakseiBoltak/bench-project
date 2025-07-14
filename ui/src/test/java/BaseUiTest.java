@@ -29,7 +29,6 @@ public abstract class BaseUiTest {
     public void setUp() {
         Injector injector = Guice.createInjector(new ConfigModule(ENV));
         configLoader = injector.getInstance(ConfigLoader.class);
-        browser = configLoader.getBrowser();
         baseUrl = configLoader.getBaseUrl();
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
