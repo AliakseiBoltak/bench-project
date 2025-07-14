@@ -2,6 +2,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import factory.WebDriverFactory;
 import io.qameta.allure.Allure;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.qameta.allure.selenide.LogType;
@@ -39,7 +40,7 @@ public abstract class BaseUiTest {
 
     @BeforeMethod
     public void openBrowser() {
-        Configuration.browser = browser;
+        WebDriverFactory.initBrowser();
         Configuration.timeout = WAIT_FOR_ELEMENT_MILLISECONDS_TIMEOUT;
         Allure.step("Open browser: " + browser);
         open(baseUrl);
