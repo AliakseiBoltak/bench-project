@@ -3,14 +3,14 @@ import constants.UserTypes;
 import io.qameta.allure.Allure;
 import missions.LoginMissions;
 import org.example.guice.ConfigModule;
-import org.example.model.User;
-import org.example.service.UserDataService;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
 import pages.HomePage;
+import service.UserDataService;
+import model.User;
 
 import java.util.Arrays;
 
@@ -35,11 +35,10 @@ public class LoginTest extends BaseUiTest {
                 .toArray(Object[][]::new);
     }
 
-    @Test(dataProvider = "allUserTypes")
+    @Test(dataProvider = "allUserTypes",
+          description = "Test login functionality with different user types")
     public void loginTest(UserTypes userType) {
-
-        User user = userDataService.getUserByType(userType.name().toLowerCase(), USERS_TEST_DATA_PATH);
-
+        User user = userDataService.getUserByTypeFromJson(userType.name().toLowerCase(), USERS_TEST_DATA_PATH);
         Allure.step("Perform login with user: " + userType.name());
         HomePage homePage = loginMissions
                 .navigateToLoginPage(baseUrl + "/login")
