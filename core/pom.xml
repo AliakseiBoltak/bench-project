@@ -15,6 +15,7 @@
 
     <properties>
         <log4j.version>2.25.0</log4j.version>
+        <guice.version>7.0.0</guice.version>
     </properties>
 
     <dependencies>
@@ -31,7 +32,12 @@
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
-            <version>7.0.0</version>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-assistedinject</artifactId>
+            <version>${guice.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>

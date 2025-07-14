@@ -37,7 +37,4 @@ public class ConfigLoader {
         return config.getString("db.password");
     }
 
-    public Config getRawConfig() {
-        return config;
-    }
 }

@@ -3,14 +3,14 @@ package org.example.service;
 import com.google.inject.Inject;
 import org.example.dao.UserDataDao;
 import org.example.exception.DataException;
-import org.example.guice.TestModule;
+import org.example.guice.ConfigModule;
 import org.example.model.User;
 import org.testng.annotations.Guice;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Guice(modules = {TestModule.class})
+@Guice(modules = {ConfigModule.class})
 public class UserDataService {
 
     @Inject

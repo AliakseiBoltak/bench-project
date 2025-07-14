@@ -1,18 +1,23 @@
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.config.ConfigLoader;
+import org.example.guice.ConfigModule;
+import org.example.interfaces.ResultSetMapper;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.example.constants.Constants.ENV;
 
 public abstract class BaseDBTest {
 
     protected static ThreadLocal<Connection> threadLocalConnection = new ThreadLocal<>();
+    protected ConfigLoader configLoader;
     private static final Logger LOGGER = LogManager.getLogger(BaseDBTest.class);
 
     public Connection getConnection() {
@@ -20,13 +25,14 @@ public abstract class BaseDBTest {
     }
 
     @BeforeClass
-    public static void setUpClass() {
-        ConfigLoader loader = new ConfigLoader(ENV);
+    public void setUp() {
+        Injector injector = Guice.createInjector(new ConfigModule(ENV));
+        configLoader = injector.getInstance(ConfigLoader.class);
         try {
             Connection conn = DriverManager.getConnection(
-                    loader.getDbUrl(),
-                    loader.getDbUsername(),
-                    loader.getDbPassword()
+                    configLoader.getDbUrl(),
+                    configLoader.getDbUsername(),
+                    configLoader.getDbPassword()
             );
             threadLocalConnection.set(conn);
             LOGGER.info("DB Connection established. - " + conn.getMetaData().getURL());
@@ -37,7 +43,7 @@ public abstract class BaseDBTest {
     }
 
     @AfterClass
-    public static void tearDownClass() {
+    public void tearDown() {
         Connection conn = threadLocalConnection.get();
         if (conn != null) {
             try {
@@ -50,6 +56,17 @@ public abstract class BaseDBTest {
             } finally {
                 threadLocalConnection.remove();
             }
+        }
+    }
+
+    protected <T> List<T> executeQueryAndMapResult(String query, ResultSetMapper<ResultSet, T> mapper) throws SQLException {
+        try (Statement stmt = getConnection().createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            List<T> result = new ArrayList<>();
+            while (rs.next()) {
+                result.add(mapper.apply(rs));
+            }
+            return result;
         }
     }
 }

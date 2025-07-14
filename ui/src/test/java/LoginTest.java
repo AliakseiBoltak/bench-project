@@ -2,7 +2,7 @@ import com.google.inject.Inject;
 import constants.UserTypes;
 import io.qameta.allure.Allure;
 import missions.LoginMissions;
-import org.example.guice.TestModule;
+import org.example.guice.ConfigModule;
 import org.example.model.User;
 import org.example.service.UserDataService;
 
@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 import static constants.Constants.USERS_TEST_DATA_PATH;
 
-@Guice(modules = {TestModule.class})
+@Guice(modules = {ConfigModule.class})
 public class LoginTest extends BaseUiTest {
 
     @Inject
