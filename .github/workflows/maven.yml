@@ -39,5 +39,5 @@ jobs:
 
       - name: Run API tests
         run: |
-          cd api-tests
+          cd api
           mvn clean test
