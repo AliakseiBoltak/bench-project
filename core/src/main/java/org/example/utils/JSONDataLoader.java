@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.example.exception.DataException;
 
 import java.io.*;
 
@@ -34,7 +33,7 @@ public class JSONDataLoader {
         catch (IOException e)
         {
             LOGGER.error("Error reading data from path: {}", dataPath, e);
-            throw new DataException(e);
+            throw new RuntimeException(e);
         }
     }
 

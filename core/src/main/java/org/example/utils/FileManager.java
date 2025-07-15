@@ -2,7 +2,6 @@ package org.example.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.example.exception.PathException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,7 +19,7 @@ public class FileManager {
             return Files.readString(Paths.get(filePath));
         } catch (IOException e) {
             LOGGER.error("Error reading from file at path: {}", filePath, e);
-            throw new PathException(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -29,7 +28,7 @@ public class FileManager {
             Files.write(Paths.get(filePath), content.getBytes());
         } catch (IOException e) {
             LOGGER.error("Error writing to file at path: {}", filePath, e);
-            throw new PathException(e);
+            throw new RuntimeException(e);
         }
     }
 }
