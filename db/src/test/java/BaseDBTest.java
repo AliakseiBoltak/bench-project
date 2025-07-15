@@ -1,5 +1,5 @@
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
+import org.testng.annotations.Guice;
 import interfaces.ResultSetMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,8 +13,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Guice(modules = {CoreModule.class})
 public abstract class BaseDBTest {
 
+    protected final ConfigLoader configLoader;
     protected static ThreadLocal<Connection> threadLocalConnection = new ThreadLocal<>();
     private static final Logger LOGGER = LogManager.getLogger(BaseDBTest.class);
 
@@ -22,10 +24,13 @@ public abstract class BaseDBTest {
         return threadLocalConnection.get();
     }
 
+    @Inject
+    public BaseDBTest(ConfigLoader configLoader) {
+        this.configLoader = configLoader;
+    }
+
     @BeforeClass
     public void setUp() {
-        Injector injector = Guice.createInjector(new CoreModule());
-        ConfigLoader configLoader = injector.getInstance(ConfigLoader.class);
         try {
             Connection conn = DriverManager.getConnection(
                     configLoader.getDbUrl(),

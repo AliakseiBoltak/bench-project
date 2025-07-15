@@ -1,5 +1,7 @@
+import com.google.inject.Inject;
 import io.qameta.allure.Allure;
 import model.OrderWithUserDataRecord;
+import org.example.config.ConfigLoader;
 import org.testng.annotations.Test;
 
 import java.sql.*;
@@ -9,6 +11,11 @@ import static org.testng.Assert.assertFalse;
 import static queries.QueriesBank.SELECT_ORDERS_FOR_USERS_JOIN_QUERY;
 
 class GetOrdersForUsersTest extends BaseDBTest {
+
+    @Inject
+    public GetOrdersForUsersTest(ConfigLoader configLoader) {
+        super(configLoader);
+    }
 
     @Test (description = "Test to retrieve orders with user data from the database")
     void getOrdersWithUsers() throws SQLException {

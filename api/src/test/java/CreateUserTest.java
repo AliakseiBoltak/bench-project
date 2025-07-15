@@ -1,6 +1,8 @@
+import com.google.inject.Inject;
 import io.restassured.RestAssured;
 import model.requests.CreateUserRequest;
 import model.responses.CreateUserResponse;
+import org.example.config.ConfigLoader;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -10,6 +12,11 @@ import static org.testng.Assert.assertNotNull;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 class CreateUserTest extends BaseAPITest {
+
+    @Inject
+    public CreateUserTest(ConfigLoader configLoader) {
+        super(configLoader);
+    }
 
     @DataProvider
     public Object[][] userDataProvider() {

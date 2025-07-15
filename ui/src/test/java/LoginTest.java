@@ -2,6 +2,7 @@ import com.google.inject.Inject;
 import constants.UserTypes;
 import io.qameta.allure.Allure;
 import missions.LoginMissions;
+import org.example.config.ConfigLoader;
 import org.example.guice.CoreModule;
 
 import org.testng.Assert;
@@ -20,7 +21,8 @@ import static constants.Constants.USERS_TEST_DATA_PATH;
 public class LoginTest extends BaseUiTest {
 
     @Inject
-    public LoginTest(final UserDataService userDataService, final LoginMissions loginMissions) {
+    public LoginTest(UserDataService userDataService, LoginMissions loginMissions, ConfigLoader configLoader) {
+        super(configLoader);
         this.userDataService = userDataService;
         this.loginMissions = loginMissions;
     }
