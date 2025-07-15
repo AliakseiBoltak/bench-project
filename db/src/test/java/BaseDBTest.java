@@ -1,10 +1,11 @@
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import interfaces.ResultSetMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.config.ConfigLoader;
 import org.example.guice.ConfigModule;
-import org.example.interfaces.ResultSetMapper;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 

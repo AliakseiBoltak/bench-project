@@ -15,8 +15,8 @@ public class LoginMissions {
         this.loginPage = loginPage;
     }
 
-    public LoginMissions navigateToLoginPage(String url) {
-        open(url);
+    public LoginMissions navigateToLoginPage(String baseUrl) {
+        open(baseUrl + "/login");
         return this;
     }
 

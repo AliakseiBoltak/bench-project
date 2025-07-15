@@ -41,7 +41,7 @@ public class LoginTest extends BaseUiTest {
         User user = userDataService.getUserByTypeFromJson(userType, USERS_TEST_DATA_PATH);
         Allure.step("Perform login with user: " + userType);
         HomePage homePage = loginMissions
-                .navigateToLoginPage(baseUrl + "/login")
+                .navigateToLoginPage(baseUrl)
                 .loginWithCredentials(
                         user.getUsername(),
                         user.getPassword());
