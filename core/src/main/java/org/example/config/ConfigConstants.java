@@ -1,8 +1,8 @@
-package org.example.constants;
+package org.example.config;
 
-public class Constants {
+public class ConfigConstants {
 
-    private Constants() {
+    private ConfigConstants() {
     }
 
     public static final String ENV = System.getProperty("env") != null && !System.getProperty("env").isEmpty()

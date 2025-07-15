@@ -1,28 +1,26 @@
 package org.example.config;
 
+import lombok.ToString;
+
+/**
+ * Singleton environment class.
+ * Wraps the environment name, resolves from ConfigConstants.ENV.
+ */
+@ToString
 public final class Env {
 
-    private static final Env INSTANCE = new Env();
+    private static final Env INSTANCE = new Env(ConfigConstants.ENV);
     private final String env;
 
-    private Env() {
-        this.env = resolveEnv();
+    private Env(String env) {
+        this.env = env;
     }
 
     public static Env getInstance() {
         return INSTANCE;
     }
 
-    public String getEnv() {
+    public String value() {
         return env;
     }
-
-    private String resolveEnv() {
-        String sysProp = System.getProperty("env");
-        if (sysProp != null && !sysProp.isEmpty()) {
-            return sysProp;
-        }
-        return "default";
-    }
-
 }

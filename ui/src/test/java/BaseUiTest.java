@@ -16,7 +16,6 @@ import java.util.logging.Level;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static org.example.constants.Constants.ENV;
 
 public abstract class BaseUiTest {
 
@@ -27,7 +26,7 @@ public abstract class BaseUiTest {
 
     @BeforeSuite
     public void setUp() {
-        Injector injector = Guice.createInjector(new CoreModule(ENV));
+        Injector injector = Guice.createInjector(new CoreModule());
         configLoader = injector.getInstance(ConfigLoader.class);
         baseUrl = configLoader.getBaseUrl();
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
