@@ -7,7 +7,7 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.qameta.allure.selenide.LogType;
 import org.example.config.ConfigLoader;
-import org.example.guice.ConfigModule;
+import org.example.guice.CoreModule;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -27,7 +27,7 @@ public abstract class BaseUiTest {
 
     @BeforeSuite
     public void setUp() {
-        Injector injector = Guice.createInjector(new ConfigModule(ENV));
+        Injector injector = Guice.createInjector(new CoreModule(ENV));
         configLoader = injector.getInstance(ConfigLoader.class);
         baseUrl = configLoader.getBaseUrl();
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()

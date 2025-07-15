@@ -4,7 +4,7 @@ import interfaces.ResultSetMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.config.ConfigLoader;
-import org.example.guice.ConfigModule;
+import org.example.guice.CoreModule;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -27,7 +27,7 @@ public abstract class BaseDBTest {
 
     @BeforeClass
     public void setUp() {
-        Injector injector = Guice.createInjector(new ConfigModule(ENV));
+        Injector injector = Guice.createInjector(new CoreModule(ENV));
         configLoader = injector.getInstance(ConfigLoader.class);
         try {
             Connection conn = DriverManager.getConnection(

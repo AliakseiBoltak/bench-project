@@ -4,18 +4,19 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import org.example.config.ConfigLoader;
+import org.example.config.Env;
 
 import static org.example.constants.Constants.ENV;
 
-public class ConfigModule extends AbstractModule {
+public class CoreModule extends AbstractModule {
 
     private final String env;
 
-    public ConfigModule(String env) {
+    public CoreModule(String env) {
         this.env = env;
     }
 
-    public ConfigModule() {
+    public CoreModule() {
         this.env = ENV;
     }
 
@@ -23,6 +24,12 @@ public class ConfigModule extends AbstractModule {
     @Singleton
     public ConfigLoader provideConfigLoader() {
         return new ConfigLoader(env);
+    }
+
+    @Provides
+    @Singleton
+    Env provideEnv() {
+        return Env.getInstance();
     }
 
 }
