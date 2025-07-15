@@ -16,7 +16,6 @@ import java.util.List;
 public abstract class BaseDBTest {
 
     protected static ThreadLocal<Connection> threadLocalConnection = new ThreadLocal<>();
-    protected ConfigLoader configLoader;
     private static final Logger LOGGER = LogManager.getLogger(BaseDBTest.class);
 
     public Connection getConnection() {
@@ -26,7 +25,7 @@ public abstract class BaseDBTest {
     @BeforeClass
     public void setUp() {
         Injector injector = Guice.createInjector(new CoreModule());
-        configLoader = injector.getInstance(ConfigLoader.class);
+        ConfigLoader configLoader = injector.getInstance(ConfigLoader.class);
         try {
             Connection conn = DriverManager.getConnection(
                     configLoader.getDbUrl(),

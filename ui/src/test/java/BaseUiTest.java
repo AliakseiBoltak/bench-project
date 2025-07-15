@@ -20,7 +20,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 public abstract class BaseUiTest {
 
     protected String baseUrl;
-    protected static final int WAIT_FOR_ELEMENT_MILLISECONDS_TIMEOUT = 15000;
+    private static final int WAIT_FOR_ELEMENT_MILLISECONDS_TIMEOUT = 15000;
 
     @BeforeSuite
     public void setUp() {
