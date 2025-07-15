@@ -7,7 +7,8 @@ public class ConfigLoader {
 
     private final Config config;
 
-    public ConfigLoader(String profile) {
+    public ConfigLoader() {
+        String profile = Env.getInstance().value();
         Config envConfig = ConfigFactory.parseResources("env.conf");
         // Fallback to default if profile missing
         if (envConfig.hasPath(profile)) {

@@ -1,6 +1,6 @@
 package constants;
 
-import static org.example.constants.Constants.ENV;
+import static org.example.config.ConfigConstants.ENV;
 
 public class Constants {
 

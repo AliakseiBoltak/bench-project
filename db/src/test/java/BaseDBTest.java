@@ -13,12 +13,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.example.constants.Constants.ENV;
-
 public abstract class BaseDBTest {
 
     protected static ThreadLocal<Connection> threadLocalConnection = new ThreadLocal<>();
-    protected ConfigLoader configLoader;
     private static final Logger LOGGER = LogManager.getLogger(BaseDBTest.class);
 
     public Connection getConnection() {
@@ -27,8 +24,8 @@ public abstract class BaseDBTest {
 
     @BeforeClass
     public void setUp() {
-        Injector injector = Guice.createInjector(new CoreModule(ENV));
-        configLoader = injector.getInstance(ConfigLoader.class);
+        Injector injector = Guice.createInjector(new CoreModule());
+        ConfigLoader configLoader = injector.getInstance(ConfigLoader.class);
         try {
             Connection conn = DriverManager.getConnection(
                     configLoader.getDbUrl(),

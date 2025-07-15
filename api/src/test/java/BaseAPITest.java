@@ -8,18 +8,15 @@ import org.example.guice.CoreModule;
 import com.google.inject.Guice;
 import org.testng.annotations.BeforeSuite;
 
-import static org.example.constants.Constants.ENV;
-
 public abstract class BaseAPITest {
 
     protected RequestSpecification baseRequestSpec;
-    protected ConfigLoader configLoader;
-    protected String baseUri ;
+    protected String baseUri;
 
     @BeforeSuite
     public void setUp() {
-        Injector injector = Guice.createInjector(new CoreModule(ENV));
-        configLoader = injector.getInstance(ConfigLoader.class);
+        Injector injector = Guice.createInjector(new CoreModule());
+        ConfigLoader configLoader = injector.getInstance(ConfigLoader.class);
         baseUri = configLoader.getBaseUrl();
         baseRequestSpec = RestAssured
                 .given()
