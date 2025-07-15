@@ -19,15 +19,13 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public abstract class BaseUiTest {
 
-    protected String browser;
     protected String baseUrl;
-    protected ConfigLoader configLoader;
     protected static final int WAIT_FOR_ELEMENT_MILLISECONDS_TIMEOUT = 15000;
 
     @BeforeSuite
     public void setUp() {
         Injector injector = Guice.createInjector(new CoreModule());
-        configLoader = injector.getInstance(ConfigLoader.class);
+        ConfigLoader configLoader = injector.getInstance(ConfigLoader.class);
         baseUrl = configLoader.getBaseUrl();
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
@@ -40,14 +38,14 @@ public abstract class BaseUiTest {
     public void openBrowser() {
         WebDriverFactory.initBrowser();
         Configuration.timeout = WAIT_FOR_ELEMENT_MILLISECONDS_TIMEOUT;
-        Allure.step("Open browser: " + browser);
+        Allure.step("Open browser: " + Configuration.browser);
         open(baseUrl);
         getWebDriver().manage().window().maximize();
     }
 
     @AfterMethod
     public void closeBrowser() {
-        Allure.step("Close browser: " + browser);
+        Allure.step("Close browser: " + Configuration.browser);
         getWebDriver().quit();
     }
 }
