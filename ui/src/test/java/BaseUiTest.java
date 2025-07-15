@@ -1,7 +1,6 @@
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 import factory.WebDriverFactory;
 import io.qameta.allure.Allure;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -11,22 +10,28 @@ import org.example.guice.CoreModule;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Guice;
 
 import java.util.logging.Level;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static constants.Constants.WAIT_FOR_ELEMENT_MILLISECONDS_TIMEOUT;
 
+@Guice(modules = {CoreModule.class})
 public abstract class BaseUiTest {
 
-    protected String baseUrl;
-    protected static final int WAIT_FOR_ELEMENT_MILLISECONDS_TIMEOUT = 15000;
+    protected final ConfigLoader configLoader;
+    protected final String baseUrl;
+
+    @Inject
+    public BaseUiTest(ConfigLoader configLoader) {
+        this.configLoader = configLoader;
+        this.baseUrl = configLoader.getBaseUrl();
+    }
 
     @BeforeSuite
     public void setUp() {
-        Injector injector = Guice.createInjector(new CoreModule());
-        ConfigLoader configLoader = injector.getInstance(ConfigLoader.class);
-        baseUrl = configLoader.getBaseUrl();
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(true)
