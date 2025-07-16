@@ -17,12 +17,9 @@ public class UserDataService {
         this.userDataDao = userDataDao;
     }
 
-    public List<User> getUserData(String type) {
-        return new ArrayList<>(userDataDao.findUserData(type) != null ? userDataDao.findUserData(type) : List.of());
-    }
-
     public User getUserByType(String type) {
-        List<User> testUsers = getUserData(type);
+        List<User> testUsers = new ArrayList<>(userDataDao.findUserData(type) != null ?
+                userDataDao.findUserData(type) : List.of());
         return testUsers.stream()
                 .filter(user -> user.getUsertype().equals(type))
                 .findFirst()
