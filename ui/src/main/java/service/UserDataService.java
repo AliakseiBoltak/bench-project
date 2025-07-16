@@ -1,29 +1,28 @@
 package service;
 
 import com.google.inject.Inject;
+import dao.UserDataDao;
 import model.User;
 import org.example.exception.DataException;
-import org.example.guice.CoreModule;
 
-import org.example.utils.JSONDataLoader;
-import org.testng.annotations.Guice;
-
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-@Guice(modules = {CoreModule.class})
 public class UserDataService {
 
-    private final JSONDataLoader jsonDataLoader;
+    private final UserDataDao userDataDao;
 
     @Inject
-    public UserDataService(JSONDataLoader jsonDataLoader) {
-        this.jsonDataLoader = jsonDataLoader;
+    public UserDataService(UserDataDao userDataDao) {
+        this.userDataDao = userDataDao;
     }
 
-    public User getUserByTypeFromJson(String type, String path)
-    {
-        List<User> testUsers = Arrays.asList(jsonDataLoader.getData(path, User[].class));
+    public List<User> getUserData(String type) {
+        return new ArrayList<>(userDataDao.findUserData(type) != null ? userDataDao.findUserData(type) : List.of());
+    }
+
+    public User getUserByType(String type) {
+        List<User> testUsers = getUserData(type);
         return testUsers.stream()
                 .filter(user -> user.getUsertype().equals(type))
                 .findFirst()
