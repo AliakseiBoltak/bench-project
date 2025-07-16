@@ -57,4 +57,9 @@ public abstract class BaseUiTest {
         Allure.step("Close browser: " + Configuration.browser);
         getWebDriver().quit();
     }
+
+    @AfterSuite
+    public void tearDown() {
+        SelenideLogger.removeListener("AllureSelenide");
+    }
 }

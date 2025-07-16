@@ -34,6 +34,6 @@ public class LoginTest extends BaseUiTest {
                 .loginWithCredentials(
                         user.getUsername(),
                         user.getPassword());
-        Assert.assertTrue(homePage.checkIfHomePageLoaded(), "Login failed!");
+        Assert.assertTrue(homePage.checkIfHomePageLoaded(), "Login failed with user: " + userType);
     }
 }
