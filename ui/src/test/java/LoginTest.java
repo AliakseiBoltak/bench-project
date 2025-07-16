@@ -1,9 +1,9 @@
 import com.google.inject.Inject;
 import constants.UserTypes;
+import guice.UIModule;
 import io.qameta.allure.Allure;
 import missions.LoginMissions;
 import org.example.config.ConfigLoader;
-import org.example.guice.CoreModule;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -15,9 +15,7 @@ import model.User;
 
 import java.util.Arrays;
 
-import static constants.Constants.USERS_TEST_DATA_PATH;
-
-@Guice(modules = {CoreModule.class})
+@Guice(modules = {UIModule.class})
 public class LoginTest extends BaseUiTest {
 
     @Inject
@@ -40,7 +38,7 @@ public class LoginTest extends BaseUiTest {
     @Test(dataProvider = "allUserTypes",
             description = "Test login functionality with different user types")
     public void loginTest(String userType) {
-        User user = userDataService.getUserByTypeFromJson(userType, USERS_TEST_DATA_PATH);
+        User user = userDataService.getUserByType(userType);
         Allure.step("Perform login with user: " + userType);
         HomePage homePage = loginMissions
                 .navigateToLoginPage(baseUrl)
