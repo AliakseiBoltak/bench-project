@@ -4,7 +4,6 @@ import lombok.ToString;
 
 /**
  * Singleton environment class.
- * Wraps the environment name, resolves from ConfigConstants.ENV.
  */
 @ToString
 public final class Env {

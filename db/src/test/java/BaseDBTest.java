@@ -62,7 +62,8 @@ public abstract class BaseDBTest {
         }
     }
 
-    protected <T> List<T> executeQueryAndMapResult(String query, ResultSetMapper<ResultSet, T> mapper) throws SQLException {
+    protected <T> List<T> executeQueryAndMapResult(String query, ResultSetMapper<ResultSet, T> mapper)
+            throws SQLException {
         try (Statement stmt = getConnection().createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             List<T> result = new ArrayList<>();
