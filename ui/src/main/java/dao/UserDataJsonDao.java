@@ -11,8 +11,12 @@ import static constants.Constants.USERS_TEST_DATA_PATH;
 
 public class UserDataJsonDao implements UserDataDao {
 
-    @Inject
     private JSONDataLoader jsonDataLoader;
+
+    @Inject
+    public UserDataJsonDao(JSONDataLoader jsonDataLoader) {
+        this.jsonDataLoader = jsonDataLoader;
+    }
 
     @Override
     public List<User> findUserData(String type) {
