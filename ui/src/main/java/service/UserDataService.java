@@ -17,15 +17,11 @@ public class UserDataService {
         this.userDataDao = userDataDao;
     }
 
-    public List<User> getUserData(String type)
-    {
-        List<User> userData = new ArrayList<>();
-        userData.addAll(userDataDao.findUserData(type));
-        return userData;
+    public List<User> getUserData(String type) {
+        return new ArrayList<>(userDataDao.findUserData(type) != null ? userDataDao.findUserData(type) : List.of());
     }
 
-    public User getUserByType(String type)
-    {
+    public User getUserByType(String type) {
         List<User> testUsers = getUserData(type);
         return testUsers.stream()
                 .filter(user -> user.getUsertype().equals(type))
