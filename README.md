@@ -18,7 +18,13 @@ Open Allure report -
 >     -D exec.mainClass=com.microsoft.playwright.CLI \
 >     -D exec.args="install"
 >   ```
-> - **To adjust the default browser or headless mode for UI tests, pass JVM parameters when running tests. For example:**
+> - **To adjust the default browser or headless mode for UI tests, you can pass JVM parameters when running tests. For example:**
     >   ```sh
 >   mvn clean test -Dheadless=false -Dbrowser=firefox
 >   ```
+    >   This will run the UI tests in headed mode using Firefox instead of the default headless Chromium.
+> - **You can also modify the environment used for all tests by passing the `env` parameter. For example:**
+    >   ```sh
+>   mvn clean test -Denv=test
+>   ```
+    >   By default, `env` is set to `'default'`. Setting `-Denv=test` will switch tests to use the `test` environment configuration.
