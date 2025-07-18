@@ -40,10 +40,10 @@ mvn allure:serve
 - **UI Playwright Tests:**  
   Before running tests in the `ui-playwright` module, you must install Playwright browsers by running:
   ```sh
+  # For Unix/Linux:
   mvn exec:java -e \
     -D exec.mainClass=com.microsoft.playwright.CLI \
     -D exec.args="install"
-  ```
 
 - **Adjust Browser/Headless Mode:**  
   To change the default browser or headless mode for UI tests, pass JVM parameters when running tests. For example:
