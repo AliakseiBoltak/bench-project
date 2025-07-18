@@ -45,5 +45,6 @@ jobs:
 
       - name: Run Playwright UI tests
         run: |
-          cd ../ui-playwright
+          cd ..
+          cd ui-playwright
           mvn clean test    
