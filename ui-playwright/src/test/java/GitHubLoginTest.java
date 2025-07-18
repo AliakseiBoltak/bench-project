@@ -5,10 +5,10 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class GithubLoginWithGoogleTest extends BaseTest {
+public class GitHubLoginTest extends BaseTest {
 
     @Inject
-    public GithubLoginWithGoogleTest(ConfigLoader configLoader) {
+    public GitHubLoginTest(ConfigLoader configLoader) {
         super(configLoader);
     }
 
@@ -21,20 +21,24 @@ public class GithubLoginWithGoogleTest extends BaseTest {
     }
 
     @Test(dataProvider = "loginCredentials")
-    public void testGithubLoginWithGoogle(String username, String password) {
+    public void testInvalidGithubLoginShowsError(String username, String password) {
         GitHubLoginPage loginPage = new GitHubLoginPage(page)
                 .navigateToLogin(baseUrl + "/login")
                 .enterUsername(username)
                 .enterPassword(password)
                 .clickSignIn();
 
-        // Assert alert for incorrect login is visible
-        Assert.assertTrue(loginPage.isLoginErrorVisible());
+        Assert.assertTrue(loginPage.isLoginErrorVisible(),
+                "Login error alert should be visible for invalid credentials.");
+    }
 
-        loginPage.clickContinueWithGoogle();
-
-        // Assert Google sign-in is visible
-        Assert.assertTrue(loginPage.isGoogleSignInVisible());
+    @Test
+    public void testContinueWithGoogleShowsGoogleSignIn() {
+        GitHubLoginPage loginPage = new GitHubLoginPage(page)
+                .navigateToLogin(baseUrl + "/login")
+                .clickContinueWithGoogle();
+        Assert.assertTrue(loginPage.isGoogleSignInVisible(),
+                "Google sign-in form should be visible.");
     }
 
 }
