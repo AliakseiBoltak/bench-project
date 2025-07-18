@@ -37,7 +37,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Install artifact
+      - name: Install Playwright dependencies
+        run: npx playwright install-deps
+
+      - name: Install Java project artifact
         run: |
           mvn clean install -DskipTests=true     
 
