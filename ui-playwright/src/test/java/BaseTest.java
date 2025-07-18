@@ -1,5 +1,6 @@
 import com.google.inject.Inject;
 import com.microsoft.playwright.*;
+import factory.BrowserFactory;
 import io.qameta.allure.Allure;
 import listeners.AllurePlaywrightListener;
 import org.example.config.ConfigLoader;
@@ -26,17 +27,18 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        Allure.step("Open browser");
         playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
+        browser = BrowserFactory.initBrowser(playwright);
         context = browser.newContext();
         page = context.newPage();
         AllurePlaywrightListener.setPage(page);
+        page.onConsoleMessage(msg -> {
+            Allure.addAttachment("Console log", msg.text());
+        });
     }
 
     @AfterMethod
     public void tearDown() {
-        Allure.step("Close browser");
         browser.close();
         playwright.close();
         AllurePlaywrightListener.removePage();
