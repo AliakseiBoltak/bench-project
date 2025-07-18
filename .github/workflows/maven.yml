@@ -37,13 +37,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Install artifact
+        run: |
+          mvn clean install -DskipTests=true     
+
       - name: Run API tests
         run: |
-          mvn clean install -DskipTests=true
           cd api
           mvn clean test
 
       - name: Run Playwright UI tests
         run: |
           cd ui-playwright
-          mvn clean test    
+          mvn clean test
