@@ -42,11 +42,8 @@ jobs:
           mvn clean install -DskipTests=true
           cd api
           mvn clean test
-          ls -la
 
       - name: Run Playwright UI tests
         run: |
-          cd ..
-          ls -la
           cd ui-playwright
           mvn clean test    
