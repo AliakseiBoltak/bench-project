@@ -11,9 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class ScreenshotListener implements ITestListener {
+public class AllureSelenideListener implements ITestListener {
 
-    private static final Logger LOGGER = LogManager.getLogger(ScreenshotListener.class);
+    private static final Logger LOGGER = LogManager.getLogger(AllureSelenideListener.class);
 
     @Override
     public void onTestFailure(ITestResult result) {

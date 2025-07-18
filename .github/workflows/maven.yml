@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: CI for API tests
+name: CI for API and UI tests
 
 on:
   push:
@@ -37,8 +37,19 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Install Playwright dependencies
+        run: npx playwright install-deps
+
+      - name: Install Java project artifact
+        run: |
+          mvn clean install -DskipTests=true     
+
       - name: Run API tests
         run: |
-          mvn clean install -DskipTests=true
           cd api
+          mvn clean test
+
+      - name: Run Playwright UI tests
+        run: |
+          cd ui-playwright
           mvn clean test
