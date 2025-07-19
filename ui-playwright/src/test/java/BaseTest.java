@@ -4,10 +4,14 @@ import factory.BrowserFactory;
 import io.qameta.allure.Allure;
 import listeners.AllurePlaywrightListener;
 import org.example.config.ConfigLoader;
+import org.example.constants.UserTypes;
 import org.example.guice.CoreModule;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Guice;
+
+import java.util.Arrays;
 
 @Guice(modules = {CoreModule.class})
 public class BaseTest {
@@ -23,6 +27,13 @@ public class BaseTest {
     public BaseTest(ConfigLoader configLoader) {
         this.configLoader = configLoader;
         this.baseUrl = configLoader.getBaseUrl();
+    }
+
+    @DataProvider
+    protected Object[][] allUserTypesWithIncorrectCreds() {
+        return Arrays.stream(UserTypes.values())
+                .map(type -> new Object[]{type.name().toLowerCase()})
+                .toArray(Object[][]::new);
     }
 
     @BeforeMethod

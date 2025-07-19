@@ -1,31 +1,30 @@
 import com.google.inject.Inject;
+import io.qameta.allure.Allure;
 import org.example.config.ConfigLoader;
+import org.example.model.User;
+import org.example.service.UserDataService;
 import pages.GitHubLoginPage;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class GitHubLoginTest extends BaseTest {
 
     @Inject
-    public GitHubLoginTest(ConfigLoader configLoader) {
+    public GitHubLoginTest(ConfigLoader configLoader, UserDataService userDataService) {
         super(configLoader);
+        this.userDataService = userDataService;
     }
 
-    @DataProvider(name = "loginCredentials")
-    public Object[][] loginCredentials() {
-        return new Object[][]{
-                {"testuser", "wrongpass"},
-                {"user123", "pass123"},
-        };
-    }
+    private final UserDataService userDataService;
 
-    @Test(dataProvider = "loginCredentials")
-    public void testInvalidGithubLoginShowsError(String username, String password) {
+    @Test(dataProvider = "allUserTypesWithIncorrectCreds")
+    public void testInvalidGithubLoginShowsError(String userType) {
+        User user = userDataService.getUserByType(userType);
+        Allure.step("Perform login with user: " + userType);
         GitHubLoginPage loginPage = new GitHubLoginPage(page)
                 .navigateToLogin(baseUrl + "/login")
-                .enterUsername(username)
-                .enterPassword(password)
+                .enterUsername(user.getUsername())
+                .enterPassword(user.getPassword())
                 .clickSignIn();
 
         Assert.assertTrue(loginPage.isLoginErrorVisible(),
@@ -36,8 +35,7 @@ public class GitHubLoginTest extends BaseTest {
     public void testContinueWithGoogleShowsGoogleSignIn() {
         GitHubLoginPage loginPage = new GitHubLoginPage(page)
                 .navigateToLogin(baseUrl + "/login")
-                .clickContinueWithGoogle();
-        Assert.assertTrue(loginPage.isGoogleSignInVisible(),
+                .clickContinueWithGoogle();        Assert.assertTrue(loginPage.isGoogleSignInVisible(),
                 "Google sign-in form should be visible.");
     }
 

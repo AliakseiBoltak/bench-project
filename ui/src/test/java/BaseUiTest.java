@@ -1,12 +1,12 @@
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.google.inject.Inject;
-import constants.UserTypes;
 import factory.WebDriverFactory;
 import io.qameta.allure.Allure;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.qameta.allure.selenide.LogType;
 import org.example.config.ConfigLoader;
+import org.example.constants.UserTypes;
 import org.example.guice.CoreModule;
 import org.testng.annotations.*;
 
@@ -23,7 +23,7 @@ public abstract class BaseUiTest {
     protected final String baseUrl;
 
     @DataProvider
-    protected Object[][] allUserTypes() {
+    protected Object[][] allUserTypesWithIncorrectCreds() {
         return Arrays.stream(UserTypes.values())
                 .map(type -> new Object[]{type.name().toLowerCase()})
                 .toArray(Object[][]::new);

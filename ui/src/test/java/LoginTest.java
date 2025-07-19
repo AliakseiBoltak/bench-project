@@ -21,9 +21,8 @@ public class LoginTest extends BaseUiTest {
     private final UserDataService userDataService;
     private final LoginMissions loginMissions;
 
-    @Test(dataProvider = "allUserTypes",
-            description = "Test login functionality with different user types")
-    public void loginTest(String userType) {
+    @Test(dataProvider = "allUserTypesWithIncorrectCreds")
+    public void testGithubLoginWithInvalidCreds(String userType) {
         User user = userDataService.getUserByType(userType);
         Allure.step("Perform login with user: " + userType);
         HomePage homePage = loginMissions
@@ -31,6 +30,9 @@ public class LoginTest extends BaseUiTest {
                 .loginWithCredentials(
                         user.getUsername(),
                         user.getPassword());
-        Assert.assertTrue(homePage.checkIfHomePageLoaded(), "Login failed with user: " + userType);
+        Assert.assertFalse(homePage.checkIfHomePageLoaded(),
+                "Login succeeded with invalid creds for user: " + userType);
+        Assert.assertTrue(loginMissions.isLoginErrorVisible(),
+                "Login error alert should be visible for invalid credentials.");
     }
 }

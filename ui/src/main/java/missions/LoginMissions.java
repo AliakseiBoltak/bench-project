@@ -25,4 +25,8 @@ public class LoginMissions {
                 .enterPassword(password)
                 .clickOnLoginButton();
     }
+
+    public boolean isLoginErrorVisible() {
+        return loginPage.isLoginErrorVisible();
+    }
 }

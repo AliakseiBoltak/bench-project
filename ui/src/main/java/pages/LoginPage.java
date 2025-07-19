@@ -20,4 +20,8 @@ public class LoginPage {
         $(By.name("commit")).click();
         return new HomePage();
     }
+
+    public boolean isLoginErrorVisible() {
+        return $(By.xpath("//div[contains(text(),'Incorrect username or password.')]")).isDisplayed();
+    }
 }

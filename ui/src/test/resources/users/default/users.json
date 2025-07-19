@@ -1,22 +1,12 @@
 [
   {
-    "usertype": "private",
+    "usertype": "test",
     "username": "alice",
-    "password": ""
-  },
-  {
-    "usertype": "business",
-    "username": "diana",
-    "password": ""
+    "password": "test123"
   },
   {
     "usertype": "admin",
     "username": "bob",
-    "password": ""
-  },
-  {
-    "usertype": "suspended",
-    "username": "charlie",
-    "password": ""
+    "password": "admin456"
   }
 ]
