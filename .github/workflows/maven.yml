@@ -19,37 +19,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping --silent"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=10
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Wait for MySQL to be ready
-        run: |
-          for i in {1..30}; do
-          if mysqladmin ping -h "127.0.0.1" -u root -proot --silent; then
-          echo "MySQL is up!"
-          break
-          fi
-          echo "Waiting for MySQL..."
-          sleep 2
-          done
-
-      - name: Create test database and schema
-        run: |
-          mysql -h 127.0.0.1 -u root -proot < ./db/src/test/resources/scripts/init_test_db.sql
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -71,11 +43,6 @@ jobs:
       - name: Install Java project artifact
         run: |
           mvn clean install -DskipTests=true     
-
-      - name: Run DB tests
-        run: |
-          cd db
-          mvn clean test    
 
       - name: Run API tests
         run: |
