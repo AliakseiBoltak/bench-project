@@ -1,17 +1,14 @@
 import com.google.inject.Inject;
-import guice.UIModule;
 import io.qameta.allure.Allure;
 import missions.LoginMissions;
 import org.example.config.ConfigLoader;
 
+import org.example.model.User;
+import org.example.service.UserDataService;
 import org.testng.Assert;
-import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import service.UserDataService;
-import model.User;
 
-@Guice(modules = {UIModule.class})
 public class LoginTest extends BaseUiTest {
 
     @Inject
@@ -24,9 +21,8 @@ public class LoginTest extends BaseUiTest {
     private final UserDataService userDataService;
     private final LoginMissions loginMissions;
 
-    @Test(dataProvider = "allUserTypes",
-            description = "Test login functionality with different user types")
-    public void loginTest(String userType) {
+    @Test(dataProvider = "allUserTypesWithIncorrectCreds")
+    public void testGithubLoginWithInvalidCreds(String userType) {
         User user = userDataService.getUserByType(userType);
         Allure.step("Perform login with user: " + userType);
         HomePage homePage = loginMissions
@@ -34,6 +30,7 @@ public class LoginTest extends BaseUiTest {
                 .loginWithCredentials(
                         user.getUsername(),
                         user.getPassword());
-        Assert.assertTrue(homePage.checkIfHomePageLoaded(), "Login failed with user: " + userType);
+        Assert.assertFalse(homePage.checkIfHomePageLoaded(),
+                "Login succeeded with invalid creds for user: " + userType);
     }
 }

@@ -1,9 +1,9 @@
-package service;
+package org.example.service;
 
 import com.google.inject.Inject;
-import dao.UserDataDao;
-import model.User;
+import org.example.dao.UserDataDao;
 import org.example.exception.DataException;
+import org.example.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

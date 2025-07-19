@@ -49,6 +49,11 @@ jobs:
           cd api
           mvn clean test
 
+      - name: Run Selenide UI tests
+        run: |
+          cd ui
+          mvn clean test    
+
       - name: Run Playwright UI tests
         run: |
           cd ui-playwright

@@ -1,6 +1,4 @@
-package constants;
-
-import org.example.config.Env;
+package org.example.config;
 
 public class Constants {
 
@@ -9,5 +7,4 @@ public class Constants {
 
     public static final String USERS_TEST_DATA_PATH = System.getProperty("user.dir") + "/src/test/resources/users/"
             + Env.getInstance().value() + "/users.json";
-
 }

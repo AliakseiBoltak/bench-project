@@ -1,4 +1,4 @@
-package model;
+package org.example.model;
 
 import lombok.AccessLevel;
 import lombok.Getter;
