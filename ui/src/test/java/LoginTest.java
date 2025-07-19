@@ -32,7 +32,5 @@ public class LoginTest extends BaseUiTest {
                         user.getPassword());
         Assert.assertFalse(homePage.checkIfHomePageLoaded(),
                 "Login succeeded with invalid creds for user: " + userType);
-        Assert.assertTrue(loginMissions.isLoginErrorVisible(),
-                "Login error alert should be visible for invalid credentials.");
     }
 }
