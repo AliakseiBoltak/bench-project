@@ -8,7 +8,8 @@ import lombok.ToString;
 @ToString
 public final class Env {
 
-    private static final Env INSTANCE = new Env(ConfigConstants.ENV);
+    private static final Env INSTANCE = new Env(System.getProperty("env") != null && !System.getProperty("env").isEmpty()
+            ? System.getProperty("env") : "default");
     private final String env;
 
     private Env(String env) {

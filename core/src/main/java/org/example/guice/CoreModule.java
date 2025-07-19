@@ -4,6 +4,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import org.example.config.ConfigLoader;
+import org.example.dao.UserDataDao;
+import org.example.dao.UserDataJsonDao;
 
 public class CoreModule extends AbstractModule {
 
@@ -12,4 +14,11 @@ public class CoreModule extends AbstractModule {
     public ConfigLoader provideConfigLoader() {
         return new ConfigLoader();
     }
+
+    @Override
+    protected void configure() {
+        // Bind a service to its implementation
+        bind(UserDataDao.class).to(UserDataJsonDao.class);
+    }
+
 }

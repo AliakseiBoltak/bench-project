@@ -1,17 +1,14 @@
 import com.google.inject.Inject;
-import guice.UIModule;
 import io.qameta.allure.Allure;
 import missions.LoginMissions;
 import org.example.config.ConfigLoader;
 
+import org.example.model.User;
+import org.example.service.UserDataService;
 import org.testng.Assert;
-import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import service.UserDataService;
-import model.User;
 
-@Guice(modules = {UIModule.class})
 public class LoginTest extends BaseUiTest {
 
     @Inject
