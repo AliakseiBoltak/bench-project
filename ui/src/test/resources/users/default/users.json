@@ -1,12 +1,12 @@
 [
   {
     "usertype": "test",
-    "username": "alice",
-    "password": "test123"
+    "username": "test123",
+    "password": ""
   },
   {
     "usertype": "admin",
-    "username": "bob",
-    "password": "admin456"
+    "username": "admin456",
+    "password": ""
   }
 ]
