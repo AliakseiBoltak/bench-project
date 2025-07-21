@@ -1,12 +1,13 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="UI Suite" parallel="classes">
+<suite name="UI Suite" parallel="tests">
     <listeners>
         <listener class-name="listeners.AllurePlaywrightListener"/>
         <listener class-name="org.example.listeners.AllureListener"/>
     </listeners>
     <test name="Login Test">
         <classes>
-            <class name="GitHubLoginTest"/>
+            <class name="GitHubLoginWithoutStoredSessionTest"/>
+<!--            <class name="GitHubLoginByLoadingStoredSessionTest"/>-->
         </classes>
     </test>
 </suite>

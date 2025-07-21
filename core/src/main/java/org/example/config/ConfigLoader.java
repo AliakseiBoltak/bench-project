@@ -22,6 +22,18 @@ public class ConfigLoader {
         return config.getString("baseUrl");
     }
 
+    public String getGithubUrl() {
+        return config.getString("github.url");
+    }
+
+    public String getGitHubUsername() {
+        return config.getString("github.username");
+    }
+
+    public String getGitHubPassword() {
+        return config.getString("github.password");
+    }
+
     public String getDbUrl() {
         return config.getString("db.url");
     }

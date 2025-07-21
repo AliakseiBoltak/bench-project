@@ -55,3 +55,7 @@ mvn allure:serve
   mvn clean test -Denv=test
   ```
   By default, `env` is set to `'default'`. Setting `-Denv=test` will switch tests to use the `test` environment configuration.
+
+- **GitHub Login UI Tests:**  
+  To run Playwright tests that require GitHub authentication (such as tests that use a stored session for GitHub),  
+  you must update your `env.conf` file with valid GitHub credentials.

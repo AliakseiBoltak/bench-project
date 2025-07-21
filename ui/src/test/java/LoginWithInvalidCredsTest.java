@@ -9,10 +9,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 
-public class LoginTest extends BaseUiTest {
+public class LoginWithInvalidCredsTest extends BaseUiTest {
 
     @Inject
-    public LoginTest(UserDataService userDataService, LoginMissions loginMissions, ConfigLoader configLoader) {
+    public LoginWithInvalidCredsTest(UserDataService userDataService, LoginMissions loginMissions,
+                                     ConfigLoader configLoader) {
         super(configLoader);
         this.userDataService = userDataService;
         this.loginMissions = loginMissions;
