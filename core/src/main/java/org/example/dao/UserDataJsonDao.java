@@ -9,7 +9,6 @@ import java.util.List;
 
 import static org.example.config.Constants.USERS_TEST_DATA_PATH;
 
-
 public class UserDataJsonDao implements UserDataDao {
 
     private JSONDataLoader jsonDataLoader;

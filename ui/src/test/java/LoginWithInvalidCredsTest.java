@@ -12,19 +12,19 @@ import pages.HomePage;
 public class LoginWithInvalidCredsTest extends BaseUiTest {
 
     @Inject
-    public LoginWithInvalidCredsTest(UserDataService userDataJsonService, LoginMissions loginMissions,
+    public LoginWithInvalidCredsTest(UserDataService userDataService, LoginMissions loginMissions,
                                      ConfigLoader configLoader) {
         super(configLoader);
-        this.userDataJsonService = userDataJsonService;
+        this.userDataService = userDataService;
         this.loginMissions = loginMissions;
     }
 
-    private final UserDataService userDataJsonService;
+    private final UserDataService userDataService;
     private final LoginMissions loginMissions;
 
     @Test(dataProvider = "allUserTypes")
     public void testGithubLoginWithInvalidCreds(String userType) {
-        User user = userDataJsonService.getUserByType(userType);
+        User user = userDataService.getUserByType(userType);
         Allure.step("Perform login with user: " + userType);
         HomePage homePage = loginMissions
                 .navigateToLoginPage(baseUrl)

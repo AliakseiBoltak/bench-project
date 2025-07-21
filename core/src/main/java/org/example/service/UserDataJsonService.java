@@ -19,9 +19,9 @@ public class UserDataJsonService implements UserDataService {
 
     @Override
     public User getUserByType(String type) {
-        List<User> testUsers = new ArrayList<>(userDataDao.findUserData(type) != null ?
+        List<User> foundUsers = new ArrayList<>(userDataDao.findUserData(type) != null ?
                 userDataDao.findUserData(type) : List.of());
-        return testUsers.stream()
+        return foundUsers.stream()
                 .filter(user -> user.getUsertype().equals(type))
                 .findFirst()
                 .orElseThrow(() -> new DataException("No user found with type: " + type));
