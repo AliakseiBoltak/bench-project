@@ -1,6 +1,6 @@
 ## How to Build and Run Tests
 
-### 1. Import as Maven Project and Install Artifacts
+### 1. Import as Maven Project and Install Artifact
 
 ```sh
 mvn clean install -DskipTests=true
@@ -35,10 +35,10 @@ mvn allure:serve
 ## Notes
 
 - **Database Tests:**  
-  Before running tests in the `db` module, execute the script `init_test_db.sql` to create the database and tables.
+  Before running tests in `db` module, execute the script `init_test_db.sql` to create the database and tables.
 
 - **UI Playwright Tests:**  
-  Before running tests in the `ui-playwright` module, you must install Playwright browsers by running:
+  Before running tests in `ui-playwright` module, you must install Playwright browsers by running:
   ```sh
   mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install"
    ```

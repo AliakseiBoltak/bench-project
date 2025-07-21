@@ -21,7 +21,7 @@ public class LoginTest extends BaseUiTest {
     private final UserDataService userDataService;
     private final LoginMissions loginMissions;
 
-    @Test(dataProvider = "allUserTypesWithIncorrectCreds")
+    @Test(dataProvider = "allUserTypes")
     public void testGithubLoginWithInvalidCreds(String userType) {
         User user = userDataService.getUserByType(userType);
         Allure.step("Perform login with user: " + userType);

@@ -30,7 +30,7 @@ public class BaseTest {
     }
 
     @DataProvider
-    protected Object[][] allUserTypesWithIncorrectCreds() {
+    protected Object[][] allUserTypes() {
         return Arrays.stream(UserTypes.values())
                 .map(type -> new Object[]{type.name().toLowerCase()})
                 .toArray(Object[][]::new);

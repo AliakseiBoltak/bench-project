@@ -23,7 +23,7 @@ public abstract class BaseUiTest {
     protected final String baseUrl;
 
     @DataProvider
-    protected Object[][] allUserTypesWithIncorrectCreds() {
+    protected Object[][] allUserTypes() {
         return Arrays.stream(UserTypes.values())
                 .map(type -> new Object[]{type.name().toLowerCase()})
                 .toArray(Object[][]::new);

@@ -17,7 +17,7 @@ public class GitHubLoginTest extends BaseTest {
 
     private final UserDataService userDataService;
 
-    @Test(dataProvider = "allUserTypesWithIncorrectCreds")
+    @Test(dataProvider = "allUserTypes")
     public void testInvalidGithubLoginShowsError(String userType) {
         User user = userDataService.getUserByType(userType);
         Allure.step("Perform login with user: " + userType);
