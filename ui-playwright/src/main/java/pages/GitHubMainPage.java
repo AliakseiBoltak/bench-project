@@ -23,8 +23,8 @@ public class GitHubMainPage {
                 .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
     }
 
-    public GitHubMainPage navigateToHomePage(String baseUrl) {
-        page.navigate(baseUrl);
+    public GitHubMainPage navigateToHomePage(String url) {
+        page.navigate(url);
         return this;
     }
 

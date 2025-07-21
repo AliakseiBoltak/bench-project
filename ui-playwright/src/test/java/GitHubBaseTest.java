@@ -78,8 +78,8 @@ public class GitHubBaseTest {
                     .navigateToLogin(gitHubUrl + LOGIN_PATH)
                     .enterUsername(username)
                     .enterPassword(password)
-                    .clickSignIn();
-            new GitHubMainPage(page).waitForHomePageToBeLoaded();
+                    .clickSignIn()
+                    .waitForHomePageToBeLoaded();
             context.storageState(new BrowserContext.StorageStateOptions().setPath(Paths.get(STORAGE_STATE)));
             context.close();
         }
