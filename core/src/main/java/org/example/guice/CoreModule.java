@@ -6,6 +6,8 @@ import com.google.inject.Singleton;
 import org.example.config.ConfigLoader;
 import org.example.dao.UserDataDao;
 import org.example.dao.UserDataJsonDao;
+import org.example.service.UserDataJsonService;
+import org.example.service.UserDataService;
 
 public class CoreModule extends AbstractModule {
 
@@ -19,6 +21,7 @@ public class CoreModule extends AbstractModule {
     protected void configure() {
         // Bind a service to its implementation
         bind(UserDataDao.class).to(UserDataJsonDao.class);
+        bind(UserDataService.class).to(UserDataJsonService.class);
     }
 
 }

@@ -2,11 +2,11 @@
   {
     "usertype": "test",
     "username": "test123",
-    "password": ""
+    "password": "test_password"
   },
   {
     "usertype": "admin",
     "username": "admin456",
-    "password": ""
+    "password": "admin_password"
   }
 ]
