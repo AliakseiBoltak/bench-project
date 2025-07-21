@@ -18,7 +18,7 @@ import static constants.PathConstants.LOGIN_PATH;
 @Guice(modules = {CoreModule.class})
 public class GitHubBaseTest {
 
-    protected static final String STORAGE_STATE = "sessionState.json";
+    protected static final String STORED_SESSION_STATE = "sessionState.json";
     protected final ConfigLoader configLoader;
     protected final String gitHubUrl;
     protected Playwright playwright;
@@ -41,15 +41,15 @@ public class GitHubBaseTest {
         playwright = Playwright.create();
         browser = BrowserFactory.initBrowser(playwright);
         if (useStoredSession()) {
-            if (Files.exists(Paths.get(STORAGE_STATE))) {
+            if (Files.exists(Paths.get(STORED_SESSION_STATE))) {
                 context = browser.newContext(new Browser.NewContextOptions()
-                        .setStorageStatePath(Paths.get(STORAGE_STATE)));
+                        .setStorageStatePath(Paths.get(STORED_SESSION_STATE)));
             } else {
                 context = browser.newContext();
                 page = context.newPage();
                 loginAndSaveSession(configLoader.getGitHubUsername(), configLoader.getGitHubPassword());
                 context = browser.newContext(new Browser.NewContextOptions()
-                        .setStorageStatePath(Paths.get(STORAGE_STATE)));
+                        .setStorageStatePath(Paths.get(STORED_SESSION_STATE)));
             }
             page = context.newPage();
         } else {
@@ -78,7 +78,7 @@ public class GitHubBaseTest {
                 .enterPassword(password)
                 .clickSignIn()
                 .waitForHomePageToBeLoaded();
-        context.storageState(new BrowserContext.StorageStateOptions().setPath(Paths.get(STORAGE_STATE)));
+        context.storageState(new BrowserContext.StorageStateOptions().setPath(Paths.get(STORED_SESSION_STATE)));
         context.close();
     }
 
