@@ -48,7 +48,7 @@ public class GitHubBaseTest {
             } else {
                 context = browser.newContext();
                 page = context.newPage();
-                gitHubUiLoginAndSaveStorage(configLoader.getGitHubUsername(), configLoader.getGitHubPassword());
+                loginAndSaveSession(configLoader.getGitHubUsername(), configLoader.getGitHubPassword());
                 context = browser.newContext(new Browser.NewContextOptions()
                         .setStorageStatePath(Paths.get(STORAGE_STATE)));
             }
@@ -70,19 +70,17 @@ public class GitHubBaseTest {
         AllurePlaywrightListener.removePage();
     }
 
-    protected void gitHubUiLoginAndSaveStorage(String username, String password) {
-        if (!Files.exists(Paths.get(STORAGE_STATE))) {
-            context = browser.newContext();
-            page = context.newPage();
-            new GitHubLoginPage(page)
-                    .navigateToLogin(gitHubUrl + LOGIN_PATH)
-                    .enterUsername(username)
-                    .enterPassword(password)
-                    .clickSignIn()
-                    .waitForHomePageToBeLoaded();
-            context.storageState(new BrowserContext.StorageStateOptions().setPath(Paths.get(STORAGE_STATE)));
-            context.close();
-        }
+    protected void loginAndSaveSession(String username, String password) {
+        context = browser.newContext();
+        page = context.newPage();
+        new GitHubLoginPage(page)
+                .navigateToLogin(gitHubUrl + LOGIN_PATH)
+                .enterUsername(username)
+                .enterPassword(password)
+                .clickSignIn()
+                .waitForHomePageToBeLoaded();
+        context.storageState(new BrowserContext.StorageStateOptions().setPath(Paths.get(STORAGE_STATE)));
+        context.close();
     }
 
     protected void startTracing() {

@@ -14,8 +14,7 @@ public class GitHubMainPage {
     }
 
     public boolean checkIfHomePageLoaded() {
-        return page.locator(HOME_PAGE_TITLE_LOCATOR)
-                .isVisible(new Locator.IsVisibleOptions());
+        return page.locator(HOME_PAGE_TITLE_LOCATOR).isVisible();
     }
 
     public void waitForHomePageToBeLoaded() {

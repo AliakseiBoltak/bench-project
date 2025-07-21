@@ -1,6 +1,5 @@
 package pages;
 
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 public class GitHubPullRequestsPage {
@@ -14,8 +13,7 @@ public class GitHubPullRequestsPage {
     }
 
     public boolean checkIfPullRequestsPageLoaded() {
-        return page.locator(PULL_REQUESTS_TITLE_LOCATOR)
-                .isVisible(new Locator.IsVisibleOptions());
+        return page.locator(PULL_REQUESTS_TITLE_LOCATOR).isVisible();
     }
 
     public GitHubPullRequestsPage navigatePullRequestsPage(String url) {
