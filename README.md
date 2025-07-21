@@ -44,7 +44,7 @@ mvn allure:serve
    ```
   To run Playwright tests that require GitHub authentication (such as tests that use a stored session for GitHub),  
   you must update your `env.conf` file with valid GitHub credentials.
-- 
+
 - **Adjust Browser/Headless Mode:**  
   To change the default browser or headless mode for UI tests, pass JVM parameters when running tests. For example:
   ```sh
