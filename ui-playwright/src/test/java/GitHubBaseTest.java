@@ -18,7 +18,7 @@ import static constants.PathConstants.LOGIN_PATH;
 @Guice(modules = {CoreModule.class})
 public class GitHubBaseTest {
 
-    protected static final String STORAGE_STATE = "githubStorageState.json";
+    protected static final String STORAGE_STATE = "sessionState.json";
     protected final ConfigLoader configLoader;
     protected final String gitHubUrl;
     protected Playwright playwright;
