@@ -9,6 +9,8 @@ import pages.GitHubMainPage;
 
 import java.nio.file.Paths;
 
+import static constants.PathConstants.TEST_VIDEO_RECORDING_PATH;
+
 public class GitHubLoginWithVideoTest extends GitHubBaseTest {
 
     private static final Logger LOGGER = LogManager.getLogger(GitHubLoginWithVideoTest.class);
@@ -26,7 +28,7 @@ public class GitHubLoginWithVideoTest extends GitHubBaseTest {
     @BeforeMethod
     public void setVideo() {
         Browser.NewContextOptions contextOptions = new Browser.NewContextOptions()
-                .setRecordVideoDir(Paths.get("videos/"))
+                .setRecordVideoDir(Paths.get(TEST_VIDEO_RECORDING_PATH))
                 .setRecordVideoSize(1280, 720);
         context = browser.newContext(contextOptions);
         page = context.newPage();
