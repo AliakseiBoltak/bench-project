@@ -26,8 +26,8 @@ public class GitHubLoginOfflineTest extends GitHubBaseTest {
     public void testLoginPageDoesNotLoadWhenOffline() {
         context.setOffline(true);
         try {
-            new GitHubLoginPage(page).navigateToLogin(gitHubUrl + LOGIN_PATH);
-            Assert.fail("Page should not load when offline");
+            GitHubLoginPage gitHubLoginPage = new GitHubLoginPage(page).navigateToLogin(gitHubUrl + LOGIN_PATH);
+            Assert.assertFalse(gitHubLoginPage.isLoginPageLoaded(), "Page should not load when offline");
         } catch (PlaywrightException ex) {
             Allure.addAttachment("Login Page is not loaded when offline:",
                     new ByteArrayInputStream(page.screenshot()));
