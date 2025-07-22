@@ -1,14 +1,14 @@
 ## How to Build and Run Tests
 
-### 1. Import as Maven Project and Install Artifact
+### 1. Import as Maven Project, navigate to core module and install artifact
 
 ```sh
-mvn clean install -DskipTests=true
+mvn clean install
 ```
 
 ---
 
-### 2. Navigate to the Corresponding Module and Run Tests
+### 2. Navigate to the corresponding module with tests and run tests
 
 ```sh
 mvn clean test
