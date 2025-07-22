@@ -6,6 +6,7 @@
     </listeners>
     <test name="Login Test">
         <classes>
+            <class name="GitHubLoginWithVideoTest"/>
             <class name="GitHubLoginWithoutStoredSessionTest"/>
 <!--            <class name="GitHubLoginByLoadingStoredSessionTest"/>-->
         </classes>

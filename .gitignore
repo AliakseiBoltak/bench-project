@@ -38,6 +38,7 @@ Desktop.ini
 /allure-report/
 /test-output/
 .surefire-*
+**/videos/
 
 # Local configuration files
 *.local
