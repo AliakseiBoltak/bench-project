@@ -42,7 +42,9 @@ jobs:
 
       - name: Install Java artifact and run tests
         run: |
-          mvn clean install -DskipTests=true
+          cd core
+          mvn clean install
+          cd ..
           for module in api ui ui-playwright; do
             mvn -f $module/pom.xml clean test
           done
