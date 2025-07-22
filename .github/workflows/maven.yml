@@ -40,21 +40,9 @@ jobs:
       - name: Install Playwright dependencies
         run: npx playwright install-deps
 
-      - name: Install Java project artifact
+      - name: Install Java artifact and run tests
         run: |
-          mvn clean install -DskipTests=true     
-
-      - name: Run API tests
-        run: |
-          cd api
-          mvn clean test
-
-      - name: Run Selenide UI tests
-        run: |
-          cd ui
-          mvn clean test    
-
-      - name: Run Playwright UI tests
-        run: |
-          cd ui-playwright
-          mvn clean test
+          mvn clean install -DskipTests=true
+          for module in api ui ui-playwright; do
+            mvn -f $module/pom.xml clean test
+          done
