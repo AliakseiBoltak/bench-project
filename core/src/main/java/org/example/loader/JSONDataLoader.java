@@ -1,4 +1,4 @@
-package org.example.utils;
+package org.example.loader;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 
-public class JSONDataLoader {
+public class JSONDataLoader implements DataLoader{
     private final Gson gson = new GsonBuilder().create();
     private static final Logger LOGGER = LogManager.getLogger(JSONDataLoader.class);
 
@@ -21,6 +21,7 @@ public class JSONDataLoader {
         return JSONDataLoader.class.getResourceAsStream(resource);
     }
 
+    @Override
     public <T> T getData(String dataPath, Class<T> genericType)
     {
         try (InputStream inputStream = JSONDataLoader.class.getResource(dataPath) == null
