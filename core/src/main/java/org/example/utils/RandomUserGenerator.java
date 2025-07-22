@@ -1,7 +1,9 @@
 package org.example.utils;
 
+import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
 import org.example.config.Constants;
 import org.example.constants.UserTypes;
+import org.example.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -55,21 +58,24 @@ public class RandomUserGenerator {
         Random random = new Random();
         UserTypes[] userTypes = UserTypes.values();
 
-        String usersJson = IntStream.range(0, userCount)
+        List<User> users = IntStream.range(0, userCount)
                 .mapToObj(i -> {
                     UserTypes selectedType = userTypes[random.nextInt(userTypes.length)];
                     String usertype = selectedType.name().toLowerCase();
                     String username = usertype + (USERNAME_OFFSET + random.nextInt(USERNAME_RANGE));
                     String password = "pwd" + (PASSWORD_OFFSET + random.nextInt(PASSWORD_RANGE));
-                    return String.format("  {\"usertype\": \"%s\", \"username\": \"%s\", \"password\": \"%s\"}",
-                            usertype, username, password);
+                    return new User(usertype, username, password);
                 })
-                .collect(Collectors.joining(",\n", "[\n", "\n]\n"));
+                .collect(Collectors.toList());
+
+        ObjectMapper mapper = new ObjectMapper();
+        String usersJson = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(users);
 
         try (FileWriter writer = new FileWriter(outPath)) {
             writer.write(usersJson);
         }
         LOGGER.info("Generated {} users at {}", userCount, outPath);
+
 
         LOGGER.info("Available user types:");
         Arrays.stream(userTypes).forEach(type -> LOGGER.info(" - {}", type));
