@@ -3,7 +3,6 @@ package org.example.dao;
 import com.google.inject.Inject;
 import org.example.loader.DataLoader;
 import org.example.model.User;
-import org.example.loader.JSONDataLoader;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +14,7 @@ public class UserDataJsonDao implements UserDataDao {
     private DataLoader dataLoader;
 
     @Inject
-    public UserDataJsonDao(JSONDataLoader jsonDataLoader) {
+    public UserDataJsonDao(DataLoader jsonDataLoader) {
         this.dataLoader = jsonDataLoader;
     }
 
