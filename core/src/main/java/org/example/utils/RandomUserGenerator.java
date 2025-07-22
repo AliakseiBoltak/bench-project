@@ -75,10 +75,6 @@ public class RandomUserGenerator {
             writer.write(usersJson);
         }
         LOGGER.info("Generated {} users at {}", userCount, outPath);
-
-
-        LOGGER.info("Available user types:");
-        Arrays.stream(userTypes).forEach(type -> LOGGER.info(" - {}", type));
     }
 
 }
