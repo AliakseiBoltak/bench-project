@@ -2,6 +2,7 @@ import com.google.inject.Inject;
 import io.qameta.allure.Allure;
 import org.example.config.ConfigLoader;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import pages.GitHubMainPage;
 
@@ -25,12 +26,16 @@ public class GitHubLoginTracingTest extends GitHubBaseTest {
         startTracing();
         new GitHubMainPage(page).navigateToHomePage(gitHubUrl);
         stopTracing(TRACE_SESSION_FILE_PATH);
+        Assert.assertTrue(new File(TRACE_SESSION_FILE_PATH).exists() &&
+                        new File(TRACE_SESSION_FILE_PATH).length() > 0,
+                "Trace file does not exist or is empty at:: " + TRACE_SESSION_FILE_PATH);
+    }
+
+    @AfterMethod
+    public void addTracedSessionToAllure() {
         Allure.step("Traced GitHub login session",
                 () -> Allure.addAttachment("Trace Session", "application/zip",
                         Files.newInputStream(Paths.get(TRACE_SESSION_FILE_PATH)), "zip")
-        );
-        Assert.assertTrue(new File(TRACE_SESSION_FILE_PATH).length() > 0,
-                "Trace file is empty at: " + TRACE_SESSION_FILE_PATH
         );
     }
 }
