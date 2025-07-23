@@ -49,7 +49,7 @@ mvn allure:serve
   To view and analyze this traced session in your browser, run the following command:
 
   ```sh
-  npx playwright show-trace traces/github-login-trace.zip
+  mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="show-trace github-login-trace.zip"
   ```
   This will open the Playwright Trace Viewer, allowing you to inspect every step of your test, including screenshots, network, console, and more. 
 
