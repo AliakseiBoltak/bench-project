@@ -21,6 +21,12 @@ public class TracingTest extends GitHubBaseTest {
         super(configLoader);
     }
 
+    @Override
+    protected boolean useStoredSession() {
+        return false;
+    }
+
+
     @Test
     public void testHomePageNavigationWithTracing() {
         startTracing();
