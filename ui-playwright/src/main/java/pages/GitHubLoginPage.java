@@ -35,9 +35,12 @@ public class GitHubLoginPage {
     }
 
     public boolean isLoginPageLoaded() {
-        boolean isUsernameVisible = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName(USERNAME_FIELD)).isVisible();
-        boolean isPasswordVisible = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName(PASSWORD_FIELD)).isVisible();
-        boolean isSignInVisible = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(SIGN_IN_BUTTON).setExact(true)).isVisible();
+        boolean isUsernameVisible = page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName(USERNAME_FIELD)).isVisible();
+        boolean isPasswordVisible = page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName(PASSWORD_FIELD)).isVisible();
+        boolean isSignInVisible = page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(SIGN_IN_BUTTON).setExact(true)).isVisible();
         return isUsernameVisible && isPasswordVisible && isSignInVisible;
     }
 
