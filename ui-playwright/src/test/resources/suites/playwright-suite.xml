@@ -8,7 +8,7 @@
         <classes>
             <class name="VideoTest"/>
             <class name="OfflineErrorTest"/>
-            <class name="GitHubLoginTracingTest"/>
+            <class name="TracingTest"/>
             <class name="GitHubLoginWithoutStoredSessionTest"/>
 <!--            <class name="GitHubLoginByLoadingStoredSessionTest"/>-->
         </classes>

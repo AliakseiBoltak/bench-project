@@ -12,17 +12,17 @@ import java.nio.file.Paths;
 
 import static constants.PathConstants.TRACE_SESSION_PATH;
 
-public class GitHubLoginTracingTest extends GitHubBaseTest {
+public class TracingTest extends GitHubBaseTest {
 
     private static final String TRACE_SESSION_FILE_PATH = TRACE_SESSION_PATH + "github-login-trace.zip";
 
     @Inject
-    public GitHubLoginTracingTest(ConfigLoader configLoader) {
+    public TracingTest(ConfigLoader configLoader) {
         super(configLoader);
     }
 
     @Test
-    public void testLoginWithTracing() {
+    public void testHomePageNavigationWithTracing() {
         startTracing();
         new GitHubMainPage(page).navigateToHomePage(gitHubUrl);
         stopTracing(TRACE_SESSION_FILE_PATH);
