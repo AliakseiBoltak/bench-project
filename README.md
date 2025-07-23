@@ -45,7 +45,7 @@ mvn allure:serve
   To run Playwright tests that require GitHub authentication (such as tests that use a stored session for GitHub),  
   you must update your `env.conf` file with valid GitHub credentials.
 
-  After running your tests, you may have a Playwright trace file (for example, `tracesession.zip`).  
+  After running your tests, you may have a Playwright trace file (for example, `github-login-trace.zip`).  
   To view and analyze this traced session in your browser, run the following command:
 
   ```sh
