@@ -39,6 +39,7 @@ Desktop.ini
 /test-output/
 .surefire-*
 **/videos/
+**/traces/
 
 # Local configuration files
 *.local

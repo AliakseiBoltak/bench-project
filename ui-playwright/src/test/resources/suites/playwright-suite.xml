@@ -1,13 +1,14 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="UI Suite" parallel="tests">
+<suite name="UI Playwright Suite" parallel="tests">
     <listeners>
         <listener class-name="listeners.AllurePlaywrightListener"/>
         <listener class-name="org.example.listeners.AllureListener"/>
     </listeners>
     <test name="Login Test">
         <classes>
-            <class name="GitHubLoginWithVideoTest"/>
-            <class name="GitHubLoginOfflineTest"/>
+            <class name="VideoTest"/>
+            <class name="OfflineErrorTest"/>
+            <class name="TracingTest"/>
             <class name="GitHubLoginWithoutStoredSessionTest"/>
 <!--            <class name="GitHubLoginByLoadingStoredSessionTest"/>-->
         </classes>

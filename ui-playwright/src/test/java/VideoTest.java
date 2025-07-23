@@ -11,12 +11,12 @@ import java.nio.file.Paths;
 
 import static constants.PathConstants.TEST_VIDEO_RECORDING_PATH;
 
-public class GitHubLoginWithVideoTest extends GitHubBaseTest {
+public class VideoTest extends GitHubBaseTest {
 
-    private static final Logger LOGGER = LogManager.getLogger(GitHubLoginWithVideoTest.class);
+    private static final Logger LOGGER = LogManager.getLogger(VideoTest.class);
 
     @Inject
-    public GitHubLoginWithVideoTest(ConfigLoader configLoader) {
+    public VideoTest(ConfigLoader configLoader) {
         super(configLoader);
     }
 

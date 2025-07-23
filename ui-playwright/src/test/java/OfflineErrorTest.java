@@ -10,10 +10,10 @@ import java.io.ByteArrayInputStream;
 
 import static constants.PathConstants.LOGIN_PATH;
 
-public class GitHubLoginOfflineTest extends GitHubBaseTest {
+public class OfflineErrorTest extends GitHubBaseTest {
 
     @Inject
-    public GitHubLoginOfflineTest(ConfigLoader configLoader) {
+    public OfflineErrorTest(ConfigLoader configLoader) {
         super(configLoader);
     }
 
