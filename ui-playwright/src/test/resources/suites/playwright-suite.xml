@@ -4,13 +4,14 @@
         <listener class-name="listeners.AllurePlaywrightListener"/>
         <listener class-name="org.example.listeners.AllureListener"/>
     </listeners>
-    <test name="Login Test">
+    <test name="Power of Playwright">
         <classes>
+            <class name="InterceptAndModifyResponseBodyTest"/>
             <class name="VideoTest"/>
             <class name="OfflineErrorTest"/>
             <class name="TracingTest"/>
-            <class name="GitHubLoginWithoutStoredSessionTest"/>
-<!--            <class name="GitHubLoginByLoadingStoredSessionTest"/>-->
+            <class name="github.GitHubLoginWithoutStoredSessionTest"/>
+<!--            <class name="github.GitHubLoginByLoadingStoredSessionTest"/>-->
         </classes>
     </test>
 </suite>

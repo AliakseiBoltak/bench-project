@@ -1,4 +1,5 @@
 import com.google.inject.Inject;
+import github.GitHubBaseTest;
 import io.qameta.allure.Allure;
 import org.example.config.ConfigLoader;
 import org.testng.Assert;
@@ -22,7 +23,7 @@ public class TracingTest extends GitHubBaseTest {
     }
 
     @Override
-    protected boolean useStoredSession() {
+    protected boolean useStoredGitHubSession() {
         return false;
     }
 

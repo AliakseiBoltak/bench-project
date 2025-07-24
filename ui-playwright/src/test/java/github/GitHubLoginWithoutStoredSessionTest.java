@@ -1,3 +1,5 @@
+package github;
+
 import com.google.inject.Inject;
 import io.qameta.allure.Allure;
 import org.example.config.ConfigLoader;
@@ -15,7 +17,7 @@ public class GitHubLoginWithoutStoredSessionTest extends GitHubBaseTest {
     }
 
     @Override
-    protected boolean useStoredSession() {
+    protected boolean useStoredGitHubSession() {
         return false;
     }
 

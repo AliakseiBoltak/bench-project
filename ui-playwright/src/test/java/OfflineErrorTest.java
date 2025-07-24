@@ -1,5 +1,6 @@
 import com.google.inject.Inject;
 import com.microsoft.playwright.*;
+import github.GitHubBaseTest;
 import io.qameta.allure.Allure;
 import org.example.config.ConfigLoader;
 import org.testng.Assert;
@@ -18,7 +19,7 @@ public class OfflineErrorTest extends GitHubBaseTest {
     }
 
     @Override
-    protected boolean useStoredSession() {
+    protected boolean useStoredGitHubSession() {
         return false;
     }
 
