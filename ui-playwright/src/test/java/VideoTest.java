@@ -1,5 +1,6 @@
 import com.google.inject.Inject;
 import com.microsoft.playwright.*;
+import github.GitHubBaseTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.config.ConfigLoader;
@@ -21,7 +22,7 @@ public class VideoTest extends GitHubBaseTest {
     }
 
     @Override
-    protected boolean useStoredSession() {
+    protected boolean useStoredGitHubSession() {
         return false;
     }
 

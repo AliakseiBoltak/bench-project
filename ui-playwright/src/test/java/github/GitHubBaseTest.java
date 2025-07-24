@@ -1,3 +1,5 @@
+package github;
+
 import com.google.inject.Inject;
 import com.microsoft.playwright.*;
 import factory.BrowserFactory;
@@ -32,7 +34,7 @@ public class GitHubBaseTest {
         this.gitHubUrl = configLoader.getGithubUrl();
     }
 
-    protected boolean useStoredSession() {
+    protected boolean useStoredGitHubSession() {
         return true;
     }
 
@@ -40,7 +42,7 @@ public class GitHubBaseTest {
     public void setUp() {
         playwright = Playwright.create();
         browser = BrowserFactory.initBrowser(playwright);
-        if (useStoredSession()) {
+        if (useStoredGitHubSession()) {
             if (Files.exists(Paths.get(STORED_SESSION_STATE))) {
                 context = browser.newContext(new Browser.NewContextOptions()
                         .setStorageStatePath(Paths.get(STORED_SESSION_STATE)));

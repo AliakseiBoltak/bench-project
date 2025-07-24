@@ -1,3 +1,5 @@
+package github;
+
 import com.google.inject.Inject;
 import org.example.config.ConfigLoader;
 import org.testng.Assert;
