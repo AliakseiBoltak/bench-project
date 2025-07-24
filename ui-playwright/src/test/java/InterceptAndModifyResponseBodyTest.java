@@ -3,6 +3,9 @@ import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Route;
 import github.GitHubBaseTest;
 import io.qameta.allure.Allure;
+import io.qameta.allure.internal.shadowed.jackson.core.JsonProcessingException;
+import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
+import io.qameta.allure.internal.shadowed.jackson.databind.node.ObjectNode;
 import org.example.config.ConfigLoader;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -15,8 +18,7 @@ public class InterceptAndModifyResponseBodyTest extends GitHubBaseTest {
 
     private static final String REQRES_API_URL = "https://reqres.in/api/users";
     private static final String APPLICATION_JSON = "application/json";
-    private static final String INITIAL_RESPONSE_BODY_TEXT =
-            "Tired of writing endless social media content? Let Content Caddy generate it for you.";
+    private static final String CONTENT_TYPE = "content-type";
     private static final String MODIFIED_RESPONSE_BODY_TEXT =
             "The text you see on the screen has been intercepted and modified by Playwright!!!";
     private String modifiedBody;
@@ -41,17 +43,31 @@ public class InterceptAndModifyResponseBodyTest extends GitHubBaseTest {
     @Test
     public void testInterceptAndModifyReqresApiResponse() {
         AtomicReference<String> interceptedBody = new AtomicReference<>("");
+        ObjectMapper objectMapper = new ObjectMapper();
         page.route(REQRES_API_URL, (Route route) -> {
             APIResponse response = route.fetch();
-            String initialBody = response.text();
-            Allure.addAttachment("Initial API Response", APPLICATION_JSON, initialBody);
-            String modifiedBody = initialBody.replace(INITIAL_RESPONSE_BODY_TEXT, MODIFIED_RESPONSE_BODY_TEXT);
-            interceptedBody.set(modifiedBody);
-            route.fulfill(new Route.FulfillOptions()
-                    .setStatus(response.status())
-                    .setHeaders(response.headers())
-                    .setContentType(response.headers().getOrDefault("content-type", APPLICATION_JSON))
-                    .setBody(modifiedBody));
+            String originalBody = response.text();
+            Allure.addAttachment("Original API Response", APPLICATION_JSON, originalBody);
+            try {
+                ObjectNode root = (ObjectNode) objectMapper.readTree(originalBody);
+                updateTextFieldsInJsonWithNewText(root, MODIFIED_RESPONSE_BODY_TEXT);
+                String modifiedBody = objectMapper.writeValueAsString(root);
+                interceptedBody.set(modifiedBody);
+                route.fulfill(new Route.FulfillOptions()
+                        .setStatus(response.status())
+                        .setHeaders(response.headers())
+                        .setContentType(response.headers().getOrDefault(CONTENT_TYPE, APPLICATION_JSON))
+                        .setBody(modifiedBody));
+            } catch (JsonProcessingException e) {
+                Allure.step("Failed to modify JSON response: " + e.getMessage());
+                Allure.step("Returning original response body: " + originalBody);
+                interceptedBody.set(originalBody);
+                route.fulfill(new Route.FulfillOptions()
+                        .setStatus(response.status())
+                        .setHeaders(response.headers())
+                        .setContentType(response.headers().getOrDefault(CONTENT_TYPE, APPLICATION_JSON))
+                        .setBody(originalBody));
+            }
         });
 
         page.navigate(REQRES_API_URL);
@@ -65,5 +81,21 @@ public class InterceptAndModifyResponseBodyTest extends GitHubBaseTest {
         Assert.assertTrue(page.content().contains(MODIFIED_RESPONSE_BODY_TEXT),
                 "Modified text is not displayed on the page!");
 
+    }
+
+    private void updateTextFieldsInJsonWithNewText(ObjectNode node, String newText) {
+        node.fields().forEachRemaining(entry -> {
+            if ("text".equals(entry.getKey())) {
+                node.put("text", newText);
+            } else if (entry.getValue().isObject()) {
+                updateTextFieldsInJsonWithNewText((ObjectNode) entry.getValue(), newText);
+            } else if (entry.getValue().isArray()) {
+                entry.getValue().forEach(child -> {
+                    if (child.isObject()) {
+                        updateTextFieldsInJsonWithNewText((ObjectNode) child, newText);
+                    }
+                });
+            }
+        });
     }
 }
