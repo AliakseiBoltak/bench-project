@@ -1,6 +1,5 @@
 package github;
 
-import github.GitHubBaseTest;
 import com.google.inject.Inject;
 import io.qameta.allure.Allure;
 import org.example.config.ConfigLoader;
@@ -26,7 +25,7 @@ public class GitHubWaitsTest extends GitHubBaseTest {
                 new ByteArrayInputStream(page.screenshot()));
     }
 
-    @Test()
+    @Test
     public void testPlaywrightWaitsPower() {
         GitHubPullRequestsPage pullRequestsPage = new GitHubPullRequestsPage(page)
                 .navigatePullRequestsPage(gitHubUrl + PULL_REQUESTS_PATH);

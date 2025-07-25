@@ -10,7 +10,7 @@ public class GitHubPullRequestsPage {
     private static final String PULL_REQUESTS_TITLE_LOCATOR =
             "//span[@class='AppHeader-context-item-label ' and text()='Pull Requests']";
     private static final String CLOSED_PULL_REQUESTS_LOCATOR =
-            " //a[@data-ga-click='Pull Requests, Table state, Closed']";
+            "//a[@data-ga-click='Pull Requests, Table state, Closed']";
 
     private static final String CLOSED_PULL_REQUESTS_LIST_LOCATOR =
             "a[data-hovercard-type='pull_request']";
