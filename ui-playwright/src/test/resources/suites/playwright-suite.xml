@@ -12,6 +12,7 @@
             <class name="TracingTest"/>
             <class name="github.GitHubLoginWithoutStoredSessionTest"/>
 <!--            <class name="github.GitHubLoginByLoadingStoredSessionTest"/>-->
+<!--            <class name="github.GitHubWaitsTest"/>-->
         </classes>
     </test>
 </suite>
