@@ -3,7 +3,7 @@ package factory;
 import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class WebDriverFactory {
+public class BrowserFactory {
 
     private static final String DEFAULT_BROWSER = "chrome";
     private static final String BROWSER = System.getProperty("browser", DEFAULT_BROWSER).toLowerCase();

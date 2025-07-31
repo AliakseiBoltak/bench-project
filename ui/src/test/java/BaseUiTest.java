@@ -1,7 +1,7 @@
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.google.inject.Inject;
-import factory.WebDriverFactory;
+import factory.BrowserFactory;
 import io.qameta.allure.Allure;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.qameta.allure.selenide.LogType;
@@ -46,7 +46,7 @@ public abstract class BaseUiTest {
 
     @BeforeMethod
     public void openBrowser() {
-        WebDriverFactory.initBrowser();
+        BrowserFactory.initBrowser();
         Allure.step("Open browser: " + Configuration.browser);
         open(baseUrl);
         getWebDriver().manage().window().maximize();
