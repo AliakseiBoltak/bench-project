@@ -1,19 +1,15 @@
 package model;
 
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Builder
-@ToString
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderWithUserDataRecord {
     int orderId;
     String username;
