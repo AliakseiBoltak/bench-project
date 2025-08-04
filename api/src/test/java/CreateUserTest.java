@@ -40,7 +40,6 @@ class CreateUserTest extends BaseAPITest {
                 .when()
                 .post(USER_URI)
                 .then()
-                .log().all()
                 .statusCode(201)
                 .extract()
                 .body()
@@ -60,7 +59,6 @@ class CreateUserTest extends BaseAPITest {
                 .when()
                 .get(USER_URI)
                 .then()
-                .log().all()
                 .assertThat()
                 .body(matchesJsonSchemaInClasspath("schemas/getUsersSchema.json"));
 

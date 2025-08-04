@@ -1,6 +1,8 @@
 import com.google.inject.Inject;
 import constants.Constants;
-import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.example.config.ConfigLoader;
@@ -23,11 +25,12 @@ public abstract class BaseAPITest {
 
     @BeforeSuite
     public void setUp() {
-        baseRequestSpec = RestAssured
-                .given()
-                .baseUri(baseUri)
-                .log().all()
-                .contentType(ContentType.JSON)
-                .header(Constants.X_API_KEY_HEADER, Constants.X_API_KEY_VALUE);
+        baseRequestSpec = new RequestSpecBuilder()
+                .setBaseUri(baseUri)
+                .setContentType(ContentType.JSON)
+                .addFilter(new RequestLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
+                .addHeader(Constants.X_API_KEY_HEADER, Constants.X_API_KEY_VALUE)
+                .build();
     }
 }
