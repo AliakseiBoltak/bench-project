@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import model.requests.CreateUserRequest;
 import model.responses.CreateUserResponse;
 import org.example.config.ConfigLoader;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -26,6 +27,14 @@ class CreateUserTest extends BaseAPITest {
         };
     }
 
+    @AfterMethod
+    public void cleanUp() {
+        cleaningUpCreatedUser(createdUserId);
+    }
+
+    private int createdUserId;
+
+
     @Test(dataProvider = "userDataProvider", description = "Checks user creation returns expected name/job")
     void checkUserCreatedWithExpectedNameAndJobTest(String name, String job) {
         CreateUserRequest createUserRequest = CreateUserRequest.builder()
@@ -44,13 +53,11 @@ class CreateUserTest extends BaseAPITest {
                 .body()
                 .as(CreateUserResponse.class);
 
-        int createdUserId = createUserResponse.getId();
+        createdUserId = createUserResponse.getId();
         Allure.step("Created user ID: " + createdUserId);
 
         assertEquals(createUserResponse.getJob(), createUserRequest.getJob(), "Job does not match");
         assertEquals(createUserResponse.getName(), createUserRequest.getName(), "Name does not match");
         assertNotNull(createUserResponse.getCreatedAt(), "Created at timestamp should not be null");
-
-        cleaningUpCreatedUser(createdUserId);
     }
 }
