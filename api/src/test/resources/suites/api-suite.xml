@@ -6,6 +6,7 @@
     <test name="Create User Test">
         <classes>
             <class name="CreateUserTest"/>
+            <class name="CheckUsersJsonSchemaTest"/>
         </classes>
     </test>
 </suite>
