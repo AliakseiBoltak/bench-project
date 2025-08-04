@@ -34,7 +34,6 @@ class CreateUserTest extends BaseAPITest {
 
     private int createdUserId;
 
-
     @Test(dataProvider = "userDataProvider", description = "Checks user creation returns expected name/job")
     void checkUserCreatedWithExpectedNameAndJobTest(String name, String job) {
         CreateUserRequest createUserRequest = CreateUserRequest.builder()
