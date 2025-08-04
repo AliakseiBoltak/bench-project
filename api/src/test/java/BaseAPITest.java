@@ -1,5 +1,6 @@
 import com.google.inject.Inject;
 import constants.Constants;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
@@ -30,6 +31,7 @@ public abstract class BaseAPITest {
                 .setContentType(ContentType.JSON)
                 .addFilter(new RequestLoggingFilter())
                 .addFilter(new ResponseLoggingFilter())
+                .addFilter(new AllureRestAssured())
                 .addHeader(Constants.X_API_KEY_HEADER, Constants.X_API_KEY_VALUE)
                 .build();
     }
