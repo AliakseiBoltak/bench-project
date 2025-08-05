@@ -7,9 +7,9 @@ import io.qameta.allure.internal.shadowed.jackson.core.JsonProcessingException;
 import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
 import io.qameta.allure.internal.shadowed.jackson.databind.node.ObjectNode;
 import org.example.config.ConfigLoader;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
 import java.util.concurrent.atomic.AtomicReference;
@@ -42,6 +42,7 @@ public class InterceptAndModifyResponseBodyTest extends GitHubBaseTest {
 
     @Test
     public void testInterceptAndModifyReqresApiResponse() {
+        SoftAssert softAssert = new SoftAssert();
         AtomicReference<String> interceptedBody = new AtomicReference<>("");
         ObjectMapper objectMapper = new ObjectMapper();
         page.route(REQRES_API_URL, (Route route) -> {
@@ -73,14 +74,13 @@ public class InterceptAndModifyResponseBodyTest extends GitHubBaseTest {
         page.navigate(REQRES_API_URL);
         modifiedBody = interceptedBody.get();
 
-        Assert.assertNotNull(modifiedBody, "Response body should not be null");
-        Assert.assertFalse(modifiedBody.isEmpty(), "Response body should not be empty");
-        Assert.assertTrue(modifiedBody.contains(MODIFIED_RESPONSE_BODY_TEXT),
+        softAssert.assertNotNull(modifiedBody, "Response body should not be null");
+        softAssert.assertFalse(modifiedBody.isEmpty(), "Response body should not be empty");
+        softAssert.assertTrue(modifiedBody.contains(MODIFIED_RESPONSE_BODY_TEXT),
                 "Response body does not contain expected modified text");
-
-        Assert.assertTrue(page.content().contains(MODIFIED_RESPONSE_BODY_TEXT),
+        softAssert.assertTrue(page.content().contains(MODIFIED_RESPONSE_BODY_TEXT),
                 "Modified text is not displayed on the page!");
-
+        softAssert.assertAll();
     }
 
     private void updateTextFieldsInJsonWithNewText(ObjectNode node, String newText) {
