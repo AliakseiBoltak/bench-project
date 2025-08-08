@@ -1,7 +1,10 @@
 package pages;
 
 import com.microsoft.playwright.Page;
+import org.example.exception.DataException;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FileUploadPage {
@@ -21,6 +24,9 @@ public class FileUploadPage {
     }
 
     public FileUploadPage uploadFile(String filePath) {
+        if (!Files.exists(Path.of(filePath))) {
+            throw new DataException("File does not exist: " + filePath);
+        }
         page.setInputFiles(FILE_INPUT, Paths.get(filePath));
         return this;
     }
