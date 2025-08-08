@@ -1,4 +1,4 @@
-package pages;
+package pages.github;
 
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;

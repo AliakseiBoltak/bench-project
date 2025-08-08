@@ -5,7 +5,7 @@ import io.qameta.allure.Allure;
 import org.example.config.ConfigLoader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.GitHubLoginPage;
+import pages.github.GitHubLoginPage;
 
 import java.io.ByteArrayInputStream;
 

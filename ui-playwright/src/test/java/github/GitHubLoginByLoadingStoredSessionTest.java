@@ -4,8 +4,8 @@ import com.google.inject.Inject;
 import org.example.config.ConfigLoader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.GitHubMainPage;
-import pages.GitHubPullRequestsPage;
+import pages.github.GitHubMainPage;
+import pages.github.GitHubPullRequestsPage;
 
 import static constants.PathConstants.PULL_REQUESTS_PATH;
 

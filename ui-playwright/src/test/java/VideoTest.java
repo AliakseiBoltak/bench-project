@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.example.config.ConfigLoader;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import pages.GitHubMainPage;
+import pages.github.GitHubMainPage;
 
 import java.nio.file.Paths;
 
