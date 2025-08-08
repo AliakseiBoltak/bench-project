@@ -10,7 +10,7 @@ import org.example.guice.CoreModule;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Guice;
-import pages.GitHubLoginPage;
+import pages.github.GitHubLoginPage;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

@@ -5,7 +5,7 @@ import org.example.config.ConfigLoader;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import pages.GitHubMainPage;
+import pages.github.GitHubMainPage;
 
 import java.io.File;
 import java.nio.file.Files;

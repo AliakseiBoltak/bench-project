@@ -6,7 +6,7 @@ import org.example.config.ConfigLoader;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import pages.GitHubPullRequestsPage;
+import pages.github.GitHubPullRequestsPage;
 
 import java.io.ByteArrayInputStream;
 

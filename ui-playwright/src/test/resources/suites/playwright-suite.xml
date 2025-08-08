@@ -10,6 +10,7 @@
             <class name="VideoTest"/>
             <class name="OfflineErrorTest"/>
             <class name="TracingTest"/>
+            <class name="FileUploadTest"/>
             <class name="github.GitHubLoginWithoutStoredSessionTest"/>
 <!--            <class name="github.GitHubLoginByLoadingStoredSessionTest"/>-->
 <!--            <class name="github.GitHubWaitsTest"/>-->
