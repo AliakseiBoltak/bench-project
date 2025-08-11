@@ -3,7 +3,11 @@
   "name": "John Doe",
   "active": true,
   "email": "john.doe@example.com",
-  "roles": ["admin", "editor", "user"],
+  "roles": [
+    "admin",
+    "editor",
+    "user"
+  ],
   "profile": {
     "age": 34,
     "country": "USA",
@@ -11,8 +15,8 @@
     "joined": "2021-09-12"
   },
   "tags": [
-    {"tag": "java"},
-    {"tag": "automation"},
-    {"tag": "testing"}
+    "java",
+    "automation",
+    "testing"
   ]
 }
