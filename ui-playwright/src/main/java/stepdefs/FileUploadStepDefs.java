@@ -22,8 +22,11 @@ public class FileUploadStepDefs {
     @Given("User is on the file upload page {string}")
     public void the_user_is_on_the_file_upload_page(String url) {
         System.out.println("======================");
-        System.out.println(testContext.getBrowser());
-        System.out.println(testContext.getPage());
+        System.out.println("TestContext in StepDefs: " + testContext.hashCode());
+        System.out.println("Playwright in StepDefs: " + testContext.getPlaywright());
+        System.out.println("Browser in StepDefs: " + testContext.getBrowser());
+        System.out.println("BrowserContext in StepDefs: " + testContext.getBrowserContext());
+        System.out.println("Page in StepDefs: " + testContext.getPage());
         System.out.println("======================");
         fileUploadPage = new FileUploadPage(testContext.getPage());
         fileUploadPage.navigateToFileUploadPage(url);

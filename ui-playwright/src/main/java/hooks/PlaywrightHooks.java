@@ -22,6 +22,13 @@ public class PlaywrightHooks {
         testContext.setBrowser(BrowserFactory.initBrowser(testContext.getPlaywright()));
         testContext.setBrowserContext(testContext.getBrowser().newContext());
         testContext.setPage(testContext.getBrowserContext().newPage());
+        System.out.println("======================");
+        System.out.println("TestContext in Hooks: " + testContext.hashCode());
+        System.out.println("Playwright in Hooks: " + testContext.getPlaywright());
+        System.out.println("Browser in Hooks: " + testContext.getBrowser());
+        System.out.println("BrowserContext in Hooks: " + testContext.getBrowserContext());
+        System.out.println("Page in Hooks: " + testContext.getPage());
+        System.out.println("======================");
     }
 
     @After

@@ -1,6 +1,5 @@
 package cucumber;
 
-import guice.TestModule;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
@@ -11,8 +10,4 @@ import io.cucumber.testng.CucumberOptions;
 )
 
 public class CucumberTestRunner extends AbstractTestNGCucumberTests  {
-    public TestModule getInjector() {
-        return new TestModule();
-    }
-
 }
