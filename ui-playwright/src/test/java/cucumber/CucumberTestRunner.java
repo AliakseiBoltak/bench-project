@@ -1,0 +1,18 @@
+package cucumber;
+
+import guice.TestModule;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
+
+@CucumberOptions(
+        features = "src/test/resources/features",
+        glue = {"stepdefs", "hooks"},
+        plugin = {"pretty", "html:target/cucumber-report.html"}
+)
+
+public class CucumberTestRunner extends AbstractTestNGCucumberTests  {
+    public TestModule getInjector() {
+        return new TestModule();
+    }
+
+}
