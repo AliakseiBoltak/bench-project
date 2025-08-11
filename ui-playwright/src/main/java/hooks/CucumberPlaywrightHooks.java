@@ -2,17 +2,17 @@ package hooks;
 
 import com.google.inject.Inject;
 import com.microsoft.playwright.Playwright;
-import context.TestContext;
+import context.CucumberTestContext;
 import factory.BrowserFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
-public class PlaywrightHooks {
+public class CucumberPlaywrightHooks {
 
-    private final TestContext testContext;
+    private final CucumberTestContext testContext;
 
     @Inject
-    public PlaywrightHooks(TestContext testContext) {
+    public CucumberPlaywrightHooks(CucumberTestContext testContext) {
         this.testContext = testContext;
     }
 
@@ -22,13 +22,6 @@ public class PlaywrightHooks {
         testContext.setBrowser(BrowserFactory.initBrowser(testContext.getPlaywright()));
         testContext.setBrowserContext(testContext.getBrowser().newContext());
         testContext.setPage(testContext.getBrowserContext().newPage());
-        System.out.println("======================");
-        System.out.println("TestContext in Hooks: " + testContext.hashCode());
-        System.out.println("Playwright in Hooks: " + testContext.getPlaywright());
-        System.out.println("Browser in Hooks: " + testContext.getBrowser());
-        System.out.println("BrowserContext in Hooks: " + testContext.getBrowserContext());
-        System.out.println("Page in Hooks: " + testContext.getPage());
-        System.out.println("======================");
     }
 
     @After

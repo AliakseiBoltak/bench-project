@@ -1,7 +1,9 @@
+package testng;
+
 import com.google.inject.Inject;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Route;
-import github.GitHubBaseTest;
+import testng.github.GitHubBaseTest;
 import io.qameta.allure.Allure;
 import io.qameta.allure.internal.shadowed.jackson.core.JsonProcessingException;
 import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;

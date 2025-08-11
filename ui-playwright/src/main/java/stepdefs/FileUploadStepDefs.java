@@ -1,6 +1,7 @@
 package stepdefs;
 
-import context.TestContext;
+import context.CucumberTestContext;
+import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -8,26 +9,20 @@ import org.testng.Assert;
 import pages.FileUploadPage;
 import com.google.inject.Inject;
 
+@ScenarioScoped
 public class FileUploadStepDefs {
 
-    private final TestContext testContext;
+    private final CucumberTestContext testContext;
     private FileUploadPage fileUploadPage;
     private String uploadedFileName;
 
     @Inject
-    public FileUploadStepDefs(TestContext testContext) {
+    public FileUploadStepDefs(CucumberTestContext testContext) {
         this.testContext = testContext;
     }
 
     @Given("User is on the file upload page {string}")
     public void the_user_is_on_the_file_upload_page(String url) {
-        System.out.println("======================");
-        System.out.println("TestContext in StepDefs: " + testContext.hashCode());
-        System.out.println("Playwright in StepDefs: " + testContext.getPlaywright());
-        System.out.println("Browser in StepDefs: " + testContext.getBrowser());
-        System.out.println("BrowserContext in StepDefs: " + testContext.getBrowserContext());
-        System.out.println("Page in StepDefs: " + testContext.getPage());
-        System.out.println("======================");
         fileUploadPage = new FileUploadPage(testContext.getPage());
         fileUploadPage.navigateToFileUploadPage(url);
     }

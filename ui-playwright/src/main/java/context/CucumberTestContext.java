@@ -14,7 +14,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ScenarioScoped
-public class TestContext {
+public class CucumberTestContext {
     Playwright playwright;
     Browser browser;
     BrowserContext browserContext;

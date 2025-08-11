@@ -6,15 +6,15 @@
     </listeners>
     <test name="Power of Playwright">
         <classes>
-            <class name="cucumber.CucumberTestRunner"/>
-            <!--            <class name="InterceptAndModifyResponseBodyTest"/>-->
-            <!--            <class name="VideoTest"/>-->
-            <!--            <class name="OfflineErrorTest"/>-->
-            <!--            <class name="TracingTest"/>-->
-            <!--            <class name="FileUploadTest"/>-->
-            <!--            <class name="github.GitHubLoginWithoutStoredSessionTest"/>-->
-            <!--            <class name="github.GitHubLoginByLoadingStoredSessionTest"/>-->
-            <!--            <class name="github.GitHubWaitsTest"/>-->
+            <class name="cucumber.AllCucumberTests"/>
+            <class name="testng.InterceptAndModifyResponseBodyTest"/>
+            <class name="testng.VideoTest"/>
+            <class name="testng.OfflineErrorTest"/>
+            <class name="testng.TracingTest"/>
+            <class name="testng.FileUploadTest"/>
+            <class name="testng.github.GitHubLoginWithoutStoredSessionTest"/>
+            <!--            <class name="testng.github.GitHubLoginByLoadingStoredSessionTest"/>-->
+            <!--            <class name="testng.github.GitHubWaitsTest"/>-->
         </classes>
     </test>
 </suite>

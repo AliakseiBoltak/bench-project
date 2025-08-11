@@ -1,5 +1,7 @@
+package testng;
+
 import com.google.inject.Inject;
-import github.GitHubBaseTest;
+import testng.github.GitHubBaseTest;
 import io.qameta.allure.Allure;
 import org.example.config.ConfigLoader;
 import org.testng.Assert;

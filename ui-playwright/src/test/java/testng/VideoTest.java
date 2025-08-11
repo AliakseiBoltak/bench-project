@@ -1,6 +1,8 @@
+package testng;
+
 import com.google.inject.Inject;
 import com.microsoft.playwright.*;
-import github.GitHubBaseTest;
+import testng.github.GitHubBaseTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.config.ConfigLoader;

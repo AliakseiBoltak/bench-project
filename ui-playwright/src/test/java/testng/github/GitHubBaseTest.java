@@ -1,4 +1,4 @@
-package github;
+package testng.github;
 
 import com.google.inject.Inject;
 import com.microsoft.playwright.*;
