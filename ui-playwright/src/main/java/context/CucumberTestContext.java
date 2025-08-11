@@ -15,6 +15,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ScenarioScoped
 public class CucumberTestContext {
+    int DEFAULT_WAIT_TIMEOUT_MILLISECONDS = 5000;
     Playwright playwright;
     Browser browser;
     BrowserContext browserContext;

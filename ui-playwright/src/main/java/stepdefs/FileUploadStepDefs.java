@@ -40,6 +40,6 @@ public class FileUploadStepDefs {
     public void the_uploaded_file_name_should_be_displayed(String expectedFileName) {
         String uploadedFileName = fileUploadPage.getUploadedFileName();
         Assert.assertTrue(uploadedFileName.contains(expectedFileName),
-                "Uploaded file name should be displayed on the page.");
+                "Uploaded file name '" + expectedFileName + "' should be displayed on the page.");
     }
 }

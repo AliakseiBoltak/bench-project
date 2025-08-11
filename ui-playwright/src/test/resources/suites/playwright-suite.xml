@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="UI Playwright Suite" parallel="tests">
+<suite name="UI Playwright Suite" parallel="classes">
     <listeners>
         <listener class-name="listeners.AllurePlaywrightListener"/>
         <listener class-name="org.example.listeners.AllureListener"/>
