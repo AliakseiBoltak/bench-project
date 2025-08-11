@@ -14,7 +14,6 @@ public class FileUploadStepDefs {
 
     private final CucumberTestContext testContext;
     private FileUploadPage fileUploadPage;
-    private String uploadedFileName;
 
     @Inject
     public FileUploadStepDefs(CucumberTestContext testContext) {
@@ -39,7 +38,7 @@ public class FileUploadStepDefs {
 
     @Then("Uploaded file name {string} should be displayed on the page")
     public void the_uploaded_file_name_should_be_displayed(String expectedFileName) {
-        uploadedFileName = fileUploadPage.getUploadedFileName();
+        String uploadedFileName = fileUploadPage.getUploadedFileName();
         Assert.assertTrue(uploadedFileName.contains(expectedFileName),
                 "Uploaded file name should be displayed on the page.");
     }
