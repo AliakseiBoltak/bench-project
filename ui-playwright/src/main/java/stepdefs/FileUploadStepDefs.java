@@ -15,8 +15,9 @@ public class FileUploadStepDefs {
     private String uploadedFileName;
 
     @Inject
-    public FileUploadStepDefs(TestContext testContext) {
+    public FileUploadStepDefs(TestContext testContext, FileUploadPage fileUploadPage) {
         this.testContext = testContext;
+        this.fileUploadPage = fileUploadPage;
     }
 
     @Given("User is on the file upload page {string}")
