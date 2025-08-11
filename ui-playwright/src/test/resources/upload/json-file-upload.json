@@ -1,0 +1,22 @@
+{
+  "id": 8423,
+  "name": "John Doe",
+  "active": true,
+  "email": "john.doe@example.com",
+  "roles": [
+    "admin",
+    "editor",
+    "user"
+  ],
+  "profile": {
+    "age": 34,
+    "country": "USA",
+    "bio": "Enthusiastic developer and tech blogger.",
+    "joined": "2021-09-12"
+  },
+  "tags": [
+    "java",
+    "automation",
+    "testing"
+  ]
+}

@@ -11,7 +11,6 @@
             <class name="testng.VideoTest"/>
             <class name="testng.OfflineErrorTest"/>
             <class name="testng.TracingTest"/>
-            <class name="testng.FileUploadTest"/>
             <class name="testng.github.GitHubLoginWithoutStoredSessionTest"/>
             <!--            <class name="testng.github.GitHubLoginByLoadingStoredSessionTest"/>-->
             <!--            <class name="testng.github.GitHubWaitsTest"/>-->

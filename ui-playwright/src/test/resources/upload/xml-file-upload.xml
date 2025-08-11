@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user>
+    <id>8423</id>
+    <name>John Doe</name>
+    <active>true</active>
+    <email>john.doe@example.com</email>
+    <roles>
+        <role>admin</role>
+        <role>editor</role>
+        <role>user</role>
+    </roles>
+    <profile>
+        <age>34</age>
+        <country>USA</country>
+        <bio>Enthusiastic developer and tech blogger.</bio>
+        <joined>2021-09-12</joined>
+    </profile>
+    <tags>
+        <tag>java</tag>
+        <tag>automation</tag>
+        <tag>testing</tag>
+    </tags>
+</user>
