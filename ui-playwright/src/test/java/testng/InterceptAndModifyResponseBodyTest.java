@@ -2,6 +2,7 @@ package testng;
 
 import com.google.inject.Inject;
 import com.microsoft.playwright.APIResponse;
+import com.microsoft.playwright.Request;
 import com.microsoft.playwright.Route;
 import testng.github.GitHubBaseTest;
 import io.qameta.allure.Allure;
@@ -14,6 +15,8 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class InterceptAndModifyResponseBodyTest extends GitHubBaseTest {
@@ -48,7 +51,10 @@ public class InterceptAndModifyResponseBodyTest extends GitHubBaseTest {
         AtomicReference<String> interceptedBody = new AtomicReference<>("");
         ObjectMapper objectMapper = new ObjectMapper();
         page.route(REQRES_API_URL, (Route route) -> {
-            APIResponse response = route.fetch();
+            Request request = route.request();
+            Map<String, String> newHeaders = new HashMap<>(request.headers());
+            newHeaders.put("x-api-key", "reqres-free-v1");
+            APIResponse response = route.fetch(new Route.FetchOptions().setHeaders(newHeaders));
             String originalBody = response.text();
             Allure.addAttachment("Original API Response", APPLICATION_JSON, originalBody);
             try {
