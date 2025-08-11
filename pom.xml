@@ -27,6 +27,7 @@
         <surefire.version>3.5.3</surefire.version>
         <aspectj.version>1.9.24</aspectj.version>
         <allure.version>2.24.0</allure.version>
+        <cucumber.version>7.27.0</cucumber.version>
         <suiteXmlFile>default-suite</suiteXmlFile>
     </properties>
 
@@ -85,6 +86,21 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-guice</artifactId>
+            <version>${cucumber.version}</version>
         </dependency>
     </dependencies>
 
