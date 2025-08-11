@@ -1,6 +1,5 @@
 package pages;
 
-import com.google.inject.Inject;
 import com.microsoft.playwright.Page;
 import org.example.exception.DataException;
 
@@ -15,7 +14,6 @@ public class FileUploadPage {
     private static final String SUBMIT_BUTTON = "#file-submit";
     private static final String UPLOADED_FILES_TEXT = "#uploaded-files";
 
-    @Inject
     public FileUploadPage(Page page) {
         this.page = page;
     }

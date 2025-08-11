@@ -7,7 +7,6 @@ import com.microsoft.playwright.Playwright;
 import io.cucumber.guice.ScenarioScoped;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import io.cucumber.guice.ScenarioScoped;
 
 @Getter
 @Setter
