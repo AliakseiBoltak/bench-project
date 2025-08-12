@@ -77,7 +77,7 @@
                             <configuration>
                                 <target>
                                     <copy todir="${project.build.directory}/allure-results/history" overwrite="true" failonerror="false">
-                                        <fileset dir="${basedir}/allure-history"/>
+                                        <fileset dir="${project.basedir}/allure-history"/>
                                     </copy>
                                 </target>
                             </configuration>
