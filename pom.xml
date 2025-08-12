@@ -85,6 +85,9 @@
                         <execution>
                             <id>copy-allure-history</id>
                             <phase>verify</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
                             <configuration>
                                 <target>
                                     <copy todir="${project.basedir}/allure-history/" overwrite="true">
@@ -92,9 +95,6 @@
                                     </copy>
                                 </target>
                             </configuration>
-                            <goals>
-                                <goal>run</goal>
-                            </goals>
                         </execution>
                     </executions>
                 </plugin>
