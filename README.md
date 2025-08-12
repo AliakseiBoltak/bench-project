@@ -42,6 +42,10 @@ After generating and serving the report, save the current run's Allure history s
 mvn antrun:run@copy-allure-history
 ```
 
+> **Note:**  
+> Allure history steps (restore/save) are required only if you want to see trends/statistics across runs.  
+> If you don’t need trends, you can skip steps 2 and 5.
+
 ---
 
 ## Notes
