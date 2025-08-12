@@ -1,5 +1,18 @@
 ## How to Build and Run Tests
 
+> **Before running any tests, you must first build and install the core module artifact.**
+>
+> 1. Navigate to the `core` module directory:
+     >    ```sh
+>    cd core
+>    ```
+> 2. Build and install the core artifact to your local Maven repository:
+     >    ```sh
+>    mvn clean install
+>    ```
+>
+> After this, you can navigate to the desired module (for example, `api`, `ui-playwright`, etc.) and execute the tests as described below.
+
 ### 1. Run Tests
 
 ```sh
