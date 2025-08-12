@@ -90,8 +90,8 @@
                             </goals>
                             <configuration>
                                 <target>
-                                    <copy todir="${project.basedir}/allure-history/" overwrite="true">
-                                        <fileset dir="${project.build.directory}/site/allure-maven-plugin/history" erroronmissingdir="false"/>
+                                    <copy todir="${project.basedir}/allure-history/" overwrite="true" failonerror="false">
+                                        <fileset dir="${project.build.directory}/site/allure-maven-plugin/history"/>
                                     </copy>
                                 </target>
                             </configuration>
