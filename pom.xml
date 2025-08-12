@@ -84,7 +84,7 @@
                         </execution>
                         <execution>
                             <id>copy-allure-history</id>
-                            <phase>process-test-resources</phase>
+                            <phase>verify</phase>
                             <configuration>
                                 <target>
                                     <copy todir="${project.basedir}/allure-history/" overwrite="true">
