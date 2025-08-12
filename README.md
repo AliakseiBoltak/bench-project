@@ -3,11 +3,11 @@
 > **Before running any tests, you must first build and install the core module artifact.**
 >
 > 1. Navigate to the `core` module directory:
-     >    ```sh
+>    ```sh
 >    cd core
 >    ```
 > 2. Build and install the core artifact to your local Maven repository:
-     >    ```sh
+>    ```sh
 >    mvn clean install
 >    ```
 >
