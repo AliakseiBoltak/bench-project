@@ -64,6 +64,27 @@
                     </dependencies>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <executions>
+                        <execution>
+                            <id>copy-allure-history</id>
+                            <phase>pre-site</phase>
+                            <configuration>
+                                <target>
+                                    <copy todir="${project.build.directory}/allure-results/history" overwrite="true">
+                                        <fileset dir="${project.build.directory}/allure-report/history" erroronmissingdir="false"/>
+                                    </copy>
+                                </target>
+                            </configuration>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
                     <groupId>io.qameta.allure</groupId>
                     <artifactId>allure-maven</artifactId>
                     <version>2.15.2</version>
