@@ -64,6 +64,41 @@
                     </dependencies>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <executions>
+                        <execution>
+                            <id>restore-allure-history</id>
+                            <phase>process-test-resources</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <configuration>
+                                <target>
+                                    <copy todir="${project.build.directory}/allure-results/history" overwrite="true" failonerror="false">
+                                        <fileset dir="${basedir}/allure-history"/>
+                                    </copy>
+                                </target>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>copy-allure-history</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <configuration>
+                                <target>
+                                    <copy todir="${project.basedir}/allure-history/" overwrite="true">
+                                        <fileset dir="${project.build.directory}/site/allure-maven-plugin/history" erroronmissingdir="false"/>
+                                    </copy>
+                                </target>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
                     <groupId>io.qameta.allure</groupId>
                     <artifactId>allure-maven</artifactId>
                     <version>2.15.2</version>

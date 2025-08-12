@@ -1,17 +1,19 @@
 ## How to Build and Run Tests
 
-### 1. Import as Maven Project, navigate to core module and install artifact
+### 1. Run Tests
 
 ```sh
-mvn clean install
+mvn clean test
 ```
 
 ---
 
-### 2. Navigate to the corresponding module with tests and run tests
+### 2. Restore Allure History from Previous Runs
+
+To enable test trend statistics (history) in Allure reports, restore the history from your previous report using:
 
 ```sh
-mvn clean test
+mvn antrun:run@restore-allure-history
 ```
 
 ---
@@ -28,6 +30,16 @@ mvn allure:report
 
 ```sh
 mvn allure:serve
+```
+
+---
+
+### 5. Save Allure History for Future Runs
+
+After generating and serving the report, save the current run's Allure history so trends will persist between runs:
+
+```sh
+mvn antrun:run@copy-allure-history
 ```
 
 ---
@@ -51,7 +63,7 @@ mvn allure:serve
   ```sh
   mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="show-trace traces/github-login-trace.zip"
   ```
-  This will open the Playwright Trace Viewer, allowing you to inspect every step of your test, including screenshots, network, console, and more. 
+  This will open the Playwright Trace Viewer, allowing you to inspect every step of your test, including screenshots, network, console, and more.
 
 - **Adjust Browser/Headless Mode:**  
   To change the default browser or headless mode for UI tests, pass JVM parameters when running tests. For example:
