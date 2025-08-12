@@ -36,6 +36,7 @@ Desktop.ini
 # Test reports
 /.allure/
 /allure-report/
+/allure-history/
 /test-output/
 .surefire-*
 **/videos/
