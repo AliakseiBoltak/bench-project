@@ -2,11 +2,11 @@ package testng.github;
 
 import com.google.inject.Inject;
 import org.example.config.ConfigLoader;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.github.GitHubMainPage;
 import pages.github.GitHubPullRequestsPage;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static constants.PathConstants.PULL_REQUESTS_PATH;
 
 public class GitHubLoginByLoadingStoredSessionTest extends GitHubBaseTest {
@@ -19,18 +19,13 @@ public class GitHubLoginByLoadingStoredSessionTest extends GitHubBaseTest {
     @Test
     public void testUserIsLoggedInAndGithubMainPageOpenedByLoadingStoredSession() {
         GitHubMainPage mainPage = new GitHubMainPage(page).navigateToHomePage(gitHubUrl);
-        Assert.assertTrue(mainPage.checkIfHomePageLoaded(),
-                "Main page should be loaded successfully. " +
-                        "Please check the URL: " + gitHubUrl);
+        assertThat(mainPage.getHomePageTitleLocator()).isVisible();
     }
 
     @Test
     public void testUserIsLoggedInAndGithubPullRequestsPageOpenedByLoadingStoredSession() {
         GitHubPullRequestsPage pullRequestsPage = new GitHubPullRequestsPage(page)
                 .navigatePullRequestsPage(gitHubUrl + PULL_REQUESTS_PATH);
-        Assert.assertTrue(pullRequestsPage.checkIfPullRequestsPageLoaded(),
-                "Pull Requests page should be loaded successfully. " +
-                "Please check the URL: " + gitHubUrl + PULL_REQUESTS_PATH);
+        assertThat(pullRequestsPage.getPullRequestsPageLocator()).isVisible();
     }
-
 }

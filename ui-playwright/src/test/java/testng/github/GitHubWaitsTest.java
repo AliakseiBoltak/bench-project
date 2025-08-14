@@ -3,13 +3,13 @@ package testng.github;
 import com.google.inject.Inject;
 import io.qameta.allure.Allure;
 import org.example.config.ConfigLoader;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import pages.github.GitHubPullRequestsPage;
 
 import java.io.ByteArrayInputStream;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static constants.PathConstants.PULL_REQUESTS_PATH;
 
 public class GitHubWaitsTest extends GitHubBaseTest {
@@ -29,15 +29,9 @@ public class GitHubWaitsTest extends GitHubBaseTest {
     public void testPlaywrightWaitsPower() {
         GitHubPullRequestsPage pullRequestsPage = new GitHubPullRequestsPage(page)
                 .navigatePullRequestsPage(gitHubUrl + PULL_REQUESTS_PATH);
-
-        Assert.assertTrue(pullRequestsPage.checkIfPullRequestsPageLoaded(),
-                "Pull Requests page should be loaded and visible!");
-
+        assertThat(pullRequestsPage.getPullRequestsPageLocator()).isVisible();
         pullRequestsPage.clickOnClosedPullRequests()
                 .clickOnFirstClosedPullRequest();
-
-        Assert.assertTrue(pullRequestsPage.checkIfMergePullRequestTextDisplayed(),
-                "Merged pull request text should be displayed!");
-
+        assertThat(pullRequestsPage.getMergedPullRequestsLocator()).isVisible();
     }
 }

@@ -2,7 +2,6 @@ package pages.github;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.WaitForSelectorState;
 
 public class GitHubPullRequestsPage {
 
@@ -22,8 +21,14 @@ public class GitHubPullRequestsPage {
         this.page = page;
     }
 
-    public boolean checkIfPullRequestsPageLoaded() {
-        return page.locator(PULL_REQUESTS_TITLE_LOCATOR).isVisible();
+    public Locator getPullRequestsPageLocator() {
+        return page.locator(PULL_REQUESTS_TITLE_LOCATOR);
+    }
+
+    public Locator getMergedPullRequestsLocator() {
+        return page.locator(MERGED_PULL_REQUESTS_SPAN_LOCATOR)
+                .filter(new Locator.FilterOptions().setVisible(true))
+                .first();
     }
 
     public GitHubPullRequestsPage navigatePullRequestsPage(String url) {
@@ -44,13 +49,4 @@ public class GitHubPullRequestsPage {
         closedPrLinks.first().click();
         return this;
     }
-
-    public boolean checkIfMergePullRequestTextDisplayed() {
-        Locator mergedBadge = page.locator(MERGED_PULL_REQUESTS_SPAN_LOCATOR)
-                .filter(new Locator.FilterOptions().setVisible(true))
-                .first();
-        mergedBadge.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-        return mergedBadge.isVisible();
-    }
-
 }
