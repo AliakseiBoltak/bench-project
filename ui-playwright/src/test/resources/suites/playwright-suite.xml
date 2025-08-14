@@ -12,8 +12,8 @@
             <class name="testng.OfflineErrorTest"/>
             <class name="testng.TracingTest"/>
             <class name="testng.github.GitHubLoginWithoutStoredSessionTest"/>
-            <!--            <class name="testng.github.GitHubLoginByLoadingStoredSessionTest"/>-->
-            <!--            <class name="testng.github.GitHubWaitsTest"/>-->
+<!--            <class name="testng.github.GitHubLoginByLoadingStoredSessionTest"/>-->
+<!--            <class name="testng.github.GitHubWaitsTest"/>-->
         </classes>
     </test>
 </suite>

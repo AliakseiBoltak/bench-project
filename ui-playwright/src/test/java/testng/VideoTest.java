@@ -6,12 +6,12 @@ import testng.github.GitHubBaseTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.config.ConfigLoader;
-import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.github.GitHubMainPage;
 
 import java.nio.file.Paths;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static constants.PathConstants.TEST_VIDEO_RECORDING_PATH;
 
 public class VideoTest extends GitHubBaseTest {
@@ -48,8 +48,6 @@ public class VideoTest extends GitHubBaseTest {
     @Test
     public void testLoginWithVideoRecordingAndUseStoredSessionIsFalse() {
         GitHubMainPage mainPage = new GitHubMainPage(page).navigateToHomePage(gitHubUrl);
-        Assert.assertFalse(mainPage.checkIfHomePageLoaded(),
-                "User should be logged out when useStoredSession is false.");
+        assertThat(mainPage.getHomePageTitleLocator()).not().isVisible();
     }
-
 }

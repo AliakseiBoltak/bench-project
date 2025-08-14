@@ -13,8 +13,8 @@ public class GitHubMainPage {
         this.page = page;
     }
 
-    public boolean checkIfHomePageLoaded() {
-        return page.locator(HOME_PAGE_TITLE_LOCATOR).isVisible();
+    public Locator getHomePageTitleLocator() {
+        return page.locator(HOME_PAGE_TITLE_LOCATOR);
     }
 
     public void waitForHomePageToBeLoaded() {
