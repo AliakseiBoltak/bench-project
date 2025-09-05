@@ -44,6 +44,12 @@ jobs:
         run: |
           mvn clean install -DskipTests=true
 
+      - name: Generate test users and build core module
+        run: |
+          cd core
+          mvn clean install
+          cd ..
+
       - name: Run tests for modules
         run: |
           for module in api ui ui-playwright; do
