@@ -2,12 +2,12 @@
 
 > **Before running any tests, you must first build and install the core module artifact.**
 >
-> 1. Import the project as a Maven project in your IDE.
+> 1. Import as a Maven project in your IDE.
 > 2. Navigate to the `core` module directory:
 >    ```sh
 >    cd core
 >    ```
-> 3. Build and install the core artifact to your local Maven repository by running this command from your core module:
+> 3. Build and install the core artifact to your local Maven repository by running this command:
 >    ```sh
 >    mvn clean install
 >    ```
