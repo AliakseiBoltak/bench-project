@@ -40,10 +40,6 @@ jobs:
       - name: Install Playwright dependencies
         run: npx playwright install-deps
 
-      - name: Build Java artifacts
-        run: |
-          mvn clean install -DskipTests=true
-
       - name: Generate test users and build core module
         run: |
           cd core
