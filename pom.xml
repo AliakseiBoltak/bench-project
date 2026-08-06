@@ -12,6 +12,7 @@
     <modules>
         <module>ui</module>
         <module>api</module>
+        <module>api-apache-http</module>
         <module>core</module>
         <module>db</module>
         <module>ui-playwright</module>
