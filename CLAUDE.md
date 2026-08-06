@@ -10,6 +10,10 @@ Multi-module Maven test automation framework in Java 17. Modules: `core` (shared
 
 Before writing or modifying code, check `.claude/conventions/` for established patterns — module/package structure, Guice DI wiring, test naming/assertion style, page object idioms, Lombok model shape, and POM/dependency handling. Follow what's documented there rather than introducing new patterns.
 
+## Skills
+
+Check `.claude/skills/` before running tests or working with Allure reports — `run-tests` wraps the module/suite/env/browser command combinations below into one flow, and `allure-report` covers report generation plus the `maven-antrun-plugin` wiring needed for history/trend graphs to actually work.
+
 ## Build & Test Commands
 
 ### First-time / after core changes
