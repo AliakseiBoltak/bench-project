@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn -f api-apache-http/pom.xml allure:report)",
+      "Bash(mvn -f api-apache-http/pom.xml verify -DskipTests)",
+      "Bash(mvn clean *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}

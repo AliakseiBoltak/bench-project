@@ -94,3 +94,33 @@ mvn allure:serve
   mvn clean test -Dheadless=false -Dbrowser=firefox
   ```
   This will run the UI tests in headed mode using Firefox instead of the default headless Chromium.
+
+- **Mobile (Appium/Android) Tests:**  
+  The `mobile` module drives a real Android device/emulator via Appium and needs some one-time setup before `mvn -f mobile/pom.xml clean test` will work:
+
+  1. Install Node.js, then Appium and its UiAutomator2 driver:
+     ```sh
+     npm install -g appium
+     appium driver install uiautomator2
+     ```
+  2. Start the Appium server (leave it running in its own terminal):
+     ```sh
+     appium
+     ```
+     By default it listens on `http://127.0.0.1:4723`, matching `appium.serverUrl` in `mobile/src/test/resources/env.conf`.
+  3. Start an Android emulator (created via Android Studio's Device Manager or `avdmanager`) or connect a physical device with USB debugging enabled:
+     ```sh
+     emulator -avd <your_avd_name>          # list AVDs with: emulator -list-avds
+     ```
+  4. Confirm it's visible to ADB before running tests:
+     ```sh
+     adb devices
+     ```
+     You should see a line like `emulator-5554   device` (not `offline`/`unauthorized`).
+  5. If your device's identifier or Android version differs from the defaults in `env.conf` (`deviceName = "emulator-5554"`, `platformVersion = "13"`), update those values — get the platform version with `adb shell getprop ro.build.version.release`.
+  6. Run the test:
+     ```sh
+     mvn -f mobile/pom.xml clean test
+     ```
+
+  The test itself (`OpenSettingsAppTest`) drives the device's pre-installed Settings app, so no APK build/install step is required. The `mobile` module is intentionally excluded from CI (no Android device/emulator available there), same as `db`. See `.claude/skills/run-mobile-tests/SKILL.md` for detailed troubleshooting.
