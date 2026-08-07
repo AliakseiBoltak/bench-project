@@ -16,6 +16,7 @@
         <module>core</module>
         <module>db</module>
         <module>ui-playwright</module>
+        <module>mobile</module>
     </modules>
 
     <description>Java framework for test automation</description>

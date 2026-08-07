@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Mobile Suite" parallel="classes">
+    <listeners>
+        <listener class-name="org.example.listeners.AllureListener"/>
+    </listeners>
+    <test name="Android App Test">
+        <classes>
+            <class name="OpenSettingsAppTest"/>
+        </classes>
+    </test>
+</suite>

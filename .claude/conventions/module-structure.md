@@ -1,14 +1,16 @@
 # Module Structure
 
-5 Maven modules under one aggregator root POM (`groupId org.example`, no shared `dependencyManagement` — see `dependency-management.md`):
+7 Maven modules under one aggregator root POM (`groupId org.example`, no shared `dependencyManagement` — see `dependency-management.md`):
 
-| Module          | Purpose                          | Driver / lib             | Base test class  |
-|-----------------|-----------------------------------|---------------------------|------------------|
-| `core`          | Shared library                   | Guice, Typesafe Config    | —                |
-| `api`           | REST API tests                   | REST Assured              | `BaseAPITest`    |
-| `ui`            | Browser UI tests                 | Selenide                  | `BaseUiTest`     |
-| `ui-playwright` | Browser UI tests + BDD           | Playwright, Cucumber      | `GitHubBaseTest` |
-| `db`            | Database tests                   | plain JDBC                | `BaseDBTest`     |
+| Module            | Purpose                          | Driver / lib             | Base test class  |
+|-------------------|-----------------------------------|---------------------------|------------------|
+| `core`            | Shared library                   | Guice, Typesafe Config    | —                |
+| `api`             | REST API tests                   | REST Assured              | `BaseAPITest`    |
+| `api-apache-http` | REST API tests                   | Apache HttpClient         | `BaseAPITest`    |
+| `ui`              | Browser UI tests                 | Selenide                  | `BaseUiTest`     |
+| `ui-playwright`   | Browser UI tests + BDD           | Playwright, Cucumber      | `GitHubBaseTest` |
+| `db`              | Database tests                   | plain JDBC                | `BaseDBTest`     |
+| `mobile`          | Android app tests                | Appium (`java-client`)    | `BaseMobileTest` |
 
 `core` must be built (`mvn clean install`) before other modules — it installs `core:1.2-SNAPSHOT` to the local repo and generates `users.json` test data. `core`'s own version (`1.2-SNAPSHOT`) is intentionally decoupled from the root aggregator version (`1.0-SNAPSHOT`).
 
