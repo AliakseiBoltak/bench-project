@@ -49,7 +49,7 @@ Expect a line like `emulator-5554   device` (not `offline` or `unauthorized`; fo
 ```hocon
 appium {
   serverUrl        = "http://127.0.0.1:4723"
-  platformVersion  = "13"
+  platformVersion  = "16"
   deviceName       = "emulator-5554"
   automationName   = "UiAutomator2"
   appPackage       = "com.android.settings"
