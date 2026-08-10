@@ -1,6 +1,5 @@
 import com.google.inject.Inject;
-import factory.AndroidDriverFactory;
-import io.appium.java_client.android.AndroidDriver;
+import factory.DriverProvider;
 import io.qameta.allure.Allure;
 import org.example.config.ConfigLoader;
 import org.example.guice.CoreModule;
@@ -12,24 +11,24 @@ import org.testng.annotations.Guice;
 public abstract class BaseMobileTest {
 
     protected final ConfigLoader configLoader;
-    protected AndroidDriver driver;
+    protected final DriverProvider driverProvider;
 
     @Inject
-    public BaseMobileTest(ConfigLoader configLoader) {
+    public BaseMobileTest(ConfigLoader configLoader, DriverProvider driverProvider) {
         this.configLoader = configLoader;
+        this.driverProvider = driverProvider;
     }
 
     @BeforeMethod
     public void setUp() {
-        Allure.step("Starting Android session on device: " + configLoader.getAppiumDeviceName());
-        driver = AndroidDriverFactory.createDriver(configLoader);
+        Allure.step("Starting mobile session for platform: " + configLoader.getPlatformName()
+                + " on device: " + configLoader.getAppiumDeviceName());
+        driverProvider.initDriver(configLoader);
     }
 
     @AfterMethod
     public void tearDown() {
-        Allure.step("Closing Android session");
-        if (driver != null) {
-            driver.quit();
-        }
+        Allure.step("Closing mobile session");
+        driverProvider.quitDriver();
     }
 }

@@ -62,6 +62,10 @@ public class ConfigLoader {
         return config.getString("appium.automationName");
     }
 
+    public String getPlatformName() {
+        return config.getString("appium.platformName");
+    }
+
     public String getAppiumAppPackage() {
         return config.getString("appium.appPackage");
     }
