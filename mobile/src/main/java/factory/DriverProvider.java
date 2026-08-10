@@ -34,7 +34,7 @@ public class DriverProvider {
                         .setAutomationName("XCUITest")
                         .setDeviceName(configLoader.getAppiumDeviceName())
                         .setPlatformVersion(configLoader.getAppiumPlatformVersion())
-                        .setBundleId("com.apple.Preferences");
+                        .setBundleId(configLoader.getAppiumAppPackage());
 
                 driverThreadLocal.set(new IOSDriver(URI.create(configLoader.getAppiumServerUrl()).toURL(), options));
             } else {

@@ -3,11 +3,11 @@ name: run-mobile-tests
 description: Sets up and runs the Appium/Android tests in the mobile module — installing/starting Appium, starting an Android emulator or connecting a device, matching env.conf to the actual device, and troubleshooting common session-start failures. Trigger on "run the mobile tests", "run appium test", "set up appium", "start android emulator for tests", "mobile test won't start".
 ---
 
-# Run Mobile (Appium/Android) Tests
+# Run Mobile (Appium) Tests
 
 The `mobile` module (`BaseMobileTest`, test class `OpenSettingsAppTest`) drives a real Android device/emulator through Appium's `UiAutomator2` driver. Unlike the other modules, this can't just be run with `mvn test` — an Appium server and a running Android device must exist first. This is also why `mobile` is excluded from CI (see `CLAUDE.md`), same as `db`.
 
-## 1. Prerequisites (one-time setup)
+## 1. Prerequisites (Android) (one-time setup)
 
 - **Node.js** (Appium is an npm package) — v16+.
 - **Android SDK** with `platform-tools` and `emulator` packages installed, and `ANDROID_HOME` (or `ANDROID_SDK_ROOT`) pointing at the SDK install. Easiest path: install Android Studio, then add its SDK's `platform-tools/` and `emulator/` directories to `PATH`.
@@ -67,7 +67,8 @@ If your device differs, update:
 
 ```sh
 mvn -f core/pom.xml clean install -q      # required once per session / after core changes
-mvn -f mobile/pom.xml clean test
+mvn -f mobile/pom.xml clean test -Denv=android     # for Android 
+mvn -f mobile/pom.xml clean test -Denv=ios         # for IOS
 ```
 
 To target a non-default `env.conf` profile: `-Denv=dev` (etc.) — see `module-structure.md` in `.claude/conventions/` for how profile fallback works.
