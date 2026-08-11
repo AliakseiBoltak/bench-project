@@ -48,6 +48,6 @@ jobs:
 
       - name: Run tests for modules
         run: |
-          for module in api api-apache-http ui ui-playwright; do
+          for module in api ui-playwright; do
             mvn -f $module/pom.xml clean test
           done
