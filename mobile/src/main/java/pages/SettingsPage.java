@@ -2,5 +2,6 @@ package pages;
 
 public interface SettingsPage {
 
-    String getCurrentAppIdentifier();
+    boolean isAppInForeground(String appIdentifier);
 }
+

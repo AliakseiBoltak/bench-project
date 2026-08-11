@@ -2,6 +2,8 @@ package pages;
 
 import com.google.inject.Inject;
 import factory.DriverProvider;
+import io.appium.java_client.InteractsWithApps;
+import io.appium.java_client.appmanagement.ApplicationState;
 
 public class IOSSettingsPage implements SettingsPage {
 
@@ -13,8 +15,8 @@ public class IOSSettingsPage implements SettingsPage {
     }
 
     @Override
-    public String getCurrentAppIdentifier() {
-        Object response = driverProvider.getDriver().executeScript("mobile: activeAppInfo");
-        return response != null ? response.toString() : "";
+    public boolean isAppInForeground(String appIdentifier) {
+        InteractsWithApps driver = (InteractsWithApps) driverProvider.getDriver();
+        return driver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
     }
 }

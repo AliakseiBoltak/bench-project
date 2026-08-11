@@ -3,7 +3,7 @@
     <listeners>
         <listener class-name="org.example.listeners.AllureListener"/>
     </listeners>
-    <test name="Android App Test">
+    <test name="Mobile App Test">
         <classes>
             <class name="OpenSettingsAppTest"/>
         </classes>

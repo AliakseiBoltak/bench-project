@@ -2,10 +2,11 @@ package pages;
 
 import com.google.inject.Inject;
 import factory.DriverProvider;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.InteractsWithApps;
+import io.appium.java_client.appmanagement.ApplicationState;
 
-public class AndroidSettingsPage implements SettingsPage
-{
+public class AndroidSettingsPage implements SettingsPage {
+
     private final DriverProvider driverProvider;
 
     @Inject
@@ -14,7 +15,8 @@ public class AndroidSettingsPage implements SettingsPage
     }
 
     @Override
-    public String getCurrentAppIdentifier() {
-        return ((AndroidDriver) driverProvider.getDriver()).getCurrentPackage();
+    public boolean isAppInForeground(String appIdentifier) {
+        InteractsWithApps driver = (InteractsWithApps) driverProvider.getDriver();
+        return driver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
     }
 }

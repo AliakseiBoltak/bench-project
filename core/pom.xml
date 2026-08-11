@@ -43,6 +43,14 @@
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
         </dependency>
+        <!-- Routes SLF4J-based logging (Appium, Selenium, RandomUserGenerator) into
+             Log4j2 so it reaches the same console + target/logs/test.log appenders.
+             Without this, those logs are silently dropped ("No SLF4J providers were found"). -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.typesafe</groupId>
             <artifactId>config</artifactId>
