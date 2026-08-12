@@ -33,7 +33,7 @@ jobs:
         run: npx playwright install-deps
 
       - name: Build project and install dependencies
-        run: mvn clean install -DskipTests
+        run: mvn clean install -pl core -DskipTests -am
 
       - name: Run tests for ui-playwright module
-        run: mvn test -pl ui-playwright -am
+        run: mvn clean test -pl ui-playwright
