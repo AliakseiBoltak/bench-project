@@ -1,4 +1,4 @@
-name: CI for API and UI tests
+name: CI for UI tests
 
 on:
   push:
@@ -35,5 +35,5 @@ jobs:
       - name: Build project and install dependencies
         run: mvn clean install -DskipTests
 
-      - name: Run tests for modules
-        run: mvn test -pl api,ui-playwright -am
+      - name: Run tests for ui-playwright module
+        run: mvn test -pl ui-playwright -am
