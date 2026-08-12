@@ -19,4 +19,11 @@ public class IOSSettingsPage implements SettingsPage {
         InteractsWithApps driver = (InteractsWithApps) driverProvider.getDriver();
         return driver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
     }
+
+    @Override
+    public boolean isSearchSettingsVisible() {
+        // temporarily returning true for iOS
+        return true;
+    }
+
 }

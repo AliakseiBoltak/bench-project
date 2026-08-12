@@ -33,5 +33,11 @@ class OpenSettingsAppTest extends BaseMobileTest {
         LOGGER.info("App {} in foreground: {}", settingsAppIdentifier, inForeground);
 
         assertTrue(inForeground, "Settings app was not launched as the foreground app");
+
+        LOGGER.info("Checking if Search Settings element is visible");
+        Allure.step("Checking if Search Settings element is visible");
+
+        boolean isSearchSettingsVisible = settingsPage.isSearchSettingsVisible();
+        assertTrue(isSearchSettingsVisible, "Search Settings element is not visible on the screen");
     }
 }
