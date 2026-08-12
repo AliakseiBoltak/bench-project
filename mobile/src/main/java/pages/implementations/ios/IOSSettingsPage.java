@@ -1,9 +1,11 @@
-package pages;
+package pages.implementations.ios;
 
 import com.google.inject.Inject;
 import factory.DriverProvider;
 import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.appmanagement.ApplicationState;
+import pages.BasePage;
+import pages.interfaces.SettingsPage;
 
 public class IOSSettingsPage extends BasePage implements SettingsPage {
 

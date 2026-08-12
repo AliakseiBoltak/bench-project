@@ -1,4 +1,4 @@
-package pages;
+package pages.interfaces;
 
 public interface SettingsPage {
 

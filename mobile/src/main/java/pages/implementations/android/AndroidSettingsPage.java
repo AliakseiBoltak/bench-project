@@ -1,10 +1,12 @@
-package pages;
+package pages.implementations.android;
 
 import com.google.inject.Inject;
 import factory.DriverProvider;
 import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.appmanagement.ApplicationState;
 import org.openqa.selenium.By;
+import pages.BasePage;
+import pages.interfaces.SettingsPage;
 
 public class AndroidSettingsPage extends BasePage implements SettingsPage {
 

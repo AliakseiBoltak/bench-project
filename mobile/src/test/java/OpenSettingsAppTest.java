@@ -1,28 +1,24 @@
 import com.google.inject.Inject;
 import factory.DriverProvider;
-import factory.PageObjectProvider;
 import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.config.ConfigLoader;
 import org.testng.annotations.Test;
-import pages.AndroidSettingsPage;
-import pages.IOSSettingsPage;
-import pages.SettingsPage;
+import pages.interfaces.SettingsPage;
 
 import static org.testng.Assert.assertTrue;
 
 class OpenSettingsAppTest extends BaseMobileTest {
 
     private static final Logger LOGGER = LogManager.getLogger(OpenSettingsAppTest.class);
-
     private final SettingsPage settingsPage;
 
     @Inject
     public OpenSettingsAppTest(ConfigLoader configLoader, DriverProvider driverProvider,
-                               PageObjectProvider pageObjectProvider) {
+                               SettingsPage settingsPage) {
         super(configLoader, driverProvider);
-        this.settingsPage = pageObjectProvider.getPage(AndroidSettingsPage.class, IOSSettingsPage.class);
+        this.settingsPage = settingsPage;
     }
 
     @Test(description = "Checks the Settings app launches and is the foreground app")
