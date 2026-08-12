@@ -6,6 +6,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.config.ConfigLoader;
 import org.testng.annotations.Test;
+import pages.AndroidSettingsPage;
+import pages.IOSSettingsPage;
 import pages.SettingsPage;
 
 import static org.testng.Assert.assertTrue;
@@ -20,7 +22,7 @@ class OpenSettingsAppTest extends BaseMobileTest {
     public OpenSettingsAppTest(ConfigLoader configLoader, DriverProvider driverProvider,
                                PageObjectProvider pageObjectProvider) {
         super(configLoader, driverProvider);
-        this.settingsPage = pageObjectProvider.getSettingsPage(configLoader.getPlatformName());
+        this.settingsPage = pageObjectProvider.getPage(AndroidSettingsPage.class, IOSSettingsPage.class);
     }
 
     @Test(description = "Checks the Settings app launches and is the foreground app")

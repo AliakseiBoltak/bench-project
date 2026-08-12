@@ -5,13 +5,11 @@ import factory.DriverProvider;
 import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.appmanagement.ApplicationState;
 
-public class IOSSettingsPage implements SettingsPage {
-
-    private final DriverProvider driverProvider;
+public class IOSSettingsPage extends BasePage implements SettingsPage {
 
     @Inject
     public IOSSettingsPage(DriverProvider driverProvider) {
-        this.driverProvider = driverProvider;
+        super(driverProvider);
     }
 
     @Override
@@ -25,5 +23,4 @@ public class IOSSettingsPage implements SettingsPage {
         // temporarily returning true for iOS
         return true;
     }
-
 }

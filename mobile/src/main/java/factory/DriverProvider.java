@@ -30,9 +30,14 @@ public class DriverProvider {
     }
 
     public void initDriver() {
+        if (driverThreadLocal.get() != null) {
+            LOGGER.warn("Driver is already initialized for the current thread. Skipping initialization.");
+            return;
+        }
+
         URL serverUrl = appiumServerUrl();
         Platform platform = Platform.from(configLoader.getPlatformName());
-        LOGGER.info("Initialising {} driver against Appium server {}", platform, serverUrl);
+        LOGGER.info("Initializing {} driver against Appium server {}", platform, serverUrl);
 
         AppiumDriver driver = switch (platform) {
             case ANDROID -> new AndroidDriver(serverUrl, androidOptions());
@@ -40,7 +45,7 @@ public class DriverProvider {
         };
 
         driverThreadLocal.set(driver);
-        LOGGER.info("{} driver initialised, session id: {}", platform, driver.getSessionId());
+        LOGGER.info("{} driver initialized, session id: {}", platform, driver.getSessionId());
     }
 
     public AppiumDriver getDriver() {
