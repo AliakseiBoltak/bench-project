@@ -39,19 +39,19 @@ jobs:
         run: mvn clean test -pl ui-playwright
 
       - name: Restore Allure history
-        run: mvn antrun:run@restore-allure-history
+        run: mvn antrun:run@restore-allure-history -pl ui-playwright
         continue-on-error: true
 
       - name: Generate Allure Report
-        run: mvn allure:report
+        run: mvn allure:report -pl ui-playwright
 
       - name: Copy Allure history
-        run: mvn antrun:run@copy-allure-history
+        run: mvn antrun:run@copy-allure-history -pl ui-playwright
         continue-on-error: true
 
       - name: Upload Allure Report Artifact
         uses: actions/upload-artifact@v4
         with:
-            name: allure-report
-            path: target/site/allure-maven-plugin/
+            name: allure-report-playwright
+            path: ui-playwright/target/site/allure-maven-plugin/
             retention-days: 30
