@@ -54,8 +54,5 @@ jobs:
         with:
             allure_results: ui-playwright/target/allure-results
             allure_report: ui-playwright/target/allure-report
-            storage_path: ${{ github.workspace }}/allure-history
+            gh_pages: gh-pages
             keep_reports: 20
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_branch: gh-pages
-            publish_dir: allure-history
