@@ -1,3 +1,5 @@
+package appium;
+
 import com.google.inject.Inject;
 import factory.DriverProvider;
 import io.qameta.allure.Allure;
@@ -9,14 +11,14 @@ import pages.interfaces.SettingsPage;
 
 import static org.testng.Assert.assertTrue;
 
-class OpenSettingsAppTest extends BaseMobileTest {
+class OpenSettingsAppIT extends BaseMobileTest {
 
-    private static final Logger LOGGER = LogManager.getLogger(OpenSettingsAppTest.class);
+    private static final Logger LOGGER = LogManager.getLogger(OpenSettingsAppIT.class);
     private final SettingsPage settingsPage;
 
     @Inject
-    public OpenSettingsAppTest(ConfigLoader configLoader, DriverProvider driverProvider,
-                               SettingsPage settingsPage) {
+    public OpenSettingsAppIT(ConfigLoader configLoader, DriverProvider driverProvider,
+                             SettingsPage settingsPage) {
         super(configLoader, driverProvider);
         this.settingsPage = settingsPage;
     }

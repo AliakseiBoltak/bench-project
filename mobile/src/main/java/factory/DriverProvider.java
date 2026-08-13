@@ -20,7 +20,6 @@ import java.net.URL;
 public class DriverProvider {
 
     private static final Logger LOGGER = LogManager.getLogger(DriverProvider.class);
-
     private final ConfigLoader configLoader;
     private final ThreadLocal<AppiumDriver> driverThreadLocal = new ThreadLocal<>();
 

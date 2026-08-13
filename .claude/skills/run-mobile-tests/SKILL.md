@@ -5,7 +5,7 @@ description: Sets up and runs the Appium/Android tests in the mobile module — 
 
 # Run Mobile (Appium) Tests
 
-The `mobile` module (`BaseMobileTest`, test class `OpenSettingsAppTest`) drives a real Android device/emulator through Appium's `UiAutomator2` driver. Unlike the other modules, this can't just be run with `mvn test` — an Appium server and a running Android device must exist first. This is also why `mobile` is excluded from CI (see `CLAUDE.md`), same as `db`.
+The `mobile` module (`appium.BaseMobileTest`, test class `appium.OpenSettingsAppIT`) drives a real Android device/emulator through Appium's `UiAutomator2` driver. Unlike the other modules, this can't just be run with `mvn verify` or `mvn test` — an Appium server and a running Android device must exist first. This is also why `mobile` is excluded from CI (see `CLAUDE.md`), same as `db`.
 
 ## 1. Prerequisites (Android) (one-time setup)
 
@@ -67,8 +67,8 @@ If your device differs, update:
 
 ```sh
 mvn -f core/pom.xml clean install -q      # required once per session / after core changes
-mvn -f mobile/pom.xml clean test -Denv=android     # for Android 
-mvn -f mobile/pom.xml clean test -Denv=ios         # for IOS
+mvn -f mobile/pom.xml clean verify -Denv=android     # for Android 
+mvn -f mobile/pom.xml clean verify -Denv=ios         # for IOS
 ```
 
 To target a non-default `env.conf` profile: `-Denv=dev` (etc.) — see `module-structure.md` in `.claude/conventions/` for how profile fallback works.

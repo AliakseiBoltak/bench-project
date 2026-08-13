@@ -13,7 +13,8 @@
     <artifactId>mobile</artifactId>
 
     <properties>
-        <suiteXmlFile>mobile-suite</suiteXmlFile>
+        <unitSuiteXmlFile>unit-suite</unitSuiteXmlFile>
+        <integrationSuiteXmlFile>mobile-suite</integrationSuiteXmlFile>
         <appium.version>9.4.0</appium.version>
         <selenium.version>4.26.0</selenium.version>
     </properties>
@@ -50,5 +51,37 @@
             <version>${selenium.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/suites/${unitSuiteXmlFile}.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/suites/${integrationSuiteXmlFile}.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Appium Integration Tests Suite" parallel="classes">
+<suite name="Unit Tests Suite">
     <listeners>
         <listener class-name="org.example.listeners.AllureListener"/>
     </listeners>
-    <test name="Appium UI Test">
+    <test name="Unit Test">
         <packages>
-            <package name="appium"/>
+            <package name="unit"/>
         </packages>
     </test>
 </suite>

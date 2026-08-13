@@ -126,12 +126,16 @@ mvn allure:serve
 
        **For Android:**
        ```sh
-       mvn -f mobile/pom.xml clean test -Denv=android
+       mvn -f mobile/pom.xml clean verify -Denv=android
        ```
 
        **For iOS:**
        ```sh
-       mvn -f mobile/pom.xml clean test -Denv=ios
+       mvn -f mobile/pom.xml clean verify -Denv=ios
        ```
+**Why use `verify` instead of `test` for Mobile?**
+The `mobile` module strictly separates fast architectural unit tests from heavy Appium UI integration tests using Maven's lifecycle phases:
+* The `test` phase (driven by `maven-surefire-plugin`) runs rapid architectural convention checks (e.g., verifying that all Page Object interfaces have corresponding Android and iOS implementations).
+* The `integration-test` and `verify` phases (driven by `maven-failsafe-plugin`) run the actual cross-platform Appium tests.
 
-  The test itself (`OpenSettingsAppTest`) drives the device's pre-installed Settings app, so no APK/IPA build/install step is required. The `mobile` module is intentionally excluded from CI (no Android device/emulator or iOS simulator available there), same as `db`. See `.claude/skills/run-mobile-tests/SKILL.md` for detailed troubleshooting.
+  The test itself (`appium.OpenSettingsAppIT`) drives the device's pre-installed Settings app, so no APK/IPA build/install step is required. The `mobile` module is intentionally excluded from CI (no Android device/emulator or iOS simulator available there), same as `db`. See `.claude/skills/run-mobile-tests/SKILL.md` for detailed troubleshooting.

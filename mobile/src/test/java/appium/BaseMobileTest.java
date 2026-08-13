@@ -1,3 +1,5 @@
+package appium;
+
 import com.google.inject.Inject;
 import factory.DriverProvider;
 import guice.PageModule;

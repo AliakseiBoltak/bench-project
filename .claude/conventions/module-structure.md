@@ -10,7 +10,7 @@
 | `ui`              | Browser UI tests                 | Selenide                  | `BaseUiTest`     |
 | `ui-playwright`   | Browser UI tests + BDD           | Playwright, Cucumber      | `GitHubBaseTest` |
 | `db`              | Database tests                   | plain JDBC                | `BaseDBTest`     |
-| `mobile`          | Android app tests                | Appium (`java-client`)    | `BaseMobileTest` |
+| `mobile`          | Android app tests                | Appium (`java-client`)    | `appium.BaseMobileTest` |
 
 `core` must be built (`mvn clean install`) before other modules — it installs `core:1.2-SNAPSHOT` to the local repo and generates `users.json` test data. `core`'s own version (`1.2-SNAPSHOT`) is intentionally decoupled from the root aggregator version (`1.0-SNAPSHOT`).
 
