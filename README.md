@@ -89,11 +89,10 @@ mvn allure:serve
   This will open the Playwright Trace Viewer, allowing you to inspect every step of your test, including screenshots, network, console, and more.
 
 - **Adjust Browser/Headless Mode:**  
-  To change the default browser or headless mode for UI tests, pass JVM parameters when running tests. For example:
+  To change the default browser or headless mode for UI tests, pass JVM parameters when running tests. For example, this will run the UI tests in headed mode using Firefox instead of the default headless Chromium.:
   ```sh
   mvn clean test -Dheadless=false -Dbrowser=firefox
   ```
-  This will run the UI tests in headed mode using Firefox instead of the default headless Chromium.
 
 - ```markdown
 - **Mobile (Appium/Android/iOS) Tests:**  
