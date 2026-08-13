@@ -7,7 +7,7 @@
     <test name="Demo of Playwright">
         <classes>
 <!--            <class name="cucumber.AllCucumberTests"/>-->
-<!--            <class name="testng.InterceptAndModifyResponseBodyTest"/>-->
+            <class name="testng.InterceptAndModifyResponseBodyTest"/>
             <class name="testng.VideoTest"/>
             <class name="testng.OfflineErrorTest"/>
             <class name="testng.TracingTest"/>
