@@ -40,27 +40,36 @@ jobs:
       - name: Build project and install dependencies
         run: mvn clean install -pl core -DskipTests -am
 
+      # 1. Restore previous Allure history to include it in the current report
+      - name: Restore Allure History
+        run: mvn antrun:run@restore-allure-history -pl ui-playwright
+        continue-on-error: true # Allow the job to continue even if the history restoration fails (e.g., if there is no previous history)
+
       - name: Run tests for ui-playwright module
         run: mvn clean test -pl ui-playwright
 
       - name: Generate Allure Report
         run: mvn allure:report -pl ui-playwright
 
+      # 2. Save the current Allure history to be used in future runs
+      - name: Save Allure History
+        run: mvn antrun:run@copy-allure-history -pl ui-playwright
+
       - name: Upload Allure Report Artifact
         uses: actions/upload-artifact@v4
         with:
-            name: allure-report-playwright
-            path: ui-playwright/target/site/allure-maven-plugin/
-            retention-days: 30
+          name: allure-report-playwright
+          path: ui-playwright/target/site/allure-maven-plugin/
+          retention-days: 30
 
       - name: Publish Allure Report to GitHub Pages
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
-            allure_results: ui-playwright/target/allure-results
-            allure_report: ui-playwright/target/allure-report
-            gh_pages: gh-pages
-            keep_reports: 10
+          allure_results: ui-playwright/target/allure-results
+          allure_report: ui-playwright/target/allure-report
+          gh_pages: gh-pages
+          keep_reports: 10
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
