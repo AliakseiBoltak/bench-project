@@ -10,7 +10,7 @@ import pages.interfaces.SettingsPage;
 
 public class AndroidSettingsPage extends BasePage implements SettingsPage {
 
-    private final By searchSettingsTitle = By.id("com.android.settings:id/search_bar_title");
+    private static final By SEARCH_SETTINGS_TITLE = By.id("com.android.settings:id/search_bar_title");
 
     @Inject
     public AndroidSettingsPage(DriverProvider driverProvider) {
@@ -19,12 +19,12 @@ public class AndroidSettingsPage extends BasePage implements SettingsPage {
 
     @Override
     public boolean isAppInForeground(String appIdentifier) {
-        InteractsWithApps driver = (InteractsWithApps) driverProvider.getDriver();
-        return driver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
+        InteractsWithApps appDriver = (InteractsWithApps) getDriver();
+        return appDriver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
     }
 
     @Override
     public boolean isSearchSettingsVisible() {
-        return isElementVisible(searchSettingsTitle);
+        return isElementVisible(SEARCH_SETTINGS_TITLE);
     }
 }

@@ -4,6 +4,7 @@ import factory.DriverProvider;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public abstract class BasePage {
+
+    private static final int DEFAULT_TIMEOUT_SECONDS = 5;
 
     protected final DriverProvider driverProvider;
 
@@ -28,20 +31,20 @@ public abstract class BasePage {
     }
 
     protected WebElement waitForElementVisible(By locator) {
-        return waitForElementVisible(locator, 5);
+        return waitForElementVisible(locator, DEFAULT_TIMEOUT_SECONDS);
     }
 
     protected boolean isElementVisible(By locator, int timeoutSeconds) {
         try {
             waitForElementVisible(locator, timeoutSeconds);
             return true;
-        } catch (TimeoutException | org.openqa.selenium.NoSuchElementException e) {
+        } catch (TimeoutException | NoSuchElementException e) {
             return false;
         }
     }
 
     protected boolean isElementVisible(By locator) {
-        return isElementVisible(locator, 5);
+        return isElementVisible(locator, DEFAULT_TIMEOUT_SECONDS);
     }
 
     protected void click(By locator, int timeoutSeconds) {
@@ -51,6 +54,6 @@ public abstract class BasePage {
     }
 
     protected void click(By locator) {
-        click(locator, 5);
+        click(locator, DEFAULT_TIMEOUT_SECONDS);
     }
 }

@@ -42,7 +42,9 @@ jobs:
 
       # 1. Restore previous Allure history to include it in the current report
       - name: Restore Allure History
-        run: mvn antrun:run@restore-allure-history -pl ui-playwright
+        run: |
+          mkdir -p ui-playwright/allure-history
+          mvn antrun:run@restore-allure-history -pl ui-playwright
         continue-on-error: true # Allow the job to continue even if the history restoration fails (e.g., if there is no previous history)
 
       - name: Run tests for ui-playwright module
