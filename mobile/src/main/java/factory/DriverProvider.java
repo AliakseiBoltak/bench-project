@@ -2,6 +2,7 @@ package factory;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.codeborne.selenide.WebDriverRunner;
 import constants.Platform;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -44,6 +45,10 @@ public class DriverProvider {
         };
 
         driverThreadLocal.set(driver);
+        // Register the driver on Selenide's own ThreadLocal so that the static
+        // Selenide.$()/$$() API (used by BasePage and page objects) resolves it
+        // without going through Selenide's Configuration.browser bootstrap.
+        WebDriverRunner.setWebDriver(driver);
         LOGGER.info("{} driver initialized, session id: {}", platform, driver.getSessionId());
     }
 
@@ -59,7 +64,8 @@ public class DriverProvider {
         AppiumDriver driver = driverThreadLocal.get();
         if (driver != null) {
             LOGGER.info("Quitting driver, session id: {}", driver.getSessionId());
-            driver.quit();
+            // closeWebDriver() quits the driver and clears Selenide's ThreadLocal reference.
+            WebDriverRunner.closeWebDriver();
             driverThreadLocal.remove();
         }
     }

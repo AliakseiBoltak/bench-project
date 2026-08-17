@@ -1,6 +1,8 @@
 package org.example.listeners;
 
 import io.qameta.allure.Allure;
+import static io.qameta.allure.model.Status.FAILED;
+import static io.qameta.allure.model.Status.SKIPPED;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
@@ -45,6 +47,7 @@ public class AllureListener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         LOGGER.error("Test failed: {}", result.getName());
         Allure.step("Test failed: " + result.getName());
+        Allure.getLifecycle().updateTestCase(testResult -> testResult.setStatus(FAILED));
         Throwable throwable = result.getThrowable();
         if (throwable != null) {
             Allure.addAttachment("Error Stacktrace", throwable + "\n" +
@@ -56,6 +59,7 @@ public class AllureListener implements ITestListener {
     public void onTestSkipped(ITestResult result) {
         LOGGER.warn("Test skipped: {}", result.getName());
         Allure.step("Test skipped: " + result.getName());
+        Allure.getLifecycle().updateTestCase(testResult -> testResult.setStatus(SKIPPED));
         Throwable throwable = result.getThrowable();
         if (throwable != null) {
             Allure.addAttachment("Skip Reason", throwable.toString());

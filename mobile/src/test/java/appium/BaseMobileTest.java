@@ -1,5 +1,8 @@
 package appium;
 
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import com.google.inject.Inject;
 import factory.DriverProvider;
 import guice.PageModule;
@@ -10,6 +13,7 @@ import org.example.config.ConfigLoader;
 import org.example.guice.CoreModule;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Guice;
 
 @Guice(modules = {CoreModule.class, PageModule.class})
@@ -24,6 +28,15 @@ public abstract class BaseMobileTest {
     public BaseMobileTest(ConfigLoader configLoader, DriverProvider driverProvider) {
         this.configLoader = configLoader;
         this.driverProvider = driverProvider;
+    }
+
+    @BeforeSuite
+    public void globalSetup() {
+        Configuration.timeout = 8000;
+        Configuration.pollingInterval = 200;
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(true));
     }
 
     @BeforeMethod
@@ -41,4 +54,5 @@ public abstract class BaseMobileTest {
         Allure.step("Closing mobile session");
         driverProvider.quitDriver();
     }
+
 }

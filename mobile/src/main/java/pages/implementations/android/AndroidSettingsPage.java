@@ -1,16 +1,21 @@
 package pages.implementations.android;
 
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.appium.AppiumSelectors;
 import com.google.inject.Inject;
 import factory.DriverProvider;
-import io.appium.java_client.InteractsWithApps;
-import io.appium.java_client.appmanagement.ApplicationState;
 import org.openqa.selenium.By;
 import pages.BasePage;
 import pages.interfaces.SettingsPage;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class AndroidSettingsPage extends BasePage implements SettingsPage {
 
-    private static final By SEARCH_SETTINGS_TITLE = By.id("com.android.settings:id/search_bar_title");
+    private SelenideElement searchBarTitle = $(By.id("com.android.settings:id/search_bar_title"))
+            .as("Search Bar Title");
+    private SelenideElement searchBarText = $(AppiumSelectors.withText("Search Settings"))
+            .as("Search Bar Text");
 
     @Inject
     public AndroidSettingsPage(DriverProvider driverProvider) {
@@ -18,13 +23,15 @@ public class AndroidSettingsPage extends BasePage implements SettingsPage {
     }
 
     @Override
-    public boolean isAppInForeground(String appIdentifier) {
-        InteractsWithApps appDriver = (InteractsWithApps) getDriver();
-        return appDriver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
+    public boolean isSearchSettingsVisible() {
+        waitForElementVisible(searchBarTitle);
+        waitForElementVisible(searchBarText);
+        return true;
     }
 
     @Override
-    public boolean isSearchSettingsVisible() {
-        return isElementVisible(SEARCH_SETTINGS_TITLE);
+    public boolean isAppInForeground(String appIdentifier) {
+        return super.isAppInForeground(appIdentifier);
     }
+
 }

@@ -1,23 +1,19 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import com.google.inject.Inject;
 import factory.DriverProvider;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import io.appium.java_client.InteractsWithApps;
+import io.appium.java_client.appmanagement.ApplicationState;
 
-import java.time.Duration;
+public class BasePage {
 
-public abstract class BasePage {
+    protected DriverProvider driverProvider;
 
-    private static final int DEFAULT_TIMEOUT_SECONDS = 5;
-
-    protected final DriverProvider driverProvider;
-
-    protected BasePage(DriverProvider driverProvider) {
+    @Inject
+    public BasePage(DriverProvider driverProvider) {
         this.driverProvider = driverProvider;
     }
 
@@ -25,35 +21,29 @@ public abstract class BasePage {
         return driverProvider.getDriver();
     }
 
-    protected WebElement waitForElementVisible(By locator, int timeoutSeconds) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeoutSeconds));
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    protected boolean isAppInForeground (String appIdentifier){
+        InteractsWithApps appDriver = (InteractsWithApps) getDriver();
+        return appDriver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
     }
 
-    protected WebElement waitForElementVisible(By locator) {
-        return waitForElementVisible(locator, DEFAULT_TIMEOUT_SECONDS);
-    }
-
-    protected boolean isElementVisible(By locator, int timeoutSeconds) {
+    protected boolean isElementVisible(SelenideElement element) {
         try {
-            waitForElementVisible(locator, timeoutSeconds);
+            element.shouldBe(Condition.visible);
             return true;
-        } catch (TimeoutException | NoSuchElementException e) {
+        } catch (Error | Exception e) {
             return false;
         }
     }
 
-    protected boolean isElementVisible(By locator) {
-        return isElementVisible(locator, DEFAULT_TIMEOUT_SECONDS);
+    protected void waitForElementVisible(SelenideElement element) {
+        element.shouldBe(Condition.visible);
     }
 
-    protected void click(By locator, int timeoutSeconds) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeoutSeconds));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
-        element.click();
+    protected void clickElement(SelenideElement element) {
+        element.shouldBe(Condition.visible, Condition.enabled).click();
     }
 
-    protected void click(By locator) {
-        click(locator, DEFAULT_TIMEOUT_SECONDS);
+    protected void typeText(SelenideElement element, String text) {
+        element.shouldBe(Condition.visible).setValue(text);
     }
 }
