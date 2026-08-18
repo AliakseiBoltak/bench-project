@@ -97,7 +97,7 @@ Live in `src/main/java/pages/` — never under `src/test/java`. One class per sc
 
 - DTOs use the Lombok stack `@Data @Builder @NoArgsConstructor @AllArgsConstructor @FieldDefaults(level = AccessLevel.PRIVATE)`. Declare fields **without** an explicit `private` — `@FieldDefaults` supplies it. Construct via the builder, not `new` + setters.
 - `db` row-mapping models expose a static `mapRowsFromResultSet(ResultSet)` factory used as a method reference — mapping logic stays on the model, not in the DAO or test.
-- Each module owns its `Constants` class: private no-arg constructor, `public static final` `SCREAMING_SNAKE_CASE` fields only. Don't centralize module constants into `core` — `core`'s `Constants` is reserved for cross-module file paths.
+- Each module owns its `Constants` class: annotate with Lombok's `@UtilityClass` (supplies the private no-arg constructor and implicit `final`/`static`) and declare only `public static final` `SCREAMING_SNAKE_CASE` fields. Don't centralize module constants into `core` — `core`'s `Constants` is reserved for cross-module file paths.
 - SQL strings are constants in `db`'s `queries.QueriesBank`; never inline SQL literals in tests.
 
 ## Build files
@@ -122,4 +122,4 @@ Agent instructions are located in `.github/agents/`. When performing tasks, note
 
 - **`ui-playwright`** — `sessionState.json` stores a reusable GitHub SSO session (`GitHubLoginByLoadingStoredSessionTest` skips the login flow). Videos land in `videos/`, traces in `traces/`. `github.username` / `github.password` must be set in `env.conf`.
 - **`db`** — initialize the schema from `db/src/test/resources/scripts/init_test_db.sql` before the first run.
-- **`mobile`** — drives the device's pre-installed Settings app; no APK build/install needed.
+- **`mobile`** — drives the device's pre-installed Settings app; no APK build/install needed. Test methods are tagged with TestNG groups `android`/`ios`; `mobile-suite.xml` has one `<test>` block per platform, each filtered to its group. Run a single platform with `-Dgroups=android` or `-Dgroups=ios` (passed through to Failsafe); without it, both blocks run as defined in the suite.

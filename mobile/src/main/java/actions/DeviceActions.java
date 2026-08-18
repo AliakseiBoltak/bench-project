@@ -1,11 +1,13 @@
 package actions;
 
 import com.google.inject.Inject;
+import exceptions.MobileFrameworkException;
 import factory.DriverProvider;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.android.SupportsSpecialEmulatorCommands;
 import io.appium.java_client.appmanagement.ApplicationState;
+import org.example.config.ConfigLoader;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 
@@ -15,17 +17,20 @@ import java.util.Collections;
 public class DeviceActions {
 
     private final DriverProvider driverProvider;
+    private final ConfigLoader configLoader;
 
     @Inject
-    public DeviceActions(DriverProvider driverProvider) {
+    public DeviceActions(DriverProvider driverProvider, ConfigLoader configLoader) {
         this.driverProvider = driverProvider;
+        this.configLoader = configLoader;
     }
 
     public boolean isAppInForeground(String appIdentifier) {
         AppiumDriver driver = driverProvider.getDriver();
         if (!(driver instanceof InteractsWithApps appDriver)) {
-            throw new IllegalStateException("Driver does not support querying application state: "
-                    + driver.getClass().getName());
+            throw new MobileFrameworkException(
+                    "Driver does not support querying application state: " + driver.getClass().getName(),
+                    platformName());
         }
         return appDriver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
     }
@@ -60,8 +65,12 @@ public class DeviceActions {
         if (driver instanceof SupportsSpecialEmulatorCommands emulatorDriver) {
             emulatorDriver.sendSMS(phoneNumber, message);
         } else {
-            throw new UnsupportedOperationException("Sending SMS is only supported on Android Emulators.");
+            throw new MobileFrameworkException("Sending SMS is only supported on Android Emulators.", platformName());
         }
+    }
+
+    private String platformName() {
+        return configLoader.getPlatformName();
     }
 
 }

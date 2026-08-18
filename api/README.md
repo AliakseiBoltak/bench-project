@@ -35,7 +35,7 @@ api/
 ### 3. `constants.Constants`
 **Location:** `src/main/java/constants/Constants.java`
 *   **Responsibility:** Centralizes endpoint URIs (e.g., `USER_URI`) and header names/values (e.g., `X_API_KEY_HEADER`) used across tests.
-*   **Do include:** `public static final` `SCREAMING_SNAKE_CASE` fields only, private no-arg constructor.
+*   **Do include:** Lombok `@UtilityClass` annotation, `public static final` `SCREAMING_SNAKE_CASE` fields only.
 *   **Do NOT include:** Cross-module values — those belong in `core`'s `Constants`.
 
 ### 4. Test Classes
@@ -63,4 +63,3 @@ To generate and view the Allure report after execution:
 mvn allure:report
 mvn allure:serve
 ```
-

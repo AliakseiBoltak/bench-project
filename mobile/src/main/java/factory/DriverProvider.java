@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.codeborne.selenide.WebDriverRunner;
 import constants.Platform;
+import exceptions.MobileFrameworkException;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -55,7 +56,8 @@ public class DriverProvider {
     public AppiumDriver getDriver() {
         AppiumDriver driver = driverThreadLocal.get();
         if (driver == null) {
-            throw new IllegalStateException("Driver is not initialized for the current thread!");
+            throw new MobileFrameworkException("Driver is not initialized for the current thread!",
+                    configLoader.getPlatformName());
         }
         return driver;
     }
@@ -74,7 +76,8 @@ public class DriverProvider {
         try {
             return URI.create(serverUrl).toURL();
         } catch (MalformedURLException e) {
-            throw new IllegalStateException("Invalid Appium server URL: " + serverUrl, e);
+            throw new MobileFrameworkException("Invalid Appium server URL: " + serverUrl,
+                    configLoader.getPlatformName(), e);
         }
     }
 

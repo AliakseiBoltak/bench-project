@@ -5,6 +5,6 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class Constants {
 
-    public static final String SQL_QUERIES_PATH = "src/test/resources/scripts/";
+    public static final String SMS_DATA_PATH = "/data/sms_data.json";
 
 }
