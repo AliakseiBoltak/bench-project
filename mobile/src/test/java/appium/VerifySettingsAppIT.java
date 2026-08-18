@@ -12,15 +12,15 @@ import actions.DeviceActions;
 
 import static org.testng.Assert.assertTrue;
 
-class OpenSettingsAppIT extends BaseMobileTest {
+class VerifySettingsAppIT extends BaseMobileTest {
 
-    private static final Logger LOGGER = LogManager.getLogger(OpenSettingsAppIT.class);
+    private static final Logger LOGGER = LogManager.getLogger(VerifySettingsAppIT.class);
     private final SettingsPage settingsPage;
     private final DeviceActions deviceActions;
 
     @Inject
-    public OpenSettingsAppIT(ConfigLoader configLoader, DriverProvider driverProvider,
-                             SettingsPage settingsPage, DeviceActions deviceActions) {
+    public VerifySettingsAppIT(ConfigLoader configLoader, DriverProvider driverProvider,
+                               SettingsPage settingsPage, DeviceActions deviceActions) {
         super(configLoader, driverProvider);
         this.settingsPage = settingsPage;
         this.deviceActions = deviceActions;

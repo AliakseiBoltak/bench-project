@@ -4,8 +4,9 @@
         <listener class-name="org.example.listeners.AllureListener"/>
     </listeners>
     <test name="Appium UI Test">
-        <packages>
-            <package name="appium"/>
-        </packages>
+        <classes>
+            <class name="appium.VerifySettingsAppIT"/>
+            <class name="appium.VerifySmsForAndroidIT"/>
+        </classes>
     </test>
 </suite>

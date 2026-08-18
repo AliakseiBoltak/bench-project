@@ -5,7 +5,7 @@ description: Sets up and runs the Appium/Android tests in the mobile module — 
 
 # Run Mobile (Appium) Tests
 
-The `mobile` module (`appium.BaseMobileTest`, test class `appium.OpenSettingsAppIT`) drives a real Android device/emulator through Appium's `UiAutomator2` driver. Unlike the other modules, this can't just be run with `mvn verify` or `mvn test` — an Appium server and a running Android device must exist first. This is also why `mobile` is excluded from CI (see `CLAUDE.md`), same as `db`.
+The `mobile` module (`appium.BaseMobileTest`, test class `appium.VerifySettingsAppIT`) drives a real Android device/emulator through Appium's `UiAutomator2` driver. Unlike the other modules, this can't just be run with `mvn verify` or `mvn test` — an Appium server and a running Android device must exist first. This is also why `mobile` is excluded from CI (see `CLAUDE.md`), same as `db`.
 
 ## 1. Prerequisites (Android) (one-time setup)
 

@@ -5,7 +5,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.google.inject.Inject;
 import factory.DriverProvider;
-import io.appium.java_client.AppiumDriver;
 
 public abstract class BasePage {
 

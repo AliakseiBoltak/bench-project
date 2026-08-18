@@ -106,7 +106,7 @@ All modules use `allure-testng` (or `allure-cucumber7-jvm` for Playwright). Hist
 
 ### `mobile`
 - Requires a running Appium server (default `http://127.0.0.1:4723`, see `appium.serverUrl` in `env.conf`) and an attached/running Android device or emulator matching `appium.deviceName`.
-- The single test (`appium.OpenSettingsAppIT`) drives the device's pre-installed Settings app (`appium.appPackage`/`appActivity`) — no APK build/install step is required to run it.
+- The single test (`appium.VerifySettingsAppIT`) drives the device's pre-installed Settings app (`appium.appPackage`/`appActivity`) — no APK build/install step is required to run it.
 - The `mobile` module is intentionally excluded from CI (no Android device/emulator or Appium server in CI), same rationale as `db`.
 
 ## CI/CD
