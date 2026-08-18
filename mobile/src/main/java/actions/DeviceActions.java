@@ -35,7 +35,7 @@ public class DeviceActions {
     }
 
     public void swipeDown() {
-        performSwipe(0.05, 0.6);
+        performSwipe(0.05, 0.75);
     }
 
     private void performSwipe(double startYRatio, double endYRatio) {
@@ -63,5 +63,5 @@ public class DeviceActions {
             throw new UnsupportedOperationException("Sending SMS is only supported on Android Emulators.");
         }
     }
-    
+
 }

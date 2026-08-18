@@ -3,7 +3,7 @@ package appium;
 import actions.DeviceActions;
 import com.google.inject.Inject;
 import factory.DriverProvider;
-import factory.JsonDataLoader;
+import utils.JsonDataLoader;
 import io.qameta.allure.Allure;
 import model.SmsData;
 import org.apache.logging.log4j.LogManager;
