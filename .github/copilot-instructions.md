@@ -67,7 +67,8 @@ mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="sh
 - Base class constructor takes `ConfigLoader` and derives the single field the module needs (`baseUri`, `baseUrl`, `gitHubUrl`); `db` keeps `configLoader` itself.
 - Every concrete test declares its own `@Inject` constructor calling `super(configLoader)`, even with no extra dependencies. Extra collaborators become constructor params assigned to `private final` fields.
 - **Constructor injection only** — no field injection.
-- All bindings live in `core`'s `CoreModule`: `@Provides @Singleton` for expensive/stateful construction (I/O, config parsing), `bind(X.class).to(Y.class)` for stateless interface impls. Don't create a second Guice module.
+- Most bindings live in `core`'s `CoreModule`: `@Provides @Singleton` for expensive/stateful construction (I/O, config parsing), `bind(X.class).to(Y.class)` for stateless interface impls. 
+- Module-specific Guice configurations (like `PageModule` in `mobile`) are officially permitted for specialized UI or domain-specific bindings. For base services, avoid creating separate Guice modules outside of `core`.
 
 ## Writing tests
 

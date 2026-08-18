@@ -52,13 +52,17 @@ public abstract class BaseMobileTest {
 
     @AfterMethod
     public void tearDown() {
+        LOGGER.info("Closing mobile session");
+        Allure.step("Closing mobile session");
         driverProvider.quitDriver();
     }
 
-protected boolean isAppInForeground(String appIdentifier) {
-    var driver = driverProvider.getDriver();
-    if (!(driver instanceof InteractsWithApps appDriver)) {
-        throw new IllegalStateException("Driver does not support querying application state: " + driver.getClass().getName());
+    protected boolean isAppInForeground(String appIdentifier) {
+        var driver = driverProvider.getDriver();
+        if (!(driver instanceof InteractsWithApps appDriver)) {
+            throw new IllegalStateException("Driver does not support querying application state: " + driver.getClass().getName());
+        }
+        return appDriver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
     }
-    return appDriver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
+
 }

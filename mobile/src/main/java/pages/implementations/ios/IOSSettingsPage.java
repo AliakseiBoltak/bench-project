@@ -14,7 +14,18 @@ public class IOSSettingsPage extends BasePage implements SettingsPage {
 
     @Override
     public boolean isSearchSettingsVisible() {
-// Temporarily returning true for iOS
+        // Adjust when iOS locators are available.
+        return true;
+    }
+
+    @Override
+    public void swipeToSystemSettings() {
+        // Adjust when iOS locators are available..
+    }
+
+    @Override
+    public boolean isSystemSettingsVisible() {
+        // Adjust when iOS locators are available.
         return true;
     }
 

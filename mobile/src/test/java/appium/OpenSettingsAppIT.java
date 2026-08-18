@@ -40,4 +40,18 @@ class OpenSettingsAppIT extends BaseMobileTest {
         boolean isSearchSettingsVisible = settingsPage.isSearchSettingsVisible();
         assertTrue(isSearchSettingsVisible, "Search Settings element is not visible on the screen");
     }
+
+    @Test(description = "Checks System settings option is available in Settings app")
+    void checkSystemSettingsAreAvailableInSettingsApp() {
+        LOGGER.info("Swiping to System settings option");
+        Allure.step("Swiping to System settings option");
+
+        settingsPage.swipeToSystemSettings();
+
+        LOGGER.info("Checking if System settings option is visible");
+        Allure.step("Checking if System settings option is visible");
+
+        boolean isSystemVisible = settingsPage.isSystemSettingsVisible();
+        assertTrue(isSystemVisible, "System settings option is not visible in Settings app");
+    }
 }
