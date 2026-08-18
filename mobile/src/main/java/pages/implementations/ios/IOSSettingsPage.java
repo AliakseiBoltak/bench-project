@@ -14,7 +14,7 @@ public class IOSSettingsPage extends BasePage implements SettingsPage {
 
     @Override
     public boolean isSearchSettingsVisible() {
-        // temporary return true for iOS
+// Temporarily returning true for iOS
         return true;
     }
 
