@@ -1,23 +1,22 @@
 package pages;
 
+import actions.DeviceActions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.google.inject.Inject;
 import factory.DriverProvider;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.interactions.PointerInput;
-import org.openqa.selenium.interactions.Sequence;
-import java.time.Duration;
-import java.util.Collections;
 
 public abstract class BasePage {
 
     protected DriverProvider driverProvider;
+    protected DeviceActions deviceActions;
     protected static final int DEFAULT_MAX_SWIPES = 5;
 
     @Inject
-    public BasePage(DriverProvider driverProvider) {
+    public BasePage(DriverProvider driverProvider, DeviceActions deviceActions) {
         this.driverProvider = driverProvider;
+        this.deviceActions = deviceActions;
     }
 
     protected AppiumDriver getDriver() {
@@ -48,22 +47,8 @@ public abstract class BasePage {
 
     protected void swipeUpUntilVisible(SelenideElement element) {
         int swipes = 0;
-        AppiumDriver driver = getDriver();
         while (!isElementVisible(element) && swipes < DEFAULT_MAX_SWIPES) {
-            // Getting the size of the screen to calculate swipe coordinates
-            var size = driver.manage().window().getSize();
-            int startX = size.width / 2;
-            int startY = (int) (size.height * 0.8); // swipe from the bottom (from 80% of screen height)
-            int endY = (int) (size.height * 0.2);   // swipe to the top (to 20% of screen height)
-
-            PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            Sequence swipe = new Sequence(finger, 1);
-            swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY));
-            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(700), PointerInput.Origin.viewport(), startX, endY));
-            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-
-            driver.perform(Collections.singletonList(swipe));
+            deviceActions.swipeUp();
             swipes++;
         }
 

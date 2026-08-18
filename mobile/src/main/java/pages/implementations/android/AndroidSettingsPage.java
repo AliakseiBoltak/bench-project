@@ -1,5 +1,6 @@
 package pages.implementations.android;
 
+import actions.DeviceActions;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.appium.AppiumSelectors;
 import com.google.inject.Inject;
@@ -14,22 +15,17 @@ public class AndroidSettingsPage extends BasePage implements SettingsPage {
 
     private SelenideElement settingsSearchBarTitle = $(By.id("com.android.settings:id/search_bar_title"))
             .as("Settings Search Bar Title");
-    private SelenideElement settingsSearchBarText = $(AppiumSelectors.withText("Search Settings"))
-            .as("Settings Search Bar Text");
     private SelenideElement systemSettingsOption = $(AppiumSelectors.withText("System"))
             .as("System Settings Option");
 
-
-
     @Inject
-    public AndroidSettingsPage(DriverProvider driverProvider) {
-        super(driverProvider);
+    public AndroidSettingsPage(DriverProvider driverProvider, DeviceActions deviceActions) {
+        super(driverProvider, deviceActions);
     }
 
     @Override
     public boolean isSearchSettingsVisible() {
         waitForElementVisible(settingsSearchBarTitle);
-        waitForElementVisible(settingsSearchBarText);
         return true;
     }
 

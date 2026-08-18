@@ -15,8 +15,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Guice;
-import io.appium.java_client.InteractsWithApps;
-import io.appium.java_client.appmanagement.ApplicationState;
 
 @Guice(modules = {CoreModule.class, PageModule.class})
 public abstract class BaseMobileTest {
@@ -25,6 +23,8 @@ public abstract class BaseMobileTest {
 
     protected final ConfigLoader configLoader;
     protected final DriverProvider driverProvider;
+    protected static final int DEFAULT_TIMEOUT = 5000; // in milliseconds
+    protected static final int DEFAULT_POLLING_INTERVAL = 200; // in milliseconds
 
     @Inject
     public BaseMobileTest(ConfigLoader configLoader, DriverProvider driverProvider) {
@@ -34,8 +34,8 @@ public abstract class BaseMobileTest {
 
     @BeforeSuite
     public void globalSetup() {
-        Configuration.timeout = 8000;
-        Configuration.pollingInterval = 200;
+        Configuration.timeout = DEFAULT_TIMEOUT;
+        Configuration.pollingInterval = DEFAULT_POLLING_INTERVAL;
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(true));
@@ -55,14 +55,6 @@ public abstract class BaseMobileTest {
         LOGGER.info("Closing mobile session");
         Allure.step("Closing mobile session");
         driverProvider.quitDriver();
-    }
-
-    protected boolean isAppInForeground(String appIdentifier) {
-        var driver = driverProvider.getDriver();
-        if (!(driver instanceof InteractsWithApps appDriver)) {
-            throw new IllegalStateException("Driver does not support querying application state: " + driver.getClass().getName());
-        }
-        return appDriver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
     }
 
 }
