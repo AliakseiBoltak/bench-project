@@ -25,26 +25,17 @@ public class JsonDataLoader {
 
     public <T> T getData(String dataPath, Class<T> genericType) {
         LOGGER.info("Loading test data from: {}", dataPath);
-        Reader reader = null;
         try {
             URL url = JsonDataLoader.class.getResource(dataPath);
             InputStream inputStream = url == null ? getFileInputStream(dataPath) : getInputStream(dataPath);
             if (inputStream == null) {
                 throw new RuntimeException("Could not find file or resource: " + dataPath);
             }
-            reader = new InputStreamReader(inputStream);
-            return gson.fromJson(reader, genericType);
+            try (inputStream; Reader reader = new InputStreamReader(inputStream)) {
+                return gson.fromJson(reader, genericType);
+            }
         } catch (IOException e) {
             throw new RuntimeException("Failed to read JSON data from " + dataPath, e);
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    LOGGER.warn("Failed to close reader for JSON data", e);
-                }
-            }
         }
     }
 }
-
