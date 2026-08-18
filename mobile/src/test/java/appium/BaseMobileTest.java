@@ -23,6 +23,8 @@ public abstract class BaseMobileTest {
 
     protected final ConfigLoader configLoader;
     protected final DriverProvider driverProvider;
+    protected static final int DEFAULT_TIMEOUT = 5000; // in milliseconds
+    protected static final int DEFAULT_POLLING_INTERVAL = 200; // in milliseconds
 
     @Inject
     public BaseMobileTest(ConfigLoader configLoader, DriverProvider driverProvider) {
@@ -32,8 +34,8 @@ public abstract class BaseMobileTest {
 
     @BeforeSuite
     public void globalSetup() {
-        Configuration.timeout = 8000;
-        Configuration.pollingInterval = 200;
+        Configuration.timeout = DEFAULT_TIMEOUT;
+        Configuration.pollingInterval = DEFAULT_POLLING_INTERVAL;
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(true));

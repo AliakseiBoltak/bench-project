@@ -1,29 +1,22 @@
 package pages;
 
+import actions.DeviceActions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.google.inject.Inject;
 import factory.DriverProvider;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.InteractsWithApps;
-import io.appium.java_client.appmanagement.ApplicationState;
 
-public class BasePage {
+public abstract class BasePage {
 
     protected DriverProvider driverProvider;
+    protected DeviceActions deviceActions;
+    protected static final int DEFAULT_MAX_SWIPES = 5;
 
     @Inject
-    public BasePage(DriverProvider driverProvider) {
+    public BasePage(DriverProvider driverProvider, DeviceActions deviceActions) {
         this.driverProvider = driverProvider;
-    }
-
-    protected AppiumDriver getDriver() {
-        return driverProvider.getDriver();
-    }
-
-    protected boolean isAppInForeground (String appIdentifier){
-        InteractsWithApps appDriver = (InteractsWithApps) getDriver();
-        return appDriver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
+        this.deviceActions = deviceActions;
     }
 
     protected boolean isElementVisible(SelenideElement element) {
@@ -44,6 +37,17 @@ public class BasePage {
     }
 
     protected void typeText(SelenideElement element, String text) {
-        element.shouldBe(Condition.visible).setValue(text);
+        element.shouldBe(Condition.visible, Condition.enabled).setValue(text);
     }
+
+    protected void swipeUpUntilVisible(SelenideElement element) {
+        int swipes = 0;
+        while (!isElementVisible(element) && swipes < DEFAULT_MAX_SWIPES) {
+            deviceActions.swipeUp();
+            swipes++;
+        }
+        // Wait for the element to be visible after swiping
+        waitForElementVisible(element);
+    }
+
 }

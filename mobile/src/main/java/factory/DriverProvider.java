@@ -64,7 +64,6 @@ public class DriverProvider {
         AppiumDriver driver = driverThreadLocal.get();
         if (driver != null) {
             LOGGER.info("Quitting driver, session id: {}", driver.getSessionId());
-            // closeWebDriver() quits the driver and clears Selenide's ThreadLocal reference.
             WebDriverRunner.closeWebDriver();
             driverThreadLocal.remove();
         }

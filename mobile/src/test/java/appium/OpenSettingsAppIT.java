@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.example.config.ConfigLoader;
 import org.testng.annotations.Test;
 import pages.interfaces.SettingsPage;
+import actions.DeviceActions;
 
 import static org.testng.Assert.assertTrue;
 
@@ -15,12 +16,14 @@ class OpenSettingsAppIT extends BaseMobileTest {
 
     private static final Logger LOGGER = LogManager.getLogger(OpenSettingsAppIT.class);
     private final SettingsPage settingsPage;
+    private final DeviceActions deviceActions;
 
     @Inject
     public OpenSettingsAppIT(ConfigLoader configLoader, DriverProvider driverProvider,
-                             SettingsPage settingsPage) {
+                             SettingsPage settingsPage, DeviceActions deviceActions) {
         super(configLoader, driverProvider);
         this.settingsPage = settingsPage;
+        this.deviceActions = deviceActions;
     }
 
     @Test(description = "Checks the Settings app launches and is the foreground app")
@@ -29,7 +32,7 @@ class OpenSettingsAppIT extends BaseMobileTest {
         LOGGER.info("Checking foreground state of app: {}", settingsAppIdentifier);
         Allure.step("Checking foreground state of app: " + settingsAppIdentifier);
 
-        boolean inForeground = settingsPage.isAppInForeground(settingsAppIdentifier);
+        boolean inForeground = deviceActions.isAppInForeground(settingsAppIdentifier);
         LOGGER.info("App {} in foreground: {}", settingsAppIdentifier, inForeground);
 
         assertTrue(inForeground, "Settings app was not launched as the foreground app");
@@ -40,4 +43,19 @@ class OpenSettingsAppIT extends BaseMobileTest {
         boolean isSearchSettingsVisible = settingsPage.isSearchSettingsVisible();
         assertTrue(isSearchSettingsVisible, "Search Settings element is not visible on the screen");
     }
+
+    @Test(description = "Checks System settings option is available in Settings app")
+    void checkSystemSettingsAreAvailableInSettingsApp() {
+        LOGGER.info("Swiping to System settings option");
+        Allure.step("Swiping to System settings option");
+
+        settingsPage.swipeToSystemSettings();
+
+        LOGGER.info("Checking if System settings option is visible");
+        Allure.step("Checking if System settings option is visible");
+
+        boolean isSystemVisible = settingsPage.isSystemSettingsVisible();
+        assertTrue(isSystemVisible, "System settings option is not visible in Settings app");
+    }
+
 }
