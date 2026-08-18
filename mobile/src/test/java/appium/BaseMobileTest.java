@@ -55,8 +55,10 @@ public abstract class BaseMobileTest {
         driverProvider.quitDriver();
     }
 
-    protected boolean isAppInForeground(String appIdentifier) {
-        InteractsWithApps appDriver = (InteractsWithApps) driverProvider.getDriver();
-        return appDriver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
+protected boolean isAppInForeground(String appIdentifier) {
+    var driver = driverProvider.getDriver();
+    if (!(driver instanceof InteractsWithApps appDriver)) {
+        throw new IllegalStateException("Driver does not support querying application state: " + driver.getClass().getName());
     }
+    return appDriver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
 }
