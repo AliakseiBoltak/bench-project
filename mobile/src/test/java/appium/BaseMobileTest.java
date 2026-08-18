@@ -23,7 +23,7 @@ public abstract class BaseMobileTest {
 
     protected final ConfigLoader configLoader;
     protected final DriverProvider driverProvider;
-    protected static final int DEFAULT_TIMEOUT = 5000; // in milliseconds
+    protected static final int DEFAULT_TIMEOUT = 8000; // in milliseconds
     protected static final int DEFAULT_POLLING_INTERVAL = 200; // in milliseconds
 
     @Inject

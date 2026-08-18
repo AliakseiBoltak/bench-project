@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import factory.DriverProvider;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.InteractsWithApps;
+import io.appium.java_client.android.SupportsSpecialEmulatorCommands;
 import io.appium.java_client.appmanagement.ApplicationState;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
@@ -30,11 +31,19 @@ public class DeviceActions {
     }
 
     public void swipeUp() {
+        performSwipe(0.8, 0.2);
+    }
+
+    public void swipeDown() {
+        performSwipe(0.05, 0.75);
+    }
+
+    private void performSwipe(double startYRatio, double endYRatio) {
         AppiumDriver driver = driverProvider.getDriver();
         var size = driver.manage().window().getSize();
         int startX = size.width / 2;
-        int startY = (int) (size.height * 0.8); // swipe from the bottom (from 80% of screen height)
-        int endY = (int) (size.height * 0.2);   // swipe to the top (to 20% of screen height)
+        int startY = (int) (size.height * startYRatio);
+        int endY = (int) (size.height * endYRatio);
 
         PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         Sequence swipe = new Sequence(finger, 1);
@@ -45,4 +54,14 @@ public class DeviceActions {
 
         driver.perform(Collections.singletonList(swipe));
     }
+
+    public void sendSMS(String phoneNumber, String message) {
+        AppiumDriver driver = driverProvider.getDriver();
+        if (driver instanceof SupportsSpecialEmulatorCommands emulatorDriver) {
+            emulatorDriver.sendSMS(phoneNumber, message);
+        } else {
+            throw new UnsupportedOperationException("Sending SMS is only supported on Android Emulators.");
+        }
+    }
+
 }
