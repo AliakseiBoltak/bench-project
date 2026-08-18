@@ -19,11 +19,6 @@ public abstract class BasePage {
         this.deviceActions = deviceActions;
     }
 
-    protected AppiumDriver getDriver() {
-        return driverProvider.getDriver();
-    }
-
-
     protected boolean isElementVisible(SelenideElement element) {
         try {
             element.shouldBe(Condition.visible);
@@ -42,7 +37,7 @@ public abstract class BasePage {
     }
 
     protected void typeText(SelenideElement element, String text) {
-        element.shouldBe(Condition.visible).setValue(text);
+        element.shouldBe(Condition.visible, Condition.enabled).setValue(text);
     }
 
     protected void swipeUpUntilVisible(SelenideElement element) {
@@ -51,7 +46,6 @@ public abstract class BasePage {
             deviceActions.swipeUp();
             swipes++;
         }
-
         // Wait for the element to be visible after swiping
         waitForElementVisible(element);
     }
