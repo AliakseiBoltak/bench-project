@@ -52,6 +52,9 @@ public abstract class BaseMobileTest {
 
     @AfterMethod
     public void tearDown() {
+        String stopMessage = "Shutting down mobile session";
+        LOGGER.info(stopMessage);
+        Allure.step(stopMessage);
         driverProvider.quitDriver();
     }
 
