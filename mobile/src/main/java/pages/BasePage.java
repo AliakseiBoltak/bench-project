@@ -5,8 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import com.google.inject.Inject;
 import factory.DriverProvider;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.InteractsWithApps;
-import io.appium.java_client.appmanagement.ApplicationState;
 
 public class BasePage {
 
@@ -21,10 +19,6 @@ public class BasePage {
         return driverProvider.getDriver();
     }
 
-    protected boolean isAppInForeground (String appIdentifier){
-        InteractsWithApps appDriver = (InteractsWithApps) getDriver();
-        return appDriver.queryAppState(appIdentifier) == ApplicationState.RUNNING_IN_FOREGROUND;
-    }
 
     protected boolean isElementVisible(SelenideElement element) {
         try {

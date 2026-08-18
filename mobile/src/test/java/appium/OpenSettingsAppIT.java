@@ -29,7 +29,7 @@ class OpenSettingsAppIT extends BaseMobileTest {
         LOGGER.info("Checking foreground state of app: {}", settingsAppIdentifier);
         Allure.step("Checking foreground state of app: " + settingsAppIdentifier);
 
-        boolean inForeground = settingsPage.isAppInForeground(settingsAppIdentifier);
+        boolean inForeground = isAppInForeground(settingsAppIdentifier);
         LOGGER.info("App {} in foreground: {}", settingsAppIdentifier, inForeground);
 
         assertTrue(inForeground, "Settings app was not launched as the foreground app");

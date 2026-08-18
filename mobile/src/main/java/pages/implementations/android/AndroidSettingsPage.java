@@ -29,9 +29,4 @@ public class AndroidSettingsPage extends BasePage implements SettingsPage {
         return true;
     }
 
-    @Override
-    public boolean isAppInForeground(String appIdentifier) {
-        return super.isAppInForeground(appIdentifier);
-    }
-
 }

@@ -14,12 +14,8 @@ public class IOSSettingsPage extends BasePage implements SettingsPage {
 
     @Override
     public boolean isSearchSettingsVisible() {
-        // temporarily returning true for iOS
+        // temporary return true for iOS
         return true;
     }
 
-    @Override
-    public boolean isAppInForeground(String appIdentifier) {
-        return super.isAppInForeground(appIdentifier);
-    }
 }
