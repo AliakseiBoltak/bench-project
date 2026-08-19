@@ -63,8 +63,8 @@ Location: src/main/java/utils/, src/main/java/model/, src/main/java/exceptions/
 Locally running the mobile module requires a running Appium server, an active Android Emulator (or iOS Simulator), and specified configuration flags.
 
 ### Configuration Parameters
-- -Dplatform: Specifies the device/OS profile from env.conf (e.g., android-16, android-17, ios-17). Defaults to platform-default.
-- -DintegrationSuiteXmlFile: Specifies the TestNG suite XML file located in src/test/resources/suites/ (e.g., mobile-suite, ios-suite).
+- -Dplatform: Specifies the device/OS profile from env.conf (e.g., android-17, ios-17). Defaults to platform-default.
+- -DintegrationSuiteXmlFile: Specifies the TestNG suite XML file located in src/test/resources/suites/ (e.g., android-smoke-suite, ios-smoke-suite).
 
 ### Command Examples
 
@@ -74,11 +74,11 @@ Locally running the mobile module requires a running Appium server, an active An
 
 2. Run Android tests with a specific suite (e.g., Smoke suite):
 
-   mvn -f mobile/pom.xml clean verify -Dplatform=android-16 -DintegrationSuiteXmlFile=smoke-suite
+   mvn -f mobile/pom.xml clean verify -Dplatform=android-17 -DintegrationSuiteXmlFile=android-smoke-suite
 
 3. Run iOS tests:
 
-   mvn -f mobile/pom.xml clean verify -Dplatform=ios-17 -DintegrationSuiteXmlFile=ios-suite
+   mvn -f mobile/pom.xml clean verify -Dplatform=ios-17 -DintegrationSuiteXmlFile=ios-smoke-suite
 
 ### Reporting
 To generate and view the Allure report after execution:
