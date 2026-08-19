@@ -13,7 +13,7 @@ This module contains mobile UI automation tests for Android and iOS utilizing Ap
     │   ├── factory/          # Appium driver management and capabilities
     │   ├── guice/            # Guice configuration and dynamic page provisioning
     │   ├── model/            # Data transfer objects and test data models (e.g., SmsData)
-    │   ├── utils/            # Utilities for data loading (e.g., JsonDataLoader)
+    │   ├── utils/            # Utilities
     │   └── pages/            # Page Object Model layer
     │       ├── implementations/
     │       │   ├── android/  # Android-specific page objects and locators
