@@ -4,12 +4,12 @@ import actions.DeviceActions;
 import com.google.inject.Inject;
 import config.MobileConfigLoader;
 import factory.DriverProvider;
-import utils.JsonDataLoader;
 import io.qameta.allure.Allure;
 import model.SmsData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.*;
+import org.example.loader.JSONDataLoader;
 import pages.interfaces.NotificationsPage;
 
 import java.util.Arrays;
@@ -21,12 +21,12 @@ public class VerifySmsForAndroidIT extends BaseMobileTest {
 
     private static final Logger LOGGER = LogManager.getLogger(VerifySmsForAndroidIT.class);
     private final DeviceActions deviceActions;
-    private final JsonDataLoader jsonDataLoader;
+    private final JSONDataLoader jsonDataLoader;
     private final NotificationsPage notificationsPage;
 
     @Inject
     public VerifySmsForAndroidIT(MobileConfigLoader configLoader, DriverProvider driverProvider,
-                                 DeviceActions deviceActions, JsonDataLoader jsonDataLoader,
+                                 DeviceActions deviceActions, JSONDataLoader jsonDataLoader,
                                  NotificationsPage notificationsPage) {
         super(configLoader, driverProvider);
         this.deviceActions = deviceActions;
