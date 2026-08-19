@@ -39,19 +39,22 @@ The framework consists of the following modules:
 
 ## 🚀 How to Build and Run Tests
 
-> **Before running any tests, you must first build and install the core module artifact.**
->
-> 1. Import as a Maven project in your IDE.
-> 2. Navigate to the `core` module directory:
-     >    ```sh
->    cd core
->    ```
-> 3. Build and install the core artifact to your local Maven repository by running this command:
-     >    ```sh
->    mvn clean install
->    ```
->
-> After this, you can navigate to the desired module (for example, `api`, `ui-playwright`, etc.) and execute the tests as described below.
+**Before running any tests, you must first build and install the core module artifact.**
+
+1. Import as a Maven project in your IDE.
+2. Navigate to the `core` module directory:
+
+    ```sh
+    cd core
+    ```
+
+3. Build and install the core artifact to your local Maven repository by running this command:
+
+    ```sh
+    mvn clean install
+    ```
+
+After this, you can navigate to the desired module (for example, `api`, `ui-playwright`, etc.) and execute the tests as described below.
 
 ### 1. Run Tests
 
@@ -135,11 +138,13 @@ After generating the report, save the current run's Allure history so trends wil
 
            appium
 
-       By default it listens on `http://127.0.0.1:4723`, matching `platform-default.appium.serverUrl` in `mobile/src/test/resources/env.conf`.
+       By default it listens on `[http://127.0.0.1:4723](http://127.0.0.1:4723)`, matching `platform-default.appium.serverUrl` in `mobile/src/test/resources/env.conf`.
 
     3. Start an Android emulator (created via Android Studio's Device Manager or `avdmanager`) or connect a physical device with USB debugging enabled:
 
-           emulator -avd <your_avd_name>          # list AVDs with: emulator -list-avds
+       ```sh
+       emulator -avd <your_avd_name>          # list AVDs with: emulator -list-avds
+       ```
 
        *(Note: iOS testing requires a macOS machine and an active iOS Simulator via Xcode).*
 
