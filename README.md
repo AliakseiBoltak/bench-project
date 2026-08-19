@@ -42,14 +42,13 @@ The framework consists of the following modules:
 > **Before running any tests, you must first build and install the core module artifact.**
 >
 > 1. Import as a Maven project in your IDE.
+
 > 2. Navigate to the `core` module directory:
-     >
-     >        cd core
->
+     cd core
+
 > 3. Build and install the core artifact to your local Maven repository by running this command:
-     >
-     >        mvn clean install
->
+     mvn clean install
+> 
 > After this, you can navigate to the desired module (for example, `api`, `ui-playwright`, etc.) and execute the tests as described below.
 
 ### 1. Run Tests
