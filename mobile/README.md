@@ -4,27 +4,27 @@ This module contains mobile UI automation tests for Android and iOS utilizing Ap
 
 ## 📁 Project Structure
 
-mobile/
-├── src/main/java/
-│   ├── actions/          # OS and device-level hardware interactions
-│   ├── config/           # Mobile configuration loader (HOCON-based)
-│   ├── constants/        # Enums and constants
-│   ├── exceptions/       # Custom runtime framework exceptions (e.g., MobileFrameworkException)
-│   ├── factory/          # Appium driver management and capabilities
-│   ├── guice/            # Guice configuration and dynamic page provisioning
-│   ├── model/            # Data transfer objects and test data models (e.g., SmsData)
-│   ├── utils/            # Utilities for data loading (e.g., JsonDataLoader)
-│   └── pages/            # Page Object Model layer
-│       ├── implementations/
-│       │   ├── android/  # Android-specific page objects and locators
-│       │   └── ios/      # iOS-specific page objects and locators
-│       └── interfaces/   # Cross-platform page contracts
-└── src/test/java/
-├── appium/           # TestNG test classes and base setup
-└── resources/
-├── data/         # JSON test data files
-├── env.conf      # Unified configuration for backends and platforms
-└── suites/       # TestNG suite XML files (Android, iOS)
+    mobile/
+    ├── src/main/java/
+    │   ├── actions/          # OS and device-level hardware interactions
+    │   ├── config/           # Mobile configuration loader (HOCON-based)
+    │   ├── constants/        # Enums and constants
+    │   ├── exceptions/       # Custom runtime framework exceptions (e.g., MobileFrameworkException)
+    │   ├── factory/          # Appium driver management and capabilities
+    │   ├── guice/            # Guice configuration and dynamic page provisioning
+    │   ├── model/            # Data transfer objects and test data models (e.g., SmsData)
+    │   ├── utils/            # Utilities for data loading (e.g., JsonDataLoader)
+    │   └── pages/            # Page Object Model layer
+    │       ├── implementations/
+    │       │   ├── android/  # Android-specific page objects and locators
+    │       │   └── ios/      # iOS-specific page objects and locators
+    │       └── interfaces/   # Cross-platform page contracts
+    └── src/test/java/
+        ├── appium/           # TestNG test classes and base setup
+        └── resources/
+            ├── data/         # JSON test data files
+            ├── env.conf      # Unified configuration for backends and platforms
+            └── suites/       # TestNG suite XML files (Android, iOS)
 
 ## 🏗️ Core Components and Responsibilities
 
@@ -69,15 +69,19 @@ Locally running the mobile module requires a running Appium server, an active An
 ### Command Examples
 
 1. Run Android tests on Android 17 (Default suite):
+
    mvn -f mobile/pom.xml clean verify -Dplatform=android-17
 
 2. Run Android tests with a specific suite (e.g., Smoke suite):
+
    mvn -f mobile/pom.xml clean verify -Dplatform=android-16 -DintegrationSuiteXmlFile=smoke-suite
 
 3. Run iOS tests:
+
    mvn -f mobile/pom.xml clean verify -Dplatform=ios-17 -DintegrationSuiteXmlFile=ios-suite
 
 ### Reporting
 To generate and view the Allure report after execution:
-mvn allure:report
-mvn allure:serve
+
+    mvn allure:report
+    mvn allure:serve
