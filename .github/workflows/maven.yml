@@ -34,12 +34,23 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      # 1. Download Allure history from the cache of the previous run
+      - name: Cache Allure History
+        uses: actions/cache@v4
+        with:
+          path: ui-playwright/allure-history
+          # Dynamic key ensures the cache is updated at the end of the job
+          key: allure-history-${{ github.run_id }}
+          restore-keys: |
+            allure-history-
+
       - name: Install Playwright dependencies
         run: npx playwright install-deps
 
       - name: Build project and install dependencies
         run: mvn clean install -pl core -DskipTests -am
 
+      # 2. Restore history to the target directory (folder is already downloaded from cache)
       - name: Restore Allure History
         run: |
           mkdir -p ui-playwright/allure-history
@@ -58,36 +69,25 @@ jobs:
           echo "Branch=${{ github.ref_name }}" >> ui-playwright/target/allure-results/environment.properties
           echo "OS=${{ runner.os }}" >> ui-playwright/target/allure-results/environment.properties
 
+      # 3. Generate report using Maven (simple-elf removed)
       - name: Generate Allure Report
         if: always()
         run: mvn allure:report -pl ui-playwright
 
+      # 4. Copy the fresh history back to the folder for caching
       - name: Save Allure History
         if: always()
         run: mvn antrun:run@copy-allure-history -pl ui-playwright
 
-      - name: Upload Allure Report Artifact
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: allure-report-playwright
-          path: ui-playwright/target/site/allure-maven-plugin/
-          retention-days: 30
-
-      - name: Publish Allure Report to GitHub Pages
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        with:
-          allure_results: ui-playwright/target/allure-results
-          allure_report: ui-playwright/target/allure-report
-          gh_pages: gh-pages
-          keep_reports: 10
-
+      # 5. Upload the artifact for GitHub Pages directly from the Maven folder
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
+        if: always()
         with:
-          path: ui-playwright/target/allure-report
+          path: ui-playwright/target/site/allure-maven-plugin/
 
+      # 6. Deploy the artifact to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        if: always()
