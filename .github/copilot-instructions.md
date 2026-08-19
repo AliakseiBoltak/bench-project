@@ -122,4 +122,4 @@ Agent instructions are located in `.github/agents/`. When performing tasks, note
 
 - **`ui-playwright`** — `sessionState.json` stores a reusable GitHub SSO session (`GitHubLoginByLoadingStoredSessionTest` skips the login flow). Videos land in `videos/`, traces in `traces/`. `github.username` / `github.password` must be set in `env.conf`.
 - **`db`** — initialize the schema from `db/src/test/resources/scripts/init_test_db.sql` before the first run.
-- **`mobile`** — drives the device's pre-installed Settings app; no APK build/install needed. Test methods are tagged with TestNG groups `android`/`ios`; `mobile-suite.xml` has one `<test>` block per platform, each filtered to its group. Run a single platform with `-Dgroups=android` or `-Dgroups=ios` (passed through to Failsafe); without it, both blocks run as defined in the suite.
+- **`mobile`** — drives device apps using a unified `env.conf` supporting both backend environments (`-Denv=qa/prod`) and platform profiles (`-Dplatform=ios-17`). Test execution can be targeted via dedicated TestNG suite XML files using `-DintegrationSuiteXmlFile=<suite-name>` (e.g., `android-smoke-suite`, `ios-smoke-suite`).

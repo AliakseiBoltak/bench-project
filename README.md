@@ -98,43 +98,50 @@ mvn allure:serve
 - **Mobile (Appium/Android/iOS) Tests:**  
   The `mobile` module drives a real Android device/emulator or iOS simulator via Appium and needs some one-time setup before running the tests will work:
 
-    1. Install Node.js, then Appium and its UiAutomator2 driver:
+    1. Install Node.js, then Appium and its drivers[cite: 16]:
        ```sh
        npm install -g appium
        appium driver install uiautomator2
        # For iOS testing on macOS, XCUITest driver is also required:
        # appium driver install xcuitest
        ```
-    2. Start the Appium server (leave it running in its own terminal):
+    2. Start the Appium server (leave it running in its own terminal)[cite: 16]:
        ```sh
        appium
        ```
-       By default it listens on `http://127.0.0.1:4723`, matching `appium.serverUrl` in `mobile/src/test/resources/env.conf`.
-    3. Start an Android emulator (created via Android Studio's Device Manager or `avdmanager`) or connect a physical device with USB debugging enabled:
+       By default it listens on `http://127.0.0.1:4723`, matching `platform-default.appium.serverUrl` in `mobile/src/test/resources/env.conf`.
+    3. Start an Android emulator (created via Android Studio's Device Manager or `avdmanager`) or connect a physical device with USB debugging enabled[cite: 16]:
        ```sh
        emulator -avd <your_avd_name>          # list AVDs with: emulator -list-avds
        ```
        *(Note: iOS testing requires a macOS machine and an active iOS Simulator via Xcode).*
-    4. Confirm it's visible to ADB before running tests:
+    4. Confirm it's visible to ADB before running tests[cite: 16]:
        ```sh
        adb devices
        ```
        You should see a line like `emulator-5554   device` (not `offline`/`unauthorized`).
-    5. If your device's identifier, platform, or Android version differs from the defaults in `env.conf` (e.g., `deviceName = "emulator-5554"`, `platformVersion = "16"`), update those values in the corresponding `android` or `ios` profile block. For Android, get the platform version with `adb shell getprop ro.build.version.release`.
-    6. Run the test by specifying the target platform profile:
+    5. Ensure your device configuration matches a platform block in `env.conf` (e.g.,`android-17`, `ios-17`), where you configure `deviceName`, `udid`, and `platformVersion`. For Android, get the platform version with `adb shell getprop ro.build.version.release`.
+    6. Run the test by specifying the target platform profile (via `-Dplatform`) and optional TestNG suite XML (via `-DintegrationSuiteXmlFile`):
 
-       **For Android:**
+       **For Android (Default suite):**
        ```sh
-       mvn -f mobile/pom.xml clean verify -Denv=android
+       mvn -f mobile/pom.xml clean verify -Dplatform=android-17
+       ```
+
+       **For Android (Specific suite, e.g., Smoke):**
+       ```sh
+       mvn -f mobile/pom.xml clean verify -Dplatform=android-17 -DintegrationSuiteXmlFile=android-smoke-suite
        ```
 
        **For iOS:**
        ```sh
-       mvn -f mobile/pom.xml clean verify -Denv=ios
+       mvn -f mobile/pom.xml clean verify -Dplatform=ios-17 -DintegrationSuiteXmlFile=ios-smoke-suite
        ```
+
 **Why use `verify` instead of `test` for Mobile?**
 The `mobile` module strictly separates fast architectural unit tests from heavy Appium UI integration tests using Maven's lifecycle phases:
-* The `test` phase (driven by `maven-surefire-plugin`) runs rapid architectural convention checks (e.g., verifying that all Page Object interfaces have corresponding Android and iOS implementations).
+* The `test` phase (driven by `maven-surefire-plugin`) runs rapid architectural convention checks.
 * The `integration-test` and `verify` phases (driven by `maven-failsafe-plugin`) run the actual cross-platform Appium tests.
-
-  The test itself (`appium.VerifySettingsAppIT`) drives the device's pre-installed Settings app, so no APK/IPA build/install step is required. The `mobile` module is intentionally excluded from CI (no Android device/emulator or iOS simulator available there), same as `db`. See `.claude/skills/run-mobile-tests/SKILL.md` for detailed troubleshooting.
+ 
+**Note:**  
+For detailed info check README files in a particular module, eg - api, mobile.

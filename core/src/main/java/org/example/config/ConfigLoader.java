@@ -46,32 +46,4 @@ public class ConfigLoader {
         return config.getString("db.password");
     }
 
-    public String getAppiumServerUrl() {
-        return config.getString("appium.serverUrl");
-    }
-
-    public String getAppiumPlatformVersion() {
-        return config.getString("appium.platformVersion");
-    }
-
-    public String getAppiumDeviceName() {
-        return config.getString("appium.deviceName");
-    }
-
-    public String getAppiumAutomationName() {
-        return config.getString("appium.automationName");
-    }
-
-    public String getPlatformName() {
-        return config.getString("appium.platformName");
-    }
-
-    public String getAppiumAppPackage() {
-        return config.getString("appium.appPackage");
-    }
-
-    public String getAppiumAppActivity() {
-        return config.getString("appium.appActivity");
-    }
-
 }

@@ -2,6 +2,7 @@ package appium;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import config.MobileConfigLoader;
 import io.qameta.allure.selenide.AllureSelenide;
 import com.google.inject.Inject;
 import factory.DriverProvider;
@@ -9,7 +10,6 @@ import guice.PageModule;
 import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.example.config.ConfigLoader;
 import org.example.guice.CoreModule;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,13 +21,13 @@ public abstract class BaseMobileTest {
 
     private static final Logger LOGGER = LogManager.getLogger(BaseMobileTest.class);
 
-    protected final ConfigLoader configLoader;
+    protected final MobileConfigLoader configLoader;
     protected final DriverProvider driverProvider;
     protected static final int DEFAULT_TIMEOUT = 8000; // in milliseconds
     protected static final int DEFAULT_POLLING_INTERVAL = 200; // in milliseconds
 
     @Inject
-    public BaseMobileTest(ConfigLoader configLoader, DriverProvider driverProvider) {
+    public BaseMobileTest(MobileConfigLoader configLoader, DriverProvider driverProvider) {
         this.configLoader = configLoader;
         this.driverProvider = driverProvider;
     }

@@ -2,18 +2,19 @@ package appium;
 
 import actions.DeviceActions;
 import com.google.inject.Inject;
+import config.MobileConfigLoader;
 import factory.DriverProvider;
 import utils.JsonDataLoader;
 import io.qameta.allure.Allure;
 import model.SmsData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.example.config.ConfigLoader;
 import org.testng.annotations.*;
 import pages.interfaces.NotificationsPage;
 
 import java.util.Arrays;
 
+import static constants.Constants.SMS_DATA_PATH;
 import static org.testng.Assert.assertTrue;
 
 public class VerifySmsForAndroidIT extends BaseMobileTest {
@@ -24,7 +25,7 @@ public class VerifySmsForAndroidIT extends BaseMobileTest {
     private final NotificationsPage notificationsPage;
 
     @Inject
-    public VerifySmsForAndroidIT(ConfigLoader configLoader, DriverProvider driverProvider,
+    public VerifySmsForAndroidIT(MobileConfigLoader configLoader, DriverProvider driverProvider,
                                  DeviceActions deviceActions, JsonDataLoader jsonDataLoader,
                                  NotificationsPage notificationsPage) {
         super(configLoader, driverProvider);
@@ -35,7 +36,7 @@ public class VerifySmsForAndroidIT extends BaseMobileTest {
 
     @DataProvider(name = "smsData")
     public Object[][] getSmsData() {
-        SmsData[] smsDataArray = jsonDataLoader.getData("/data/sms_data.json", SmsData[].class);
+        SmsData[] smsDataArray = jsonDataLoader.getData(SMS_DATA_PATH, SmsData[].class);
         return Arrays.stream(smsDataArray)
                 .map(sms -> new Object[]{sms})
                 .toArray(Object[][]::new);

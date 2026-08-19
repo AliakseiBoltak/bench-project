@@ -40,25 +40,35 @@ jobs:
       - name: Build project and install dependencies
         run: mvn clean install -pl core -DskipTests -am
 
-      # 1. Restore previous Allure history to include it in the current report
       - name: Restore Allure History
         run: |
           mkdir -p ui-playwright/allure-history
           mvn antrun:run@restore-allure-history -pl ui-playwright
-        continue-on-error: true # Allow the job to continue even if the history restoration fails (e.g., if there is no previous history)
+        continue-on-error: true
 
       - name: Run tests for ui-playwright module
-        run: mvn clean test -pl ui-playwright
+        run: mvn clean test -pl ui-playwright -Denv=qa
+
+      - name: Generate Allure Environment Properties
+        if: always()
+        run: |
+          mkdir -p ui-playwright/target/allure-results
+          echo "Environment=QA" >> ui-playwright/target/allure-results/environment.properties
+          echo "Framework=Playwright" >> ui-playwright/target/allure-results/environment.properties
+          echo "Branch=${{ github.ref_name }}" >> ui-playwright/target/allure-results/environment.properties
+          echo "OS=${{ runner.os }}" >> ui-playwright/target/allure-results/environment.properties
 
       - name: Generate Allure Report
+        if: always()
         run: mvn allure:report -pl ui-playwright
 
-      # 2. Save the current Allure history to be used in future runs
       - name: Save Allure History
+        if: always()
         run: mvn antrun:run@copy-allure-history -pl ui-playwright
 
       - name: Upload Allure Report Artifact
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: allure-report-playwright
           path: ui-playwright/target/site/allure-maven-plugin/

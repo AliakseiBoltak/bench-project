@@ -14,7 +14,7 @@
 
     <properties>
         <unitSuiteXmlFile>unit-suite</unitSuiteXmlFile>
-        <integrationSuiteXmlFile>mobile-suite</integrationSuiteXmlFile>
+        <integrationSuiteXmlFile>android-smoke-suite</integrationSuiteXmlFile>
         <appium.version>9.4.0</appium.version>
         <selenium.version>4.26.0</selenium.version>
     </properties>
