@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.codeborne.selenide.WebDriverRunner;
 import constants.Platform;
+import config.MobileConfigLoader;
 import exceptions.MobileFrameworkException;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -12,7 +13,6 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.example.config.ConfigLoader;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -22,11 +22,11 @@ import java.net.URL;
 public class DriverProvider {
 
     private static final Logger LOGGER = LogManager.getLogger(DriverProvider.class);
-    private final ConfigLoader configLoader;
+    private final MobileConfigLoader configLoader;
     private final ThreadLocal<AppiumDriver> driverThreadLocal = new ThreadLocal<>();
 
     @Inject
-    public DriverProvider(ConfigLoader configLoader) {
+    public DriverProvider(MobileConfigLoader configLoader) {
         this.configLoader = configLoader;
     }
 

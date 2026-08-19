@@ -3,8 +3,8 @@ package guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import config.MobileConfigLoader;
 import constants.Platform;
-import org.example.config.ConfigLoader;
 import java.util.Objects;
 
 public class DynamicPageProvider<T> implements Provider<T> {
@@ -15,7 +15,7 @@ public class DynamicPageProvider<T> implements Provider<T> {
     private Injector injector;
 
     @Inject
-    private ConfigLoader configLoader;
+    private MobileConfigLoader configLoader;
 
     public DynamicPageProvider(Class<T> interfaceType) {
         this.interfaceType = Objects.requireNonNull(interfaceType, "interfaceType");

@@ -1,13 +1,13 @@
 package actions;
 
 import com.google.inject.Inject;
+import config.MobileConfigLoader;
 import exceptions.MobileFrameworkException;
 import factory.DriverProvider;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.android.SupportsSpecialEmulatorCommands;
 import io.appium.java_client.appmanagement.ApplicationState;
-import org.example.config.ConfigLoader;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 
@@ -17,10 +17,10 @@ import java.util.Collections;
 public class DeviceActions {
 
     private final DriverProvider driverProvider;
-    private final ConfigLoader configLoader;
+    private final MobileConfigLoader configLoader;
 
     @Inject
-    public DeviceActions(DriverProvider driverProvider, ConfigLoader configLoader) {
+    public DeviceActions(DriverProvider driverProvider, MobileConfigLoader configLoader) {
         this.driverProvider = driverProvider;
         this.configLoader = configLoader;
     }

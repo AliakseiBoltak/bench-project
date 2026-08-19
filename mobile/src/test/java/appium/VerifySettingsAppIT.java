@@ -5,7 +5,7 @@ import factory.DriverProvider;
 import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.example.config.ConfigLoader;
+import config.MobileConfigLoader;
 import org.testng.annotations.Test;
 import pages.interfaces.SettingsPage;
 import actions.DeviceActions;
@@ -19,7 +19,7 @@ class VerifySettingsAppIT extends BaseMobileTest {
     private final DeviceActions deviceActions;
 
     @Inject
-    public VerifySettingsAppIT(ConfigLoader configLoader, DriverProvider driverProvider,
+    public VerifySettingsAppIT(MobileConfigLoader configLoader, DriverProvider driverProvider,
                                SettingsPage settingsPage, DeviceActions deviceActions) {
         super(configLoader, driverProvider);
         this.settingsPage = settingsPage;
