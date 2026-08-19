@@ -21,6 +21,7 @@ This module contains mobile UI automation tests for Android and iOS utilizing Ap
     │       └── interfaces/   # Cross-platform page contracts
     └── src/test/java/
         ├── appium/           # TestNG test classes and base setup
+        ├── unit/             # Architectural convention and unit tests
         └── resources/
             ├── data/         # JSON test data files
             ├── env.conf      # Unified configuration for backends and platforms
@@ -48,11 +49,10 @@ Location: src/main/java/pages/BasePage.java
 - Do include: Methods taking a SelenideElement and performing UI commands (isElementVisible, clickElement).
 - Do NOT include: Physical pointer logic (delegated to DeviceActions) or app lifecycle transitions.
 
-### 4. interfaces & implementations (Page Objects)
+### 4. interfaces & implementations (Page Objects & Conventions)
 Location: src/main/java/pages/interfaces/ & src/main/java/pages/implementations/
 - Responsibility: Define screen-specific locators and business workflows. Tests rely on interfaces, while Guice dynamically injects the platform-specific implementation.
-- Do include: SelenideElement locators and high-level behavioral domain methods.
-- Do NOT include: Any WebDriver initialization or device manipulation logic not tied to evaluating page elements.
+- **Architectural Convention & Unit Testing:** To prevent missing platform implementations, the test suite includes `ArchitectureConventionTest` (located in `src/test/java/unit/ArchitectureConventionTest.java`). This unit test scans the `pages.interfaces` package via Guava ClassPath and programmatically verifies that for every interface (e.g., `SettingsPage`), corresponding physical classes exist under `pages.implementations.android.Android<Name>` and `pages.implementations.ios.IOS<Name>`.
 
 ### 5. Utils, Models & Exceptions (Support Layer)
 Location: src/main/java/utils/, src/main/java/model/, src/main/java/exceptions/

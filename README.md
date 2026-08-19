@@ -138,7 +138,7 @@ After generating the report, save the current run's Allure history so trends wil
 
            appium
 
-       By default it listens on `[http://127.0.0.1:4723](http://127.0.0.1:4723)`, matching `platform-default.appium.serverUrl` in `mobile/src/test/resources/env.conf`.
+       By default it listens on `http://127.0.0.1:4723`, matching `platform-default.appium.serverUrl` in `mobile/src/test/resources/env.conf`.
 
     3. Start an Android emulator (created via Android Studio's Device Manager or `avdmanager`) or connect a physical device with USB debugging enabled:
 
@@ -172,8 +172,8 @@ After generating the report, save the current run's Allure history so trends wil
 
 **Why use `verify` instead of `test` for Mobile?**
 The `mobile` module strictly separates fast architectural unit tests from heavy Appium UI integration tests using Maven's lifecycle phases:
-* The `test` phase (driven by `maven-surefire-plugin`) runs rapid architectural convention checks.
-* The `integration-test` and `verify` phases (driven by `maven-failsafe-plugin`) run the actual cross-platform Appium tests.
+* On the `test` phase, `maven-surefire-plugin` runs first to execute quick unit and architectural tests — specifically, validating that every declared page interface has its corresponding implementation for both Android and iOS.
+* On the subsequent `integration-test` and `verify` phases, `maven-failsafe-plugin` takes over to run the heavy cross-platform Appium UI tests against real devices or emulators.
 
 **Note:**  
 For detailed info check README files in a particular module, eg - api, mobile.
