@@ -1,24 +1,60 @@
-## How to Build and Run Tests
+# Test Automation Bench Project
+
+A comprehensive Java framework for test automation.
+
+## 🎓 About This Project
+
+This project serves as an **educational sketch and reference example** of how robust test automation can be implemented across multiple completely different software domains. It is built as a **Maven multi-module project** to demonstrate architectural best practices: isolating domain-specific dependencies while sharing common utilities.
+
+At the heart of the framework is the `core` module, which contains shared logic (like configuration loading, data generation, and dependency injection). This core is inherited and utilized by independent domain-specific testing modules.
+
+### Domains Covered:
+*   **API Testing:** RESTful service validation.
+*   **Database (DB) Testing:** Direct JDBC integrations and SQL state validation.
+*   **Mobile Testing:** Appium-based automation for Android and iOS devices.
+*   **UI Testing (Dual Approach):** The web automation layer is deliberately split into two distinct paradigms to showcase different industry standards:
+    *   **Classic Approach:** Utilizing `Selenide` (WebDriver-based) in the `ui` module.
+    *   **Modern Approach:** Utilizing `Playwright` + `Cucumber` (BDD) in the `ui-playwright` module.
+
+## 🛠️ Technology Stack
+
+*   **Language:** Java 17
+*   **Build Tool:** Maven (Multi-module POM packaging)
+*   **Test Runner:** TestNG 7.11.0
+*   **Dependency Injection:** Guice for Dependency Injection
+*   **BDD Framework:** Cucumber 7.27.0 (with Guice support)
+*   **Reporting:** Allure 2.24.0 (with TestNG and Cucumber JVM integrations)
+*   **Execution Plugins:** `maven-surefire-plugin` (for unit/fast tests) and `maven-failsafe-plugin` (for integration tests)
+
+## 📁 Multi-Module Architecture
+
+The framework consists of the following modules:
+
+1.  **`core`**: The foundational shared library. Must be built and installed before running any tests.
+2.  **`api`**: REST API test automation.
+3.  **`db`**: Database integration tests.
+4.  **`mobile`**: Android/iOS Appium tests.
+5.  **`ui`**: Browser UI tests via Selenide.
+6.  **`ui-playwright`**: Browser UI tests via Playwright and Cucumber BDD.
+
+## 🚀 How to Build and Run Tests
 
 > **Before running any tests, you must first build and install the core module artifact.**
 >
 > 1. Import as a Maven project in your IDE.
 > 2. Navigate to the `core` module directory:
->    ```sh
->    cd core
->    ```
+     >
+     >        cd core
+>
 > 3. Build and install the core artifact to your local Maven repository by running this command:
->    ```sh
->    mvn clean install
->    ```
+     >
+     >        mvn clean install
 >
 > After this, you can navigate to the desired module (for example, `api`, `ui-playwright`, etc.) and execute the tests as described below.
 
 ### 1. Run Tests
 
-```sh
-mvn clean test
-```
+    mvn clean test
 
 ---
 
@@ -26,17 +62,13 @@ mvn clean test
 
 To enable test trend statistics (history) in Allure reports, restore the history from your previous report using:
 
-```sh
-mvn antrun:run@restore-allure-history
-```
+    mvn antrun:run@restore-allure-history
 
 ---
 
 ### 3. Generate Allure Report
 
-```sh
-mvn allure:report
-```
+    mvn allure:report
 
 ---
 
@@ -44,17 +76,13 @@ mvn allure:report
 
 After generating the report, save the current run's Allure history so trends will persist between runs:
 
-```sh
-mvn antrun:run@copy-allure-history
-```
+    mvn antrun:run@copy-allure-history
 
 ---
 
 ### 5. Open Allure Report
 
-```sh
-mvn allure:serve
-```
+    mvn allure:serve
 
 ---
 
@@ -74,74 +102,72 @@ mvn allure:serve
 
 - **UI Playwright Tests:**  
   Before running tests in the `ui-playwright` module, you must install Playwright browsers by running:
-  ```sh
-  mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install"
-  ```
+
+      mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install"
+
   To run Playwright tests that require GitHub authentication (such as tests that use a stored session for GitHub),  
   you must update your `env.conf` file with valid GitHub credentials.
 
   After running your tests, you may have a Playwright trace file (for example, `github-login-trace.zip`).  
   To view and analyze this traced session in your browser, run the following command:
 
-  ```sh
-  mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="show-trace traces/github-login-trace.zip"
-  ```
+      mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="show-trace traces/github-login-trace.zip"
+
   This will open the Playwright Trace Viewer, allowing you to inspect every step of your test, including screenshots, network, console, and more.
 
 - **Adjust Browser/Headless Mode:**  
   To change the default browser or headless mode for UI tests, pass JVM parameters when running tests. For example, this will run the UI tests in headed mode using Firefox instead of the default headless Chromium.:
-  ```sh
-  mvn clean test -Dheadless=false -Dbrowser=firefox
-  ```
 
-- ```markdown
+      mvn clean test -Dheadless=false -Dbrowser=firefox
+
 - **Mobile (Appium/Android/iOS) Tests:**  
   The `mobile` module drives a real Android device/emulator or iOS simulator via Appium and needs some one-time setup before running the tests will work:
 
-    1. Install Node.js, then Appium and its drivers[cite: 16]:
-       ```sh
-       npm install -g appium
-       appium driver install uiautomator2
-       # For iOS testing on macOS, XCUITest driver is also required:
-       # appium driver install xcuitest
-       ```
-    2. Start the Appium server (leave it running in its own terminal)[cite: 16]:
-       ```sh
-       appium
-       ```
+    1. Install Node.js, then Appium and its drivers:
+
+           npm install -g appium
+           appium driver install uiautomator2
+           # For iOS testing on macOS, XCUITest driver is also required:
+           # appium driver install xcuitest
+
+    2. Start the Appium server (leave it running in its own terminal):
+
+           appium
+
        By default it listens on `http://127.0.0.1:4723`, matching `platform-default.appium.serverUrl` in `mobile/src/test/resources/env.conf`.
-    3. Start an Android emulator (created via Android Studio's Device Manager or `avdmanager`) or connect a physical device with USB debugging enabled[cite: 16]:
-       ```sh
-       emulator -avd <your_avd_name>          # list AVDs with: emulator -list-avds
-       ```
+
+    3. Start an Android emulator (created via Android Studio's Device Manager or `avdmanager`) or connect a physical device with USB debugging enabled:
+
+           emulator -avd <your_avd_name>          # list AVDs with: emulator -list-avds
+
        *(Note: iOS testing requires a macOS machine and an active iOS Simulator via Xcode).*
-    4. Confirm it's visible to ADB before running tests[cite: 16]:
-       ```sh
-       adb devices
-       ```
+
+    4. Confirm it's visible to ADB before running tests:
+
+           adb devices
+
        You should see a line like `emulator-5554   device` (not `offline`/`unauthorized`).
+
     5. Ensure your device configuration matches a platform block in `env.conf` (e.g.,`android-17`, `ios-17`), where you configure `deviceName`, `udid`, and `platformVersion`. For Android, get the platform version with `adb shell getprop ro.build.version.release`.
+
     6. Run the test by specifying the target platform profile (via `-Dplatform`) and optional TestNG suite XML (via `-DintegrationSuiteXmlFile`):
 
        **For Android (Default suite):**
-       ```sh
-       mvn -f mobile/pom.xml clean verify -Dplatform=android-17
-       ```
+
+           mvn -f mobile/pom.xml clean verify -Dplatform=android-17
 
        **For Android (Specific suite, e.g., Smoke):**
-       ```sh
-       mvn -f mobile/pom.xml clean verify -Dplatform=android-17 -DintegrationSuiteXmlFile=android-smoke-suite
-       ```
+
+           mvn -f mobile/pom.xml clean verify -Dplatform=android-17 -DintegrationSuiteXmlFile=android-smoke-suite
 
        **For iOS:**
-       ```sh
-       mvn -f mobile/pom.xml clean verify -Dplatform=ios-17 -DintegrationSuiteXmlFile=ios-smoke-suite
-       ```
+
+           mvn -f mobile/pom.xml clean verify -Dplatform=ios-17 -DintegrationSuiteXmlFile=ios-smoke-suite
 
 **Why use `verify` instead of `test` for Mobile?**
 The `mobile` module strictly separates fast architectural unit tests from heavy Appium UI integration tests using Maven's lifecycle phases:
 * The `test` phase (driven by `maven-surefire-plugin`) runs rapid architectural convention checks.
 * The `integration-test` and `verify` phases (driven by `maven-failsafe-plugin`) run the actual cross-platform Appium tests.
- 
+
 **Note:**  
 For detailed info check README files in a particular module, eg - api, mobile.
