@@ -178,10 +178,19 @@ The `mobile` module strictly separates fast architectural unit tests from heavy 
 
 ## ⚙️ Continuous Integration (CI/CD) & Reporting
 
-This project is integrated with **GitHub Actions** to provide automated testing and reporting on every push and pull request to the `default` branch.
+This project is fully integrated with **GitHub Actions** to provide automated testing and reporting on every push and pull request to the `default` branch.
 
 * **Automated Pipeline:** The CI pipeline automatically sets up JDK 17, installs project dependencies (including Playwright browsers), builds the `core` module, and runs the test suites (e.g., `ui-playwright`).
-* **Allure Report Deployment:** After tests run, the pipeline automatically generates an Allure report. It dynamically restores previous test execution history from the `gh-pages` branch to maintain test trend statistics, and finally deploys the generated interactive report directly to **GitHub Pages** for easy viewing.
+* **Allure Report Deployment:** After tests run, the pipeline automatically generates an Allure report. It dynamically restores previous test execution history to maintain test trend statistics, and finally deploys the generated interactive report directly to **GitHub Pages** for easy viewing.
+
+### 📊 Hosted Reports
+
+After a successful CI run, your site goes live and the latest Allure report is accessible at:  
+👉 **https://<username>.github.io/<repository-name>/**
+
+As shown in the screenshot below, the deployed report successfully parses and preserves the historical **Trend** data across runs, while also displaying the injected **Environment** details (such as the framework used, QA environment, OS, etc.):
+
+![Allure Report with Trends](GitHub Actions Allure Trends.png)
 
 ## 🤖 AI Integration & Agents
 
