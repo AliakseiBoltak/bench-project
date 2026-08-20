@@ -4,17 +4,14 @@ import actions.DeviceActions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.google.inject.Inject;
-import factory.DriverProvider;
 
 public abstract class BasePage {
 
-    protected DriverProvider driverProvider;
     protected DeviceActions deviceActions;
     protected static final int DEFAULT_MAX_SWIPES = 5;
 
     @Inject
-    protected BasePage(DriverProvider driverProvider, DeviceActions deviceActions) {
-        this.driverProvider = driverProvider;
+    protected BasePage(DeviceActions deviceActions) {
         this.deviceActions = deviceActions;
     }
 

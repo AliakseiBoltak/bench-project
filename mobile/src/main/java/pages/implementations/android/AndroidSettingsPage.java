@@ -4,7 +4,6 @@ import actions.DeviceActions;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.appium.AppiumSelectors;
 import com.google.inject.Inject;
-import factory.DriverProvider;
 import org.openqa.selenium.By;
 import pages.BasePage;
 import pages.interfaces.SettingsPage;
@@ -19,8 +18,8 @@ public class AndroidSettingsPage extends BasePage implements SettingsPage {
             .as("System Settings Option");
 
     @Inject
-    public AndroidSettingsPage(DriverProvider driverProvider, DeviceActions deviceActions) {
-        super(driverProvider, deviceActions);
+    public AndroidSettingsPage(DeviceActions deviceActions) {
+        super(deviceActions);
     }
 
     @Override
