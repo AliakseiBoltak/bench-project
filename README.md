@@ -100,7 +100,7 @@ After generating the report, save the current run's Allure history so trends wil
 ## Notes
 
 - **Allure Trends:**  
-  To keep test trends and history visible in Allure reports across runs, always restore history before running tests and save history after generating the report.
+  To keep test trends and history visible in Allure reports across runs, always restore/save history.
 
 - **Database Tests:**  
   Before running tests in the `db` module, execute the script `init_test_db.sql` to create the database and tables.
@@ -139,7 +139,7 @@ After generating the report, save the current run's Allure history so trends wil
 
            appium
 
-       By default it listens on `http://127.0.0.1:4723`, matching `platform-default.appium.serverUrl` in `mobile/src/test/resources/env.conf`.
+       By default, it listens on `http://127.0.0.1:4723`, matching `platform-default.appium.serverUrl` in `mobile/src/test/resources/env.conf`.
 
     3. Start an Android emulator (created via Android Studio's Device Manager or `avdmanager`) or connect a physical device with USB debugging enabled:
 
@@ -197,13 +197,13 @@ As shown in the screenshot below, the deployed report successfully parses and pr
 
 ## 🤖 AI Integration & Agents
 
-This project is equipped with AI assistance instructions and specialized autonomous agents to help maintain, run, and scale the framework.
+This project is equipped with AI assistance instructions and specialized agents to help maintain, run, and scale the framework.
 
 ### 1. GitHub Copilot Instructions
 The repository includes predefined instructions for GitHub Copilot. These guidelines ensure Copilot understands the custom multi-module Maven structure, Guice dependency injection patterns, TestNG standards, and Page Object Model implementations (across Selenide and Playwright). This context forces the AI to match existing conventions rather than introducing divergent patterns.
 
 ### 2. AI Agents
-The project features three configured autonomous AI agents to assist with code quality and architecture:
+The project features three configured AI agents to help with code quality and architecture:
 *   **`code-architect`**: A software architecture specialist responsible for design reviews, refactoring plans, and dependency analysis. It ensures modules remain loosely coupled, favors composition over inheritance, and plans breaking changes securely.
 *   **`code-simplifier`**: A dedicated agent that reviews recently modified code to reduce complexity and redundancy. It streamlines logic and improves readability without altering external behavior or adding new dependencies.
 *   **`staff-reviewer`**: A skeptical review agent that evaluates plans or architectural proposals *before* implementation. It pushes back on unnecessary complexity, highlights missing edge cases, and checks for security or performance concerns.
