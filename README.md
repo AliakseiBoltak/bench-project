@@ -185,12 +185,15 @@ This project is fully integrated with **GitHub Actions** to provide automated te
 
 ### 📊 Hosted Reports
 
-After a successful CI run, your site goes live and the latest Allure report is accessible at:  
-👉 **https://<username>.github.io/<repository-name>/**
+GitHub Pages is designed to host your personal, organization, or project pages directly from a GitHub repository.
+
+After a successful CI run, your site goes live and the latest Allure report is accessible at your project's GitHub Pages URL:  
+👉 **`https://<your-github-username>.github.io/<repository-name>/`**  
+*(Example for this repository: [https://aliakseiboltak.github.io/bench-project/](https://aliakseiboltak.github.io/bench-project/))*
 
 As shown in the screenshot below, the deployed report successfully parses and preserves the historical **Trend** data across runs, while also displaying the injected **Environment** details (such as the framework used, QA environment, OS, etc.):
 
-![Allure Report with Trends](GitHub Actions Allure Trends.png)
+![Allure Report with Trends](images/GitHubActionsAllureTrends.png)
 
 ## 🤖 AI Integration & Agents
 
