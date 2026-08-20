@@ -15,8 +15,6 @@
     <properties>
         <unitSuiteXmlFile>unit-suite</unitSuiteXmlFile>
         <integrationSuiteXmlFile>android-smoke-suite</integrationSuiteXmlFile>
-        <appium.version>9.4.0</appium.version>
-        <selenium.version>4.26.0</selenium.version>
     </properties>
 
     <dependencies>
@@ -28,27 +26,7 @@
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
-            <version>${appium.version}</version>
-        </dependency>
-        <!-- java-client declares its Selenium dependency as a version range
-             ([4.26.0,5.0)), which Maven otherwise expands to the newest match.
-             Newer versions on that range removed HTML5 context APIs that this
-             java-client version still references (ContextAware, LocationContext),
-             so these are pinned as direct dependencies to force the lower bound. -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-api</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-remote-driver</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-support</artifactId>
-            <version>${selenium.version}</version>
+            <version>10.1.1</version>
         </dependency>
         <dependency>
             <groupId>com.codeborne</groupId>
