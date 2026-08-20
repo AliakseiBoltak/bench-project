@@ -193,7 +193,7 @@ After a successful CI run, your site goes live and the latest Allure report is a
 
 As shown in the screenshot below, the deployed report successfully parses and preserves the historical **Trend** data across runs, while also displaying the injected **Environment** details (such as the framework used, QA environment, OS, etc.):
 
-![Allure Report with Trends](core/src/main/resources/images/GitHubActionsAllureTrends.png)
+![Allure Report with Trends](core/src/main/resources/images/AllureReportWithTrendsFromGitHubPages.png)
 
 ## 🤖 AI Integration & Agents
 
