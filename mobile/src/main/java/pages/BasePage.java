@@ -13,7 +13,7 @@ public abstract class BasePage {
     protected static final int DEFAULT_MAX_SWIPES = 5;
 
     @Inject
-    public BasePage(DriverProvider driverProvider, DeviceActions deviceActions) {
+    protected BasePage(DriverProvider driverProvider, DeviceActions deviceActions) {
         this.driverProvider = driverProvider;
         this.deviceActions = deviceActions;
     }

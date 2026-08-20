@@ -4,15 +4,14 @@ Multi-module Maven test automation framework, Java 17. Follow the conventions be
 
 ## Modules
 
-| Module            | Purpose             | Driver / lib           | Base test class  |
-|-------------------|---------------------|------------------------|------------------|
-| `core`            | Shared library      | Guice, Typesafe Config | —                |
-| `api`             | REST API tests      | REST Assured           | `BaseAPITest`    |
-| `api-apache-http` | REST API tests      | Apache HttpClient      | `BaseAPITest`    |
-| `ui`              | Browser UI tests    | Selenide               | `BaseUiTest`     |
-| `ui-playwright`   | UI tests + BDD      | Playwright, Cucumber   | `GitHubBaseTest` |
-| `db`              | Database tests      | plain JDBC             | `BaseDBTest`     |
-| `mobile`          | Android app tests   | Appium `java-client`   | `appium.BaseMobileTest` |
+| Module            | Purpose          | Driver / lib           | Base test class  |
+|-------------------|------------------|------------------------|------------------|
+| `core`            | Shared library   | Guice, Typesafe Config | —                |
+| `api`             | REST API tests   | REST Assured           | `BaseAPITest`    |
+| `ui`              | Browser UI tests | Selenide               | `BaseUiTest`     |
+| `ui-playwright`   | UI tests + BDD   | Playwright, Cucumber   | `GitHubBaseTest` |
+| `db`              | Database tests   | plain JDBC             | `BaseDBTest`     |
+| `mobile`          | Appium app tests | Appium `java-client`   | `appium.BaseMobileTest` |
 
 `core` (version `1.2-SNAPSHOT`, decoupled from the root aggregator's `1.0-SNAPSHOT`) must be installed before anything else runs.
 
