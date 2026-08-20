@@ -39,15 +39,27 @@ jobs:
         continue-on-error: true
         run: |
           mkdir -p ui-playwright/allure-history
-          # Forming BASE URL for repo
-          BASE_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/history"
           
-          # Downloading history files
-          curl -s -f -o ui-playwright/allure-history/history.json "$BASE_URL/history.json" || true
-          curl -s -f -o ui-playwright/allure-history/history-trend.json "$BASE_URL/history-trend.json" || true
-          curl -s -f -o ui-playwright/allure-history/categories-trend.json "$BASE_URL/categories-trend.json" || true
-          curl -s -f -o ui-playwright/allure-history/duration-trend.json "$BASE_URL/duration-trend.json" || true
-          curl -s -f -o ui-playwright/allure-history/retry-trend.json "$BASE_URL/retry-trend.json" || true
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          REPO="${{ github.event.repository.name }}"
+          BASE_URL="https://${OWNER}.github.io/${REPO}/history"
+          
+          echo "Downloading history from: $BASE_URL"
+          
+          FILES=("history.json" "history-trend.json" "categories-trend.json" "duration-trend.json" "retry-trend.json")
+          
+          for file in "${FILES[@]}"; do
+            # Use curl to download the file and capture the HTTP status code
+            HTTP_STATUS=$(curl -s -L -o "ui-playwright/allure-history/$file" -w "%{http_code}" "$BASE_URL/$file" || echo "FAIL")
+          
+            # Check if the download was successful and the file is not empty
+            if [ "$HTTP_STATUS" != "200" ] || [ ! -s "ui-playwright/allure-history/$file" ]; then
+              echo "⚠️ Failed to download $file (HTTP status: $HTTP_STATUS). Deleting corrupted file."
+              rm -f "ui-playwright/allure-history/$file"
+            else
+              echo "✅ Successfully downloaded $file"
+            fi
+          done
 
       - name: Install Playwright dependencies
         run: npx playwright install-deps
