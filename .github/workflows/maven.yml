@@ -34,19 +34,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      # 1. Pull previous Allure history directly from the gh-pages branch
+      # 1. Pull previous Allure history directly from the live GitHub Pages site
       - name: Restore Allure History from GitHub Pages
         continue-on-error: true
         run: |
           mkdir -p ui-playwright/allure-history
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git fetch origin gh-pages --depth=1 || true
-          if git checkout origin/gh-pages -- history 2>/dev/null; then
-            cp -r history/* ui-playwright/allure-history/ 2>/dev/null || true
-            rm -rf history
-          elif git checkout origin/gh-pages -- ui-playwright/allure-history 2>/dev/null; then
-            cp -r origin-gh-pages/ui-playwright/allure-history/* ui-playwright/allure-history/ 2>/dev/null || true
-          fi
+          # Forming BASE URL for repo
+          BASE_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/history"
+          
+          # Downloading history files
+          curl -s -f -o ui-playwright/allure-history/history.json "$BASE_URL/history.json" || true
+          curl -s -f -o ui-playwright/allure-history/history-trend.json "$BASE_URL/history-trend.json" || true
+          curl -s -f -o ui-playwright/allure-history/categories-trend.json "$BASE_URL/categories-trend.json" || true
+          curl -s -f -o ui-playwright/allure-history/duration-trend.json "$BASE_URL/duration-trend.json" || true
+          curl -s -f -o ui-playwright/allure-history/retry-trend.json "$BASE_URL/retry-trend.json" || true
 
       - name: Install Playwright dependencies
         run: npx playwright install-deps
