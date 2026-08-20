@@ -7,21 +7,22 @@ import com.typesafe.config.ConfigFactory;
 public class MobileConfigLoader extends ConfigLoader {
 
     private final Config platformConfig;
+    private static final String DEFAULT_PLATFORM = "platform-default";
 
     public MobileConfigLoader() {
         super();
 
-        String platform = System.getProperty("platform", "platform-default");
+        String platform = System.getProperty("platform", DEFAULT_PLATFORM);
 
         Config fullConfig = ConfigFactory.parseResources("env.conf");
 
         if (fullConfig.hasPath(platform)) {
-            // Fallback to default if profile missin
+            // Fallback to default if profile missing
             this.platformConfig = fullConfig.getConfig(platform)
-                    .withFallback(fullConfig.getConfig("platform-default"))
+                    .withFallback(fullConfig.getConfig(DEFAULT_PLATFORM))
                     .resolve();
         } else {
-            this.platformConfig = fullConfig.getConfig("platform-default").resolve();
+            this.platformConfig = fullConfig.getConfig(DEFAULT_PLATFORM).resolve();
         }
     }
 

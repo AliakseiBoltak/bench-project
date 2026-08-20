@@ -22,7 +22,7 @@ public abstract class BasePage {
         try {
             element.shouldBe(Condition.visible);
             return true;
-        } catch (Error | Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
