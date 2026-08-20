@@ -20,6 +20,14 @@
 
     <description>Java framework for test automation</description>
 
+    <developers>
+        <developer>
+            <id>aliakseiboltak</id>
+            <name>Aliaksei Boltak</name>
+            <url>https://github.com/AliakseiBoltak</url>
+        </developer>
+    </developers>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
