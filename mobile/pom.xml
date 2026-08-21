@@ -33,11 +33,6 @@
             <artifactId>selenide-appium</artifactId>
             <version>7.16.2</version>
         </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-selenide</artifactId>
-            <version>2.24.0</version>
-        </dependency>
     </dependencies>
 
     <build>

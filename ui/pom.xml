@@ -56,11 +56,6 @@
             <artifactId>selenide</artifactId>
             <version>7.17.0</version>
         </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-selenide</artifactId>
-            <version>${allure.version}</version>
-        </dependency>
     </dependencies>
 
 </project>
