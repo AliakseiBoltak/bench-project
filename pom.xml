@@ -193,11 +193,6 @@
             <artifactId>awaitility</artifactId>
             <version>4.3.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy</artifactId>
-            <version>5.0.8</version>
-        </dependency>
     </dependencies>
 
 </project>
