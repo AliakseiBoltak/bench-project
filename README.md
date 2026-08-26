@@ -18,7 +18,7 @@ At the heart of the framework is the `core` module, which contains shared logic 
 
 ## 🛠️ Technology Stack
 
-*   **Language:** Java 17
+*   **Language:** Java 21
 *   **Build Tool:** Maven (Multi-module POM packaging)
 *   **Test Runner:** TestNG 7.11.0
 *   **Dependency Injection:** Google Guice 7.0.0 for Dependency Injection
