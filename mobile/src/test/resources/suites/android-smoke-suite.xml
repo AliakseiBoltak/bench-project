@@ -3,10 +3,9 @@
     <listeners>
         <listener class-name="org.example.listeners.AllureListener"/>
     </listeners>
-    <test name="Appium Android Test">
+    <test name="Android Specific Tests">
         <classes>
-            <class name="appium.VerifySettingsAppIT"/>
-            <class name="appium.VerifySmsForAndroidIT"/>
+            <class name="appium.android.VerifySmsForAndroidIT"/>
         </classes>
     </test>
 </suite>

@@ -14,7 +14,7 @@ public class IOSNotificationsPage extends BasePage implements NotificationsPage 
 
     @Override
     public boolean isNotificationWithTextVisible(String text) {
-        // Adjust when iOS notification locators are available.
+        // Temporarily do nothing for iOS
         return true;
     }
 

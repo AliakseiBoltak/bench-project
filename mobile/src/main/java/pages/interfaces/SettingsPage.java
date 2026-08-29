@@ -2,10 +2,8 @@ package pages.interfaces;
 
 public interface SettingsPage {
 
-    boolean isSearchSettingsVisible();
+    boolean isSearchSettingsInputVisible();
 
-    void swipeToSystemSettings();
-
-    boolean isSystemSettingsVisible();
+    boolean canSwipeToSettingFromMenuUntilItIsVisible();
 
 }

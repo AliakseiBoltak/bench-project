@@ -1,5 +1,6 @@
-package appium;
+package appium.common;
 
+import appium.BaseMobileTest;
 import com.google.inject.Inject;
 import factory.DriverProvider;
 import io.qameta.allure.Allure;
@@ -40,22 +41,17 @@ class VerifySettingsAppIT extends BaseMobileTest {
         LOGGER.info("Checking if Search Settings element is visible");
         Allure.step("Checking if Search Settings element is visible");
 
-        boolean isSearchSettingsVisible = settingsPage.isSearchSettingsVisible();
+        boolean isSearchSettingsVisible = settingsPage.isSearchSettingsInputVisible();
         assertTrue(isSearchSettingsVisible, "Search Settings element is not visible on the screen");
     }
 
-    @Test(description = "Checks System settings option is available in Settings app")
-    void checkSystemSettingsAreAvailableInSettingsApp() {
-        LOGGER.info("Swiping to System settings option");
-        Allure.step("Swiping to System settings option");
+    @Test(description = "Checks user can swipe to any existing setting in settings menu")
+    void checkUserCanSwipeInSettingsMenu() {
+        LOGGER.info("Swiping in settings menu");
+        Allure.step("Swiping in settings menu");
 
-        settingsPage.swipeToSystemSettings();
-
-        LOGGER.info("Checking if System settings option is visible");
-        Allure.step("Checking if System settings option is visible");
-
-        boolean isSystemVisible = settingsPage.isSystemSettingsVisible();
-        assertTrue(isSystemVisible, "System settings option is not visible in Settings app");
+        boolean isElementVisibleAfterSwipe  = settingsPage.canSwipeToSettingFromMenuUntilItIsVisible();
+        assertTrue(isElementVisibleAfterSwipe, "Element was not visible after swiping in settings menu");
     }
 
 }

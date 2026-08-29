@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import pages.BasePage;
 import pages.interfaces.NotificationsPage;
 
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.appium.SelenideAppium.$;
 
 public class AndroidNotificationsPage extends BasePage implements NotificationsPage {
 

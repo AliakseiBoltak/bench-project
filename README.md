@@ -159,17 +159,17 @@ After generating the report, save the current run's Allure history so trends wil
 
     6. Run the test by specifying the target platform profile (via `-Dplatform`) and optional TestNG suite XML (via `-DintegrationSuiteXmlFile`):
 
-       **For Android (Default suite):**
+       **For Android/IOS (Common suite):**
 
-           mvn -f mobile/pom.xml clean verify -Dplatform=android-17
+           mvn -f mobile/pom.xml clean verify -Dplatform=android-emulator or -Dplatform=ios-simulator
 
-       **For Android (Specific suite, e.g., Smoke):**
+       **For Android (Android Specific Suite):**
 
-           mvn -f mobile/pom.xml clean verify -Dplatform=android-17 -DintegrationSuiteXmlFile=android-smoke-suite
+           mvn -f mobile/pom.xml clean verify -Dplatform=android-emulator -DintegrationSuiteXmlFile=android-smoke-suite
 
-       **For iOS:**
+       **For iOS (iOS Specific Suite):**
 
-           mvn -f mobile/pom.xml clean verify -Dplatform=ios-17 -DintegrationSuiteXmlFile=ios-smoke-suite
+           mvn -f mobile/pom.xml clean verify -Dplatform=ios-simulator -DintegrationSuiteXmlFile=ios-smoke-suite
 
 **Why use `verify` instead of `test` for Mobile?**
 The `mobile` module strictly separates fast architectural unit tests from heavy Appium UI integration tests using Maven's lifecycle phases:

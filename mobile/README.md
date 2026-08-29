@@ -20,7 +20,10 @@ This module contains mobile UI automation tests for Android and iOS utilizing Ap
     │       │   └── ios/      # iOS-specific page objects and locators
     │       └── interfaces/   # Cross-platform page contracts
     └── src/test/java/
-        ├── appium/           # TestNG test classes and base setup
+        ├── appium/           # TestNG test classes
+        │   ├── android/      # Android-specific tests
+        │   ├── common/       # Cross-platform tests and base test setup
+        │   └── ios/          # iOS-specific tests
         ├── unit/             # Architectural convention and unit tests
         └── resources/
             ├── data/         # JSON test data files
@@ -32,7 +35,7 @@ This module contains mobile UI automation tests for Android and iOS utilizing Ap
 To maintain a scalable and separated architecture, functionality must be placed in the appropriate layer.
 
 ### 1. BaseMobileTest (Test Lifecycle)
-Location: src/test/java/appium/BaseMobileTest.java
+Location: src/test/java/appium/common/BaseMobileTest.java
 - Responsibility: Manages the global test lifecycle, driver startup/teardown via MobileConfigLoader, Allure listeners, and Selenide configurations.
 - Do include: @BeforeSuite, @BeforeMethod, @AfterMethod, TestNG configurations.
 - Do NOT include: Appium driver interaction logic, OS checks, page element assertions, or business logic.
@@ -68,17 +71,18 @@ Locally running the mobile module requires a running Appium server, an active An
 
 ### Command Examples
 
-1. Run Android tests on Android 17 (Default suite):
+1. Run Appium tests on Android or IOS (Common suite):
 
-   mvn -f mobile/pom.xml clean verify -Dplatform=android-17
+   mvn -f mobile/pom.xml clean verify -Dplatform=android-emulator or -Dplatform=ios-simulator
 
-2. Run Android tests with a specific suite (e.g., Smoke suite):
+2. Run Android specific tests:
 
-   mvn -f mobile/pom.xml clean verify -Dplatform=android-17 -DintegrationSuiteXmlFile=android-smoke-suite
+   mvn -f mobile/pom.xml clean verify -Dplatform=android-emulator -DintegrationSuiteXmlFile=android-smoke-suite
 
-3. Run iOS tests:
+3. Run IOS specific tests:
 
-   mvn -f mobile/pom.xml clean verify -Dplatform=ios-17 -DintegrationSuiteXmlFile=ios-smoke-suite
+   mvn -f mobile/pom.xml clean verify -Dplatform=ios-simulator -DintegrationSuiteXmlFile=ios-smoke-suite
+
 
 ### Reporting
 To generate and view the Allure report after execution:

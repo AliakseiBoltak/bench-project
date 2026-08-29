@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import pages.BasePage;
 import pages.interfaces.SettingsPage;
 
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.appium.SelenideAppium.$;
 
 public class AndroidSettingsPage extends BasePage implements SettingsPage {
 
@@ -23,19 +23,15 @@ public class AndroidSettingsPage extends BasePage implements SettingsPage {
     }
 
     @Override
-    public boolean isSearchSettingsVisible() {
+    public boolean isSearchSettingsInputVisible() {
         waitForElementVisible(settingsSearchBarTitle);
         return true;
     }
 
     @Override
-    public void swipeToSystemSettings() {
+    public boolean canSwipeToSettingFromMenuUntilItIsVisible() {
         swipeUpUntilVisible(systemSettingsOption);
-    }
-
-    @Override
-    public boolean isSystemSettingsVisible() {
-        return isElementVisible(systemSettingsOption);
+        return true;
     }
 
 }

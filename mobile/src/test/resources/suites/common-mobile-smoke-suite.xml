@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Appium IOS Tests Suite">
+<suite name="Appium Android and IOS Tests Suite">
     <listeners>
         <listener class-name="org.example.listeners.AllureListener"/>
     </listeners>
-    <test name="Appium IOS Test">
+    <test name="Common Android and IOS Tests">
         <classes>
-            <class name="appium.VerifySettingsAppIT"/>
+            <class name="appium.common.VerifySettingsAppIT"/>
         </classes>
     </test>
 </suite>
