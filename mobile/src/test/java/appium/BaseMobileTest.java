@@ -14,6 +14,7 @@ import org.example.guice.CoreModule;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.Guice;
 
 @Guice(modules = {CoreModule.class, PageModule.class})
@@ -34,11 +35,19 @@ public abstract class BaseMobileTest {
 
     @BeforeSuite
     public void globalSetup() {
+        LOGGER.info("Global setup: starting Appium service");
+        AppiumServiceManager.startService(configLoader);
         Configuration.timeout = DEFAULT_TIMEOUT;
         Configuration.pollingInterval = DEFAULT_POLLING_INTERVAL;
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(true));
+    }
+
+    @AfterSuite
+    public void globalTeardown() {
+        LOGGER.info("Global teardown: stopping Appium service");
+        AppiumServiceManager.stopService();
     }
 
     @BeforeMethod
