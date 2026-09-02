@@ -133,15 +133,9 @@ After generating the report, save the current run's Allure history so trends wil
            npm install -g appium
            appium driver install uiautomator2
            # For iOS testing on macOS, XCUITest driver is also required:
-           # appium driver install xcuitest
+           appium driver install xcuitest
 
-    2. Start the Appium server (leave it running in its own terminal):
-
-           appium
-
-       By default, it listens on `http://127.0.0.1:4723`, matching `platform-default.appium.serverUrl` in `mobile/src/test/resources/env.conf`.
-
-    3. Start an Android emulator (created via Android Studio's Device Manager or `avdmanager`) or connect a physical device with USB debugging enabled:
+  2. Start an Android emulator (created via Android Studio's Device Manager or `avdmanager`) or connect a physical device with USB debugging enabled:
 
        ```sh
        emulator -avd <your_avd_name>          # list AVDs with: emulator -list-avds
@@ -149,27 +143,27 @@ After generating the report, save the current run's Allure history so trends wil
 
        *(Note: iOS testing requires a macOS machine and an active iOS Simulator via Xcode).*
 
-    4. Confirm it's visible to ADB before running tests:
+  3.  Confirm it's visible to ADB before running tests:
 
            adb devices
 
        You should see a line like `emulator-5554   device` (not `offline`/`unauthorized`).
 
-    5. Ensure your device configuration matches a platform block in `env.conf` (e.g.,`android-17`, `ios-17`), where you configure `deviceName`, `udid`, and `platformVersion`. For Android, get the platform version with `adb shell getprop ro.build.version.release`.
+  4. Ensure your device configuration matches a platform block in `env.conf` (e.g.,`android`, `ios`), where you configure `deviceName` and `platformVersion`.
 
-    6. Run the test by specifying the target platform profile (via `-Dplatform`) and optional TestNG suite XML (via `-DintegrationSuiteXmlFile`):
+  5. Run the test by specifying the target platform profile (via `-Dplatform`) and optional TestNG suite XML (via `-DintegrationSuiteXmlFile`):
 
-       **For Android/IOS (Common suite):**
+      **For Android/IOS (Common suite):**
 
-           mvn -f mobile/pom.xml clean verify -Dplatform=android-emulator or -Dplatform=ios-simulator
+          mvn -f mobile/pom.xml clean verify -Dplatform=<android|ios>
 
-       **For Android (Android Specific Suite):**
+      **For Android (Android Specific Suite):**
 
-           mvn -f mobile/pom.xml clean verify -Dplatform=android-emulator -DintegrationSuiteXmlFile=android-smoke-suite
+          mvn -f mobile/pom.xml clean verify -Dplatform=android -DintegrationSuiteXmlFile=android-smoke-suite
 
-       **For iOS (iOS Specific Suite):**
+      **For iOS (iOS Specific Suite):**
 
-           mvn -f mobile/pom.xml clean verify -Dplatform=ios-simulator -DintegrationSuiteXmlFile=ios-smoke-suite
+          mvn -f mobile/pom.xml clean verify -Dplatform=ios -DintegrationSuiteXmlFile=ios-smoke-suite
 
 **Why use `verify` instead of `test` for Mobile?**
 The `mobile` module strictly separates fast architectural unit tests from heavy Appium UI integration tests using Maven's lifecycle phases:

@@ -63,25 +63,26 @@ Location: src/main/java/utils/, src/main/java/model/, src/main/java/exceptions/
 
 ## 🚀 Running Tests
 
-Locally running the mobile module requires a running Appium server, an active Android Emulator (or iOS Simulator), and specified configuration flags.
+Locally running the mobile module requires an active Android Emulator (or iOS Simulator), and specified configuration flags.
 
 ### Configuration Parameters
-- -Dplatform: Specifies the device/OS profile from env.conf (e.g., android-17, ios-17). Defaults to platform-default.
-- -DintegrationSuiteXmlFile: Specifies the TestNG suite XML file located in src/test/resources/suites/ (e.g., android-smoke-suite, ios-smoke-suite).
+- -Dplatform: Specifies the device/OS profile from env.conf (e.g., android, ios).
+- -DintegrationSuiteXmlFile: Specifies the TestNG suite XML file located in src/test/resources/suites/ (e.g., android-smoke-suite, common-mobile-smoke-suite).
 
 ### Command Examples
 
 1. Run Appium tests on Android or IOS (Common suite):
 
-   mvn -f mobile/pom.xml clean verify -Dplatform=android-emulator or -Dplatform=ios-simulator
+   mvn -f mobile/pom.xml clean verify -Dplatform=android
+   mvn -f mobile/pom.xml clean verify -Dplatform=ios
 
 2. Run Android specific tests:
 
-   mvn -f mobile/pom.xml clean verify -Dplatform=android-emulator -DintegrationSuiteXmlFile=android-smoke-suite
+   mvn -f mobile/pom.xml clean verify -Dplatform=android -DintegrationSuiteXmlFile=android-smoke-suite
 
 3. Run IOS specific tests:
 
-   mvn -f mobile/pom.xml clean verify -Dplatform=ios-simulator -DintegrationSuiteXmlFile=ios-smoke-suite
+   mvn -f mobile/pom.xml clean verify -Dplatform=ios -DintegrationSuiteXmlFile=ios-smoke-suite
 
 
 ### Reporting
