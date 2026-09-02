@@ -11,17 +11,16 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 
+@Log4j2
 @Singleton
 public class DriverProvider {
 
-    private static final Logger LOGGER = LogManager.getLogger(DriverProvider.class);
     private final MobileConfigLoader configLoader;
     private final ThreadLocal<AppiumDriver> driverThreadLocal = new ThreadLocal<>();
 
@@ -32,13 +31,13 @@ public class DriverProvider {
 
     public void initDriver() {
         if (driverThreadLocal.get() != null) {
-            LOGGER.warn("Driver is already initialized for the current thread. Skipping initialization.");
+            log.warn("Driver is already initialized for the current thread. Skipping initialization.");
             return;
         }
 
         URL serverUrl = appiumServerUrl();
         Platform platform = Platform.from(configLoader.getPlatformName());
-        LOGGER.info("Initializing {} driver against Appium server {}", platform, serverUrl);
+        log.info("Initializing {} driver against Appium server {}", platform, serverUrl);
 
         AppiumDriver driver = switch (platform) {
             case ANDROID -> new AndroidDriver(serverUrl, androidOptions());
@@ -50,7 +49,7 @@ public class DriverProvider {
         // Selenide.$()/$$() API (used by BasePage and page objects) resolves it
         // without going through Selenide's Configuration.browser bootstrap.
         WebDriverRunner.setWebDriver(driver);
-        LOGGER.info("{} driver initialized, session id: {}", platform, driver.getSessionId());
+        log.info("{} driver initialized, session id: {}", platform, driver.getSessionId());
     }
 
     public AppiumDriver getDriver() {
@@ -65,7 +64,7 @@ public class DriverProvider {
     public void quitDriver() {
         AppiumDriver driver = driverThreadLocal.get();
         if (driver != null) {
-            LOGGER.info("Quitting driver, session id: {}", driver.getSessionId());
+            log.info("Quitting driver, session id: {}", driver.getSessionId());
             WebDriverRunner.closeWebDriver();
             driverThreadLocal.remove();
         }

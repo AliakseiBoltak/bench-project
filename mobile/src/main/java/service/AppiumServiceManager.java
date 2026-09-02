@@ -1,12 +1,11 @@
-package appium;
+package service;
 
 import config.MobileConfigLoader;
 import exceptions.MobileFrameworkException;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import lombok.experimental.UtilityClass;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.File;
 import java.net.URI;
@@ -22,15 +21,15 @@ import java.net.URISyntaxException;
  * - AppiumServiceManager.startService(configLoader);
  * - AppiumServiceManager.stopService();
  */
+@Log4j2
 @UtilityClass
 public final class AppiumServiceManager {
 
-    private static final Logger LOGGER = LogManager.getLogger(AppiumServiceManager.class);
     private static AppiumDriverLocalService service;
 
     public static synchronized void startService(MobileConfigLoader configLoader) {
         if (service != null && service.isRunning()) {
-            LOGGER.info("Appium service already running at: {}", service.getUrl());
+            log.info("Appium service already running at: {}", service.getUrl());
             return;
         }
 
@@ -55,29 +54,29 @@ public final class AppiumServiceManager {
             service = AppiumDriverLocalService.buildService(builder);
             service.start();
 
-            LOGGER.info("Started Appium service at: {}", service.getUrl());
+            log.info("Started Appium service at: {}", service.getUrl());
         } catch (URISyntaxException e) {
             throw new MobileFrameworkException("Invalid appium.serverUrl in configuration: "
                     + configLoader.getAppiumServerUrl(), configLoader.getPlatformName(), e);
         } catch (Exception e) {
-            LOGGER.error("Failed to start Appium service", e);
+            log.error("Failed to start Appium service", e);
             throw new RuntimeException("Could not start Appium service", e);
         }
     }
 
     public static synchronized void stopService() {
         if (service == null) {
-            LOGGER.info("Appium service was not started by this manager.");
+            log.info("Appium service was not started by this manager.");
             return;
         }
 
         try {
             if (service.isRunning()) {
-                LOGGER.info("Stopping Appium service at: {}", service.getUrl());
+                log.info("Stopping Appium service at: {}", service.getUrl());
                 service.stop();
             }
         } catch (Exception e) {
-            LOGGER.warn("Error while stopping Appium service", e);
+            log.warn("Error while stopping Appium service", e);
         } finally {
             service = null;
         }
