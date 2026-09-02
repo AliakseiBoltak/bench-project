@@ -63,11 +63,11 @@ Location: src/main/java/utils/, src/main/java/model/, src/main/java/exceptions/
 
 ## 🚀 Running Tests
 
-Locally running the mobile module requires a running Appium server, an active Android Emulator (or iOS Simulator), and specified configuration flags.
+Locally running the mobile module requires an active Android Emulator (or iOS Simulator), and specified configuration flags.
 
 ### Configuration Parameters
-- -Dplatform: Specifies the device/OS profile from env.conf (e.g., android-17, ios-17). Defaults to platform-default.
-- -DintegrationSuiteXmlFile: Specifies the TestNG suite XML file located in src/test/resources/suites/ (e.g., android-smoke-suite, ios-smoke-suite).
+- -Dplatform: Specifies the device/OS profile from env.conf (e.g., android, ios).
+- -DintegrationSuiteXmlFile: Specifies the TestNG suite XML file located in src/test/resources/suites/ (e.g., android-smoke-suite, common-mobile-smoke-suite).
 
 ### Command Examples
 
