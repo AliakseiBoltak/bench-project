@@ -73,15 +73,16 @@ Locally running the mobile module requires an active Android Emulator (or iOS Si
 
 1. Run Appium tests on Android or IOS (Common suite):
 
-   mvn -f mobile/pom.xml clean verify -Dplatform=android-emulator or -Dplatform=ios-simulator
+   mvn -f mobile/pom.xml clean verify -Dplatform=android
+   mvn -f mobile/pom.xml clean verify -Dplatform=ios
 
 2. Run Android specific tests:
 
-   mvn -f mobile/pom.xml clean verify -Dplatform=android-emulator -DintegrationSuiteXmlFile=android-smoke-suite
+   mvn -f mobile/pom.xml clean verify -Dplatform=android -DintegrationSuiteXmlFile=android-smoke-suite
 
 3. Run IOS specific tests:
 
-   mvn -f mobile/pom.xml clean verify -Dplatform=ios-simulator -DintegrationSuiteXmlFile=ios-smoke-suite
+   mvn -f mobile/pom.xml clean verify -Dplatform=ios -DintegrationSuiteXmlFile=ios-smoke-suite
 
 
 ### Reporting
