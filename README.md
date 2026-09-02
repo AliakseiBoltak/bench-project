@@ -155,7 +155,7 @@ After generating the report, save the current run's Allure history so trends wil
 
       **For Android/IOS (Common suite):**
 
-          mvn -f mobile/pom.xml clean verify -Dplatform=android or -Dplatform=ios
+          mvn -f mobile/pom.xml clean verify -Dplatform=<android|ios>
 
       **For Android (Android Specific Suite):**
 
