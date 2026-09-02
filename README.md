@@ -132,7 +132,7 @@ After generating the report, save the current run's Allure history so trends wil
 
            npm install -g appium
            appium driver install uiautomator2
-           For iOS testing on macOS, XCUITest driver is also required:
+           # For iOS testing on macOS, XCUITest driver is also required:
            appium driver install xcuitest
 
   2. Start an Android emulator (created via Android Studio's Device Manager or `avdmanager`) or connect a physical device with USB debugging enabled:
