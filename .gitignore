@@ -13,7 +13,7 @@ dump.rdb
 *.iml
 *.iws
 *.ipr
-.vscode/
+.mcp/
 *.sw?
 
 # OS generated files
