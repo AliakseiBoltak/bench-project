@@ -13,12 +13,13 @@ This module contains mobile UI automation tests for Android and iOS utilizing Ap
     │   ├── factory/          # Appium driver management and capabilities
     │   ├── guice/            # Guice configuration and dynamic page provisioning
     │   ├── model/            # Data transfer objects and test data models (e.g., SmsData)
+    │   ├── steps/            # Intermediate business logic and assertions layer (BaseSteps, Steps subclasses)
     │   ├── utils/            # Utilities
-    │   └── pages/            # Page Object Model layer
+    │   └── pages/            # Page Object Element definitions (Locators only)
     │       ├── implementations/
-    │       │   ├── android/  # Android-specific page objects and locators
-    │       │   └── ios/      # iOS-specific page objects and locators
-    │       └── interfaces/   # Cross-platform page contracts
+    │       │   ├── android/  # Android-specific page objects and element accessors
+    │       │   └── ios/      # iOS-specific page objects and element accessors
+    │       └── interfaces/   # Cross-platform page element contracts
     └── src/test/java/
         ├── appium/           # TestNG test classes
         │   ├── android/      # Android-specific tests
@@ -46,15 +47,17 @@ Location: src/main/java/actions/DeviceActions.java
 - Do include: Raw coordinate gestures (swipes, taps), app state querying (foreground/background), device rotation, SMS simulation.
 - Do NOT include: Verifications of specific on-screen UI elements.
 
-### 3. BasePage (UI Orchestration Layer)
-Location: src/main/java/pages/BasePage.java
-- Responsibility: Provides standard wrapper methods around Selenide UI elements (waits, clicks, typing).
-- Do include: Methods taking a SelenideElement and performing UI commands (isElementVisible, clickElement).
-- Do NOT include: Physical pointer logic (delegated to DeviceActions) or app lifecycle transitions.
+### 3. Steps (Business Logic & Verification Layer)
+Location: src/main/java/steps/
+- Responsibility: Houses all validation checks and user flows. This acts as the intermediate layer between tests and page element definitions.
+- Do include: Relies directly on Page interfaces to fetch raw `SelenideElement`s. Uses declarative Allure `@Step` annotations on step methods. Performs fluid Selenide assertions (e.g., `shouldBe`, `shouldHave`) to ensure reporting features clear element details upon failure rather than generic boolean mismatch logs.
+- Do NOT include: Hardcoded element locators or platform-specific driver calls.
 
-### 4. interfaces & implementations (Page Objects & Conventions)
+### 4. interfaces & implementations (Page Elements POM)
 Location: src/main/java/pages/interfaces/ & src/main/java/pages/implementations/
-- Responsibility: Define screen-specific locators and business workflows. Tests rely on interfaces, while Guice dynamically injects the platform-specific implementation.
+- Responsibility: Screen-specific representation containing element locators only. Intermediates (Steps) call getters defined inside the platform-agnostic interface, while Guice dynamically injects the platform-specific implementation.
+- Do include: Static-like mappings of UI elements wrapped as `SelenideElement`.
+- Do NOT include: Assertions, test flows, complex state machine validation, or device controls (e.g. swipes). Keeps constructors empty or omitted.
 - **Architectural Convention & Unit Testing:** To prevent missing platform implementations, the test suite includes `ArchitectureConventionTest` (located in `src/test/java/unit/ArchitectureConventionTest.java`). This unit test scans the `pages.interfaces` package via Guava ClassPath and programmatically verifies that for every interface (e.g., `SettingsPage`), corresponding physical classes exist under `pages.implementations.android.Android<Name>` and `pages.implementations.ios.IOS<Name>`.
 
 ### 5. Utils, Models & Exceptions (Support Layer)
