@@ -88,7 +88,6 @@ mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="sh
 
 To generate and view the Allure report after execution:
 ```sh
-mvn allure:report
 mvn allure:serve
 ```
 
@@ -97,4 +96,3 @@ mvn allure:serve
 - `sessionState.json` stores a reusable GitHub SSO session; `GitHubLoginByLoadingStoredSessionTest` skips the login flow when it's present.
 - Videos land in `videos/`, traces in `traces/`.
 - `github.username` / `github.password` must be set in `env.conf`.
-

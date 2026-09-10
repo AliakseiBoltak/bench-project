@@ -1,9 +1,11 @@
 package pages.interfaces;
 
+import com.codeborne.selenide.SelenideElement;
+
 public interface SettingsPage {
 
-    boolean isSearchSettingsInputVisible();
+    SelenideElement searchBarTitle();
 
-    boolean canSwipeToSettingFromMenuUntilItIsVisible();
+    SelenideElement menuTargetSetting();
 
 }

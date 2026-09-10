@@ -60,6 +60,5 @@ Common overrides:
 
 To generate and view the Allure report after execution:
 ```sh
-mvn allure:report
 mvn allure:serve
 ```
