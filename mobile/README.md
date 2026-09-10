@@ -88,5 +88,4 @@ Locally running the mobile module requires an active Android Emulator (or iOS Si
 ### Reporting
 To generate and view the Allure report after execution:
 
-    mvn allure:report
     mvn allure:serve

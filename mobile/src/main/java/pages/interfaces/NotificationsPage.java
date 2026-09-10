@@ -1,11 +1,13 @@
 package pages.interfaces;
 
+import com.codeborne.selenide.SelenideElement;
+
 public interface NotificationsPage {
 
-    boolean isNotificationWithTextVisible(String text);
+    SelenideElement notificationsContainer();
 
-    void openNotifications();
+    SelenideElement clearAllButton();
 
-    void clearAllNotifications();
+    SelenideElement notificationWithText(String text);
 
 }

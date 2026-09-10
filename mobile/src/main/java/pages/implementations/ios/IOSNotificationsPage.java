@@ -1,30 +1,26 @@
 package pages.implementations.ios;
 
-import actions.DeviceActions;
-import com.google.inject.Inject;
-import pages.BasePage;
+import com.codeborne.selenide.SelenideElement;
 import pages.interfaces.NotificationsPage;
 
-public class IOSNotificationsPage extends BasePage implements NotificationsPage {
+public class IOSNotificationsPage implements NotificationsPage {
 
-    @Inject
-    public IOSNotificationsPage(DeviceActions deviceActions) {
-        super(deviceActions);
+    //iOS notification Page is currently not supported.
+    // This provides a minimal and clean dummy class structure.
+
+    @Override
+    public SelenideElement notificationsContainer() {
+        return null;
     }
 
     @Override
-    public boolean isNotificationWithTextVisible(String text) {
-        // Temporarily do nothing for iOS
-        return true;
+    public SelenideElement clearAllButton() {
+        return null;
     }
 
     @Override
-    public void openNotifications() {
-        // Temporarily do nothing for iOS
+    public SelenideElement notificationWithText(String text) {
+        return null;
     }
 
-    @Override
-    public void clearAllNotifications() {
-        // Temporarily do nothing for iOS
-    }
 }

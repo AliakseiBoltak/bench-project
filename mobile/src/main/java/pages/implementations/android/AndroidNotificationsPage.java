@@ -1,42 +1,32 @@
 package pages.implementations.android;
 
-import actions.DeviceActions;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.appium.AppiumSelectors;
-import com.google.inject.Inject;
 import org.openqa.selenium.By;
-import pages.BasePage;
 import pages.interfaces.NotificationsPage;
 
 import static com.codeborne.selenide.appium.SelenideAppium.$;
 
-public class AndroidNotificationsPage extends BasePage implements NotificationsPage {
+public class AndroidNotificationsPage implements NotificationsPage {
 
-    private SelenideElement notificationContainer = $(By.id("com.android.systemui:id/notifications_container"))
+    private final SelenideElement notificationsContainer = $(By.id("com.android.systemui:id/notifications_container"))
             .as("System Notifications Container");
-    private SelenideElement clearAllNotificationsButton = $(AppiumSelectors.withText("Clear all"))
+    private final SelenideElement clearAllButton = $(AppiumSelectors.withText("Clear all"))
             .as("Clear all Button");
 
-    @Inject
-    public AndroidNotificationsPage(DeviceActions deviceActions) {
-        super(deviceActions);
+    @Override
+    public SelenideElement notificationsContainer() {
+        return notificationsContainer;
     }
 
     @Override
-    public boolean isNotificationWithTextVisible(String text) {
-        waitForElementVisible(notificationContainer);
-        SelenideElement notificationText = $(AppiumSelectors.withText(text));
-        return isElementVisible(notificationText);
+    public SelenideElement clearAllButton() {
+        return clearAllButton;
     }
 
     @Override
-    public void openNotifications() {
-        deviceActions.swipeDown();
-    }
-
-    @Override
-    public void clearAllNotifications() {
-        clickElement(clearAllNotificationsButton);
+    public SelenideElement notificationWithText(String text) {
+        return $(AppiumSelectors.withText(text)).as("Notification with text: " + text);
     }
 
 }

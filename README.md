@@ -63,7 +63,7 @@ After this, you can navigate to the desired module (for example, `api`, `ui-play
 
 ---
 
-### 2. Restore Allure History from Previous Runs
+### 2. Restore Allure History from Previous Runs (Optional)
 
 To enable test trend statistics (history) in Allure reports, restore the history from your previous report using:
 
@@ -71,29 +71,19 @@ To enable test trend statistics (history) in Allure reports, restore the history
 
 ---
 
-### 3. Generate Allure Report
+### 3. Generate and Open Allure Report
 
-    mvn allure:report
-
----
-
-### 4. Save Allure History for Future Runs
-
-After generating the report, save the current run's Allure history so trends will persist between runs:
-
-    mvn antrun:run@copy-allure-history
-
----
-
-### 5. Open Allure Report
+To generate the report and view it in your browser:
 
     mvn allure:serve
 
 ---
 
-> **Note:**  
-> The Allure history steps (restore/save) are only required if you want to see trends/statistics across runs.  
-> If you don’t need trends, you can skip steps 2 and 4.
+### 4. Save Allure History for Future Runs (Optional)
+
+If you are preserving trends between runs, save the current run's Allure history after viewing the report:
+
+    mvn antrun:run@copy-allure-history
 
 ---
 

@@ -10,28 +10,27 @@ import lombok.extern.log4j.Log4j2;
 import model.SmsData;
 import org.testng.annotations.*;
 import org.example.loader.JSONDataLoader;
-import pages.interfaces.NotificationsPage;
+import steps.NotificationsSteps;
 
 import java.util.Arrays;
 
 import static constants.Constants.SMS_DATA_PATH;
-import static org.testng.Assert.assertTrue;
 
 @Log4j2
 public class VerifySmsForAndroidIT extends BaseMobileTest {
 
     private final DeviceActions deviceActions;
     private final JSONDataLoader jsonDataLoader;
-    private final NotificationsPage notificationsPage;
+    private final NotificationsSteps notificationsSteps;
 
     @Inject
     public VerifySmsForAndroidIT(MobileConfigLoader configLoader, DriverProvider driverProvider,
                                  DeviceActions deviceActions, JSONDataLoader jsonDataLoader,
-                                 NotificationsPage notificationsPage) {
+                                 NotificationsSteps notificationsSteps) {
         super(configLoader, driverProvider);
         this.deviceActions = deviceActions;
         this.jsonDataLoader = jsonDataLoader;
-        this.notificationsPage = notificationsPage;
+        this.notificationsSteps = notificationsSteps;
     }
 
     @DataProvider(name = "smsData")
@@ -44,8 +43,7 @@ public class VerifySmsForAndroidIT extends BaseMobileTest {
 
     @BeforeMethod
     public void setupTest() {
-        Allure.step("Opening notification shade to check for received SMS");
-        notificationsPage.openNotifications();
+        notificationsSteps.openNotifications();
     }
 
     @Test(description = "Verify that Android emulator can receive SMS messages", dataProvider = "smsData")
@@ -58,20 +56,12 @@ public class VerifySmsForAndroidIT extends BaseMobileTest {
         // Note: For this to work, the test must be running on Android Emulator.
         deviceActions.sendSMS(phoneNumber, messageText);
 
-        Allure.step("Verifying SMS is received in the notifications shade");
-
-        boolean isReceived = notificationsPage.isNotificationWithTextVisible(messageText);
-        assertTrue(isReceived, "SMS text was not visible in the notifications shade");
+        notificationsSteps.checkNotificationWithTextIsVisible(messageText);
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDownTest() {
-        Allure.step("Cleaning up notifications by clicking Clear all");
-        try {
-            notificationsPage.clearAllNotifications();
-        } catch (Exception e) {
-            log.warn("Failed to clear notifications. It might be already cleared.", e);
-        }
+        notificationsSteps.clearAllNotifications();
     }
 
 }
