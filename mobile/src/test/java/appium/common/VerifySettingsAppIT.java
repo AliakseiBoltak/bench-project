@@ -4,7 +4,6 @@ import appium.BaseMobileTest;
 import com.google.inject.Inject;
 import factory.DriverProvider;
 import io.qameta.allure.Allure;
-import lombok.extern.log4j.Log4j2;
 import config.MobileConfigLoader;
 import org.testng.annotations.Test;
 import steps.SettingsSteps;
@@ -12,7 +11,6 @@ import actions.DeviceActions;
 
 import static org.testng.Assert.assertTrue;
 
-@Log4j2
 class VerifySettingsAppIT extends BaseMobileTest {
 
     private final SettingsSteps settingsSteps;

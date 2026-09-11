@@ -6,7 +6,6 @@ import com.google.inject.Inject;
 import config.MobileConfigLoader;
 import factory.DriverProvider;
 import io.qameta.allure.Allure;
-import lombok.extern.log4j.Log4j2;
 import model.SmsData;
 import org.testng.annotations.*;
 import org.example.loader.JSONDataLoader;
@@ -16,7 +15,6 @@ import java.util.Arrays;
 
 import static constants.Constants.SMS_DATA_PATH;
 
-@Log4j2
 public class VerifySmsForAndroidIT extends BaseMobileTest {
 
     private final DeviceActions deviceActions;
