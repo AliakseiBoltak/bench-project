@@ -5,7 +5,7 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import config.MobileConfigLoader;
 import io.qameta.allure.selenide.AllureSelenide;
 import com.google.inject.Inject;
-import factory.DriverProvider;
+import factory.AppiumDriverProvider;
 import guice.PageModule;
 import io.qameta.allure.Allure;
 import lombok.extern.log4j.Log4j2;
@@ -22,14 +22,14 @@ import service.AppiumServiceManager;
 public abstract class BaseMobileTest {
 
     protected final MobileConfigLoader configLoader;
-    protected final DriverProvider driverProvider;
+    protected final AppiumDriverProvider appiumDriverProvider;
     protected static final int DEFAULT_TIMEOUT = 8000; // in milliseconds
     protected static final int DEFAULT_POLLING_INTERVAL = 200; // in milliseconds
 
     @Inject
-    public BaseMobileTest(MobileConfigLoader configLoader, DriverProvider driverProvider) {
+    public BaseMobileTest(MobileConfigLoader configLoader, AppiumDriverProvider appiumDriverProvider) {
         this.configLoader = configLoader;
-        this.driverProvider = driverProvider;
+        this.appiumDriverProvider = appiumDriverProvider;
     }
 
     @BeforeSuite
@@ -54,13 +54,13 @@ public abstract class BaseMobileTest {
         String startMessage = "Starting mobile session for platform: " + configLoader.getPlatformName()
                 + " on device: " + configLoader.getAppiumDeviceName();
         Allure.step(startMessage);
-        driverProvider.initDriver();
+        appiumDriverProvider.initDriver();
     }
 
     @AfterMethod
     public void tearDown() {
         Allure.step("Closing mobile session");
-        driverProvider.quitDriver();
+        appiumDriverProvider.quitDriver();
     }
 
 }

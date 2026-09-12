@@ -4,12 +4,12 @@ import actions.DeviceActions;
 import appium.BaseMobileTest;
 import com.google.inject.Inject;
 import config.MobileConfigLoader;
-import factory.DriverProvider;
+import factory.AppiumDriverProvider;
 import io.qameta.allure.Allure;
 import model.SmsData;
 import org.testng.annotations.*;
 import org.example.loader.JSONDataLoader;
-import steps.NotificationsSteps;
+import steps.android.AndroidSmsNotificationsSteps;
 
 import java.util.Arrays;
 
@@ -19,16 +19,16 @@ public class VerifySmsForAndroidIT extends BaseMobileTest {
 
     private final DeviceActions deviceActions;
     private final JSONDataLoader jsonDataLoader;
-    private final NotificationsSteps notificationsSteps;
+    private final AndroidSmsNotificationsSteps androidSmsNotificationsSteps;
 
     @Inject
-    public VerifySmsForAndroidIT(MobileConfigLoader configLoader, DriverProvider driverProvider,
+    public VerifySmsForAndroidIT(MobileConfigLoader configLoader, AppiumDriverProvider driverProvider,
                                  DeviceActions deviceActions, JSONDataLoader jsonDataLoader,
-                                 NotificationsSteps notificationsSteps) {
+                                 AndroidSmsNotificationsSteps androidSmsNotificationsSteps) {
         super(configLoader, driverProvider);
         this.deviceActions = deviceActions;
         this.jsonDataLoader = jsonDataLoader;
-        this.notificationsSteps = notificationsSteps;
+        this.androidSmsNotificationsSteps = androidSmsNotificationsSteps;
     }
 
     @DataProvider(name = "smsData")
@@ -41,7 +41,7 @@ public class VerifySmsForAndroidIT extends BaseMobileTest {
 
     @BeforeMethod
     public void setupTest() {
-        notificationsSteps.openNotifications();
+        androidSmsNotificationsSteps.openNotifications();
     }
 
     @Test(description = "Verify that Android emulator can receive SMS messages", dataProvider = "smsData")
@@ -50,16 +50,14 @@ public class VerifySmsForAndroidIT extends BaseMobileTest {
         String messageText = smsData.getText();
 
         Allure.step(String.format("Sending SMS from %s with message: %s", phoneNumber, messageText));
-
-        // Note: For this to work, the test must be running on Android Emulator.
         deviceActions.sendSMS(phoneNumber, messageText);
 
-        notificationsSteps.checkNotificationWithTextIsVisible(messageText);
+        androidSmsNotificationsSteps.checkNotificationWithTextIsVisible(messageText);
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDownTest() {
-        notificationsSteps.clearAllNotifications();
+        androidSmsNotificationsSteps.clearAllNotifications();
     }
 
 }

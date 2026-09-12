@@ -19,13 +19,13 @@ import java.net.URL;
 
 @Log4j2
 @Singleton
-public class DriverProvider {
+public class AppiumDriverProvider {
 
     private final MobileConfigLoader configLoader;
     private final ThreadLocal<AppiumDriver> driverThreadLocal = new ThreadLocal<>();
 
     @Inject
-    public DriverProvider(MobileConfigLoader configLoader) {
+    public AppiumDriverProvider(MobileConfigLoader configLoader) {
         this.configLoader = configLoader;
     }
 

@@ -48,7 +48,7 @@ api/
 
 ```sh
 cd core && mvn clean install     # required first / after any core change
-mvn -f api/pom.xml clean test
+mvn clean test
 ```
 
 Common overrides:
@@ -58,7 +58,17 @@ Common overrides:
 -Denv=dev                 # env.conf profile: default|dev|test|uat
 ```
 
-To generate and view the Allure report after execution:
+To generate and view the Allure report after execution (see root `README.md` for the full explanation of why `allure:report`, not `allure:serve`, is required before saving history):
+
+```sh
+mvn antrun:run@restore-allure-history   # optional: restore trend history from previous runs
+mvn allure:report                       # generates target/site/allure-maven-plugin/ (required before saving history)
+mvn antrun:run@copy-allure-history       # optional: persist this run's history back to api/allure-history/
+mvn allure:serve                        # opens the report in your browser
+```
+
+If you don't need trend history, skip straight to:
+
 ```sh
 mvn allure:serve
 ```

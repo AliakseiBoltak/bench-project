@@ -3,7 +3,7 @@ package actions;
 import com.google.inject.Inject;
 import config.MobileConfigLoader;
 import exceptions.MobileFrameworkException;
-import factory.DriverProvider;
+import factory.AppiumDriverProvider;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.android.SupportsSpecialEmulatorCommands;
@@ -16,11 +16,11 @@ import java.util.Collections;
 
 public class DeviceActions {
 
-    private final DriverProvider driverProvider;
+    private final AppiumDriverProvider driverProvider;
     private final MobileConfigLoader configLoader;
 
     @Inject
-    public DeviceActions(DriverProvider driverProvider, MobileConfigLoader configLoader) {
+    public DeviceActions(AppiumDriverProvider driverProvider, MobileConfigLoader configLoader) {
         this.driverProvider = driverProvider;
         this.configLoader = configLoader;
     }

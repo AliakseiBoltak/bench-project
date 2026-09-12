@@ -63,34 +63,59 @@ After this, you can navigate to the desired module (for example, `api`, `ui-play
 
 ---
 
-### 2. Restore Allure History from Previous Runs (Optional)
+### 2. Restore Allure History from Previous Runs (Optional — only if you want trend graphs)
 
-To enable test trend statistics (history) in Allure reports, restore the history from your previous report using:
+Allure's **Trend** graphs (history of pass/fail counts, duration, retries across runs) are built by comparing the current run's results against a `history/` folder embedded in a *previous* report. That history is committed to the repo under each module's `allure-history/` directory (e.g., `mobile/allure-history/`), since `target/` is not persisted between clean builds.
+
+Copy that saved history into this run's raw results directory (`target/allure-results/history`) so the *next* generated report can pick it up and draw trends:
 
     mvn antrun:run@restore-allure-history
 
 ---
 
-### 3. Generate and Open Allure Report
+### 3. Generate the Allure Report
 
-To generate the report and view it in your browser:
+    mvn allure:report
 
-    mvn allure:serve
+**Use `allure:report`, not `allure:serve`, at this step.** `allure:report` writes a persistent static site to `target/site/allure-maven-plugin/` (including a fresh `history/` folder derived from this run + whatever was restored in step 2). `allure:serve` instead builds the report into a temporary directory and serves it directly from there — it never writes anything under `target/site/allure-maven-plugin/`. Since the next step copies history *from* `target/site/allure-maven-plugin/history`, running `allure:serve` in place of `allure:report` here means that folder never exists, and `copy-allure-history` fails with an Ant `BuildException: ... history does not exist`.
 
 ---
 
-### 4. Save Allure History for Future Runs (Optional)
+### 4. Save Allure History for Future Runs (Optional — pairs with step 2)
 
-If you are preserving trends between runs, save the current run's Allure history after viewing the report:
+Persist this run's freshly generated history back into the module's `allure-history/` folder so the trend chain continues on the next run:
 
     mvn antrun:run@copy-allure-history
+
+Commit the updated `allure-history/*.json` files if you want the trend to survive across machines/CI runs.
+
+---
+
+### 5. (Optional) View the Report in Your Browser
+
+Once the report has been generated (step 3), you can open it at any time:
+
+    mvn allure:serve
+
+`allure:serve` is purely for local viewing — it re-renders the already-generated results (plus whatever history is present in `target/allure-results/history`) into a temporary server and does not persist anything back to disk. Running it does not replace steps 3–4 if you care about preserving trends.
+
+---
+
+### Don't need history? Skip straight to viewing the report
+
+If you don't care about trend graphs across runs (e.g., a one-off local run), you can skip steps 2–4 entirely and just run:
+
+    mvn clean test
+    mvn allure:serve
+
+This opens a report immediately with results from just the current run, with no `Trend` graph (or a `Trend` graph frozen at a single data point).
 
 ---
 
 ## Notes
 
-- **Allure Trends:**  
-  To keep test trends and history visible in Allure reports across runs, always restore/save history.
+- **Allure Trends:**
+  To keep test trends and history visible in Allure reports across runs, run the full restore → `allure:report` → save sequence (steps 2–4) — not `allure:serve`, which never touches `target/site/allure-maven-plugin/history`.
 
 - **Database Tests:**  
   Before running tests in the `db` module, execute the script `init_test_db.sql` to create the database and tables.

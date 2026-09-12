@@ -2,11 +2,11 @@ package appium.common;
 
 import appium.BaseMobileTest;
 import com.google.inject.Inject;
-import factory.DriverProvider;
+import factory.AppiumDriverProvider;
 import io.qameta.allure.Allure;
 import config.MobileConfigLoader;
 import org.testng.annotations.Test;
-import steps.SettingsSteps;
+import steps.common.SettingsSteps;
 import actions.DeviceActions;
 
 import static org.testng.Assert.assertTrue;
@@ -17,7 +17,7 @@ class VerifySettingsAppIT extends BaseMobileTest {
     private final DeviceActions deviceActions;
 
     @Inject
-    public VerifySettingsAppIT(MobileConfigLoader configLoader, DriverProvider driverProvider,
+    public VerifySettingsAppIT(MobileConfigLoader configLoader, AppiumDriverProvider driverProvider,
                                SettingsSteps settingsSteps, DeviceActions deviceActions) {
         super(configLoader, driverProvider);
         this.settingsSteps = settingsSteps;

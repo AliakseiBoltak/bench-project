@@ -38,7 +38,7 @@ The module executes tests in parallel at the class level via `ui-suite.xml`[cite
 
 Run the default suite via Maven:
 
-    mvn clean test -pl ui
+    mvn clean test
 
 ### Common JVM Overrides
 
@@ -49,4 +49,17 @@ You can control the execution environment and browser behavior using system prop
 
 Example of running tests in headed Firefox on the test environment:
 
-    mvn clean test -pl ui -Dbrowser=firefox -Dheadless=false -Denv=test
+    mvn clean test -Dbrowser=firefox -Dheadless=false -Denv=test
+
+### Reporting
+
+To generate and view the Allure report after execution (see root `README.md` for the full explanation of why `allure:report`, not `allure:serve`, is required before saving history):
+
+    mvn antrun:run@restore-allure-history   # optional: restore trend history from previous runs
+    mvn allure:report                       # generates target/site/allure-maven-plugin/ (required before saving history)
+    mvn antrun:run@copy-allure-history       # optional: persist this run's history back to ui/allure-history/
+    mvn allure:serve                        # opens the report in your browser
+
+If you don't need trend history, skip straight to:
+
+    mvn allure:serve

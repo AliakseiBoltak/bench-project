@@ -8,6 +8,18 @@ import java.util.Set;
 
 import static org.testng.Assert.fail;
 
+/**
+ * Enforces the module's default Page Object convention: every interface declared under
+ * {@code pages.interfaces} (e.g. {@code SettingsPage}) must have both an
+ * {@code pages.implementations.android.Android<Name>} and a
+ * {@code pages.implementations.ios.IOS<Name>} implementation.
+ *
+ * <p>This check intentionally does NOT apply to platform-exclusive pages such as
+ * {@code pages.implementations.android.AndroidSmsNotificationsPage} - those pages have no
+ * interface at all (by design, since the feature doesn't exist on the other platform) and
+ * therefore never appear in {@code pages.interfaces}, so they're outside this test's scope.
+ * See the module README's "Page Objects" section for the full rationale.
+ */
 public class ArchitectureConventionTest {
 
     @Test(description = "Checks that each page interface has physical implementations for Android and iOS")

@@ -67,7 +67,7 @@ Playwright locator healing is not natively pre-installed; it requires integratin
 
 ```sh
 cd core && mvn clean install               # required first / after any core change
-mvn -f ui-playwright/pom.xml clean test
+mvn clean test
 ```
 
 Common overrides:
@@ -86,7 +86,15 @@ mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="in
 mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="show-trace traces/github-login-trace.zip"
 ```
 
-To generate and view the Allure report after execution:
+To generate and view the Allure report after execution (see root `README.md` for the full explanation of why `allure:report`, not `allure:serve`, is required before saving history):
+```sh
+mvn antrun:run@restore-allure-history   # optional: restore trend history from previous runs
+mvn allure:report                       # generates target/site/allure-maven-plugin/ (required before saving history)
+mvn antrun:run@copy-allure-history       # optional: persist this run's history back to ui-playwright/allure-history/
+mvn allure:serve                        # opens the report in your browser
+```
+
+If you don't need trend history, skip straight to:
 ```sh
 mvn allure:serve
 ```

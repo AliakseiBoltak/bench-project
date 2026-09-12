@@ -7,6 +7,19 @@ import config.MobileConfigLoader;
 import constants.Platform;
 import java.util.Objects;
 
+/**
+ * Resolves the platform-specific implementation of a cross-platform page interface at runtime,
+ * based on the configured platform (see {@code pages.interfaces.SettingsPage} for the pattern
+ * this supports).
+ *
+ * <p>Given an interface {@code pages.interfaces.<Name>}, this provider looks up
+ * {@code pages.implementations.android.Android<Name>} or {@code pages.implementations.ios.IOS<Name>}
+ * depending on {@link MobileConfigLoader#getPlatformName()}, and instantiates it via Guice.
+ *
+ * <p>Only used for interfaces registered in {@code guice.PageModule}. Platform-exclusive pages
+ * (no interface, only one platform's implementation) never go through this provider - they are
+ * injected directly as concrete types.
+ */
 public class DynamicPageProvider<T> implements Provider<T> {
 
     private final Class<T> interfaceType;

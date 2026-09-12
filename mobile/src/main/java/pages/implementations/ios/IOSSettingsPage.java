@@ -6,6 +6,10 @@ import pages.interfaces.SettingsPage;
 
 import static com.codeborne.selenide.appium.SelenideAppium.$;
 
+/**
+ * iOS implementation of the cross-platform {@link SettingsPage} contract.
+ * See {@link SettingsPage} for the rationale behind the interface + two-implementation pattern.
+ */
 public class IOSSettingsPage implements SettingsPage {
 
     private final SelenideElement searchBarTitle = $(By.className("XCUIElementTypeSearchField"))
