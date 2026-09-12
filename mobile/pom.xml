@@ -37,6 +37,12 @@
 
     <build>
         <plugins>
+            <!--
+                Surefire runs during Maven's `test` phase. It executes the fast, non-Appium
+                architecture convention tests (see src/test/resources/suites/unit-suite.xml,
+                unit.ArchitectureConventionTest) that verify every page interface under
+                pages.interfaces has both an Android and iOS implementation.
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -47,6 +53,12 @@
                 </configuration>
             </plugin>
 
+            <!--
+                Failsafe runs during Maven's `integration-test`/`verify` phases (i.e. `mvn verify`,
+                not `mvn test`). It executes the heavier Appium UI tests against a real
+                Android device/emulator or iOS device/simulator (see the ${integrationSuiteXmlFile}
+                suite, e.g. common-mobile-smoke-suite, android-smoke-suite, ios-smoke-suite).
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
