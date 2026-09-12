@@ -141,22 +141,23 @@ This opens a report immediately with results from just the current run, with no 
       mvn clean test -Dheadless=false -Dbrowser=firefox
 
 - **Mobile (Appium/Android/iOS) Tests:**  
-  The `mobile` module drives a real Android device/emulator or iOS simulator via Appium and needs some one-time setup before running the tests will work:
+  The `mobile` module drives a real Android device/emulator or iOS device/simulator via Appium and needs some one-time setup before running the tests will work:
 
     1. Install Node.js, then Appium and its drivers:
 
            npm install -g appium
+           # For Android testing, UIAutomator2 driver is required:
            appium driver install uiautomator2
-           # For iOS testing on macOS, XCUITest driver is also required:
+           # For iOS testing, XCUITest driver is required:
            appium driver install xcuitest
 
-  2. Start an Android emulator (created via Android Studio's Device Manager or `avdmanager`) or connect a physical device with USB debugging enabled:
+  2. Start an Android emulator/IOS Simulator or connect a physical device with USB debugging enabled:
 
        ```sh
        emulator -avd <your_avd_name>          # list AVDs with: emulator -list-avds
        ```
 
-       *(Note: iOS testing requires a macOS machine and an active iOS Simulator via Xcode).*
+       *(Note: iOS testing requires a macOS machine and an active iOS Simulator via Xcode or connected IOS device).*
 
   3.  Confirm it's visible to ADB before running tests:
 
