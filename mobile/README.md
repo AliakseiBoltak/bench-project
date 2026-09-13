@@ -14,16 +14,15 @@ This module contains mobile UI automation tests for Android and iOS utilizing Ap
     │   ├── guice/            # Guice configuration and dynamic page provisioning (PageModule, DynamicPageProvider)
     │   ├── model/            # Data transfer objects and test data models (e.g., SmsData)
     │   ├── steps/            # Intermediate business logic and assertions layer
-    │   │   ├── common/       # Steps for screens whose behavior is identical on both platforms (e.g. SettingsSteps)
+    │   │   ├── common/       # Steps for screens whose behavior is similar on both platforms
     │   │   ├── android/      # Steps for Android-exclusive screens (e.g. AndroidSmsNotificationsSteps)
     │   │   └── ios/          # Steps for iOS-exclusive screens (currently empty - no iOS-only screens yet)
     │   ├── utils/            # Utilities
     │   └── pages/            # Page Object Element definitions (Locators only)
-    │       ├── interfaces/          # Cross-platform contracts - ONLY for screens with identical behavior (e.g. SettingsPage)
+    │       ├── interfaces/          # Cross-platform contracts - ONLY for screens with similar behavior
     │       └── implementations/
     │           ├── android/  # Android implementations of cross-platform interfaces, PLUS Android-exclusive
-    │           │              #   pages that have no interface at all (e.g. AndroidSmsNotificationsPage)
-    │           └── ios/      # iOS implementations of cross-platform interfaces (e.g. IOSSettingsPage)
+    │           └── ios/      # iOS implementations of cross-platform interfaces, PLUS iOS-exclusive
     └── src/test/java/
         ├── appium/           # TestNG test classes
         │   ├── android/      # Android-specific tests
@@ -42,7 +41,7 @@ To maintain a scalable and separated architecture, functionality must be placed 
 ### 1. BaseMobileTest (Test Lifecycle)
 Location: src/test/java/appium/common/BaseMobileTest.java
 - Responsibility: Manages the global test lifecycle, driver startup/teardown via MobileConfigLoader, Allure listeners, and Selenide configurations.
-- Do include: @BeforeSuite, @BeforeMethod, @AfterMethod, TestNG configurations.
+- Do include: @BeforeSuite, @BeforeMethod, @AfterMethod, @AfterSuite, TestNG configurations.
 - Do NOT include: Appium driver interaction logic, OS checks, page element assertions, or business logic.
 
 ### 2. DeviceActions (Device & OS Layer)
@@ -61,7 +60,7 @@ Location: src/main/java/steps/
 ### 4. Page Objects (POM) — default pattern vs. platform-exclusive exception
 Location: `src/main/java/pages/interfaces/` & `src/main/java/pages/implementations/`
 
-**Default pattern — assume identical behavior until proven otherwise.** For any new screen, start by assuming Android and iOS behave the same way from the user's perspective. Declare one interface under `pages.interfaces` (e.g. `SettingsPage`) exposing the screen's elements/actions, then provide exactly two implementations — `pages.implementations.android.Android<Name>` and `pages.implementations.ios.IOS<Name>` — that differ only in their underlying locators. Steps and tests depend on the interface; `guice.PageModule` binds it through `guice.DynamicPageProvider`, which resolves the correct platform implementation at runtime via `MobileConfigLoader`.
+**Default pattern — assume similar behavior until proven otherwise.** For any new screen, start by assuming Android and iOS behave the same way from the user's perspective. Declare one interface under `pages.interfaces` (e.g. `SettingsPage`) exposing the screen's elements/actions, then provide exactly two implementations — `pages.implementations.android.Android<Name>` and `pages.implementations.ios.IOS<Name>` — that differ mostly by their underlying locators. Steps and tests depend on the interface; `guice.PageModule` binds it through `guice.DynamicPageProvider`, which resolves the correct platform implementation at runtime via `MobileConfigLoader`.
 - Do include: Static-like mappings of UI elements wrapped as `SelenideElement`.
 - Do NOT include: Assertions, test flows, complex state machine validation, or device controls (e.g. swipes). Keep constructors empty or omitted.
 - **Architectural Convention & Unit Testing:** To prevent missing platform implementations, the test suite includes `ArchitectureConventionTest` (located in `src/test/java/unit/ArchitectureConventionTest.java`). This unit test scans the `pages.interfaces` package via Guava ClassPath and programmatically verifies that for every interface (e.g., `SettingsPage`), corresponding physical classes exist under `pages.implementations.android.Android<Name>` and `pages.implementations.ios.IOS<Name>`.
@@ -72,7 +71,7 @@ Location: `src/main/java/pages/interfaces/` & `src/main/java/pages/implementatio
 - Its corresponding Steps class lives in that platform's `steps` sub-package (e.g. `steps.android.AndroidSmsNotificationsSteps`) and depends on the concrete page class directly — not through Guice's `DynamicPageProvider`, since there's nothing to dynamically resolve.
 - `ArchitectureConventionTest` does not (and should not) flag this: it only scans `pages.interfaces`, so platform-exclusive pages are outside its scope by construction.
 
-**Worked example — SMS notifications:** Appium cannot send/simulate SMS on the iOS Simulator at all (there is no API or facility for it), so there is nothing to verify in the notification shade on iOS in the first place — not just "no cross-platform behavior to abstract," but no iOS test scenario to write at all. Rather than force an interface with a fake `IOSSmsNotificationsPage` stub, the module only has `pages.implementations.android.AndroidSmsNotificationsPage` and `steps.android.AndroidSmsNotificationsSteps`, used exclusively by Android SMS tests. Compare this to `pages.interfaces.SettingsPage`, which *is* identical on both platforms and therefore follows the default interface + two-implementation pattern.
+**Worked example — SMS notifications:** Appium cannot send/simulate SMS on the iOS Simulator at all (there is no API or facility for it), so there is nothing to verify in the notification shade on iOS in the first place — not just "no cross-platform behavior to abstract," but no iOS test scenario to write at all. Rather than force an interface with a fake `IOSSmsNotificationsPage` stub, the module only has `pages.implementations.android.AndroidSmsNotificationsPage` and `steps.android.AndroidSmsNotificationsSteps`, used exclusively by Android SMS tests. Compare this to `pages.interfaces.SettingsPage`, which *is* similar on both platforms and therefore follows the default interface + two-implementation pattern.
 
 ### 5. Utils, Models & Exceptions (Support Layer)
 Location: src/main/java/utils/, src/main/java/model/, src/main/java/exceptions/
@@ -80,7 +79,7 @@ Location: src/main/java/utils/, src/main/java/model/, src/main/java/exceptions/
 
 ## 🚀 Running Tests
 
-Locally running the mobile module requires an active Android Emulator (or iOS Simulator), and specified configuration flags.
+Locally running the mobile module requires an active Android Emulator/Real Device (or iOS Simulator/Real Device), and specified configuration flags.
 
 ### Configuration Parameters
 - -Dplatform: Specifies the device/OS profile from env.conf (e.g., android, ios).

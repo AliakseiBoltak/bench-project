@@ -9,7 +9,7 @@ Runs one or more modules of this framework the way `CLAUDE.md` documents, withou
 
 ## Modules
 
-`core` (shared lib, not directly tested), `api` (REST Assured), `api-apache-http` (Apache HttpClient), `ui` (Selenide), `ui-playwright` (Playwright + Cucumber), `db` (JDBC/MySQL).
+`core` (shared lib, not directly tested), `api` (REST Assured), `mobile` (Appium), `ui` (Selenide), `ui-playwright` (Playwright + Cucumber), `db` (JDBC/MySQL).
 
 ## Step 1 — always build `core` first
 

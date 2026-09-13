@@ -1,0 +1,17 @@
+{
+  "android": {
+    "appium:app": "/path/to/your/android/app.apk",
+    "appium:deviceName": "Pixel 10 Emulator",
+    "appium:platformVersion": "17",
+    "appium:automationName": "UIAutomator2",
+    "appium:udid": "your-device-udid", // run discovery on your machine: adb devices
+  },
+  "ios": {
+    "appium:app": "/path/to/your/ios/app.ipa",
+    "appium:bundleId": "com.example.yourapp",
+    "appium:deviceName": "iPhone 17 Pro",
+    "appium:platformVersion": "26.5",
+    "appium:automationName": "XCUITest",
+    "appium:udid": "your-device-udid", // run discovery on your machine: xcrun simctl list devices
+  }
+}

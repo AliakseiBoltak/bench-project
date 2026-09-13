@@ -1,0 +1,40 @@
+{
+  "servers": {
+    "github": {
+      "url": "https://api.githubcopilot.com/mcp/",
+      "requestInit": {
+        "headers": {
+          "Authorization": "your-github-token"
+        }
+      }
+    },
+    "selenide": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "selenide-mcp@7.16.0"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser=chrome"
+      ]
+    },
+    "appium-mcp": {
+      "disabled": false,
+      "timeout": 100,
+      "command": "npx",
+      "args": [
+        "-y",
+        "appium-mcp@latest"
+      ],
+      "env": {
+        "ANDROID_HOME": "/path/to/android/sdk",
+        "CAPABILITIES_CONFIG": ".mcp/appium-mcp-capabilities.local.json"
+      }
+    }
+  }
+}

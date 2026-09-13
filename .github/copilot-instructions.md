@@ -11,7 +11,7 @@ Multi-module Maven test automation framework, Java 17. Follow the conventions be
 | `ui`              | Browser UI tests | Selenide               | `BaseUiTest`     |
 | `ui-playwright`   | UI tests + BDD   | Playwright, Cucumber   | `GitHubBaseTest` |
 | `db`              | Database tests   | plain JDBC             | `BaseDBTest`     |
-| `mobile`          | Appium app tests | Appium `java-client`   | `appium.BaseMobileTest` |
+| `mobile`          | Appium app tests | Appium `java-client`   | `BaseMobileTest` |
 
 `core` (version `1.2-SNAPSHOT`, decoupled from the root aggregator's `1.0-SNAPSHOT`) must be installed before anything else runs.
 
@@ -121,4 +121,4 @@ Agent instructions are located in `.github/agents/`. When performing tasks, note
 
 - **`ui-playwright`** — `sessionState.json` stores a reusable GitHub SSO session (`GitHubLoginByLoadingStoredSessionTest` skips the login flow). Videos land in `videos/`, traces in `traces/`. `github.username` / `github.password` must be set in `env.conf`.
 - **`db`** — initialize the schema from `db/src/test/resources/scripts/init_test_db.sql` before the first run.
-- **`mobile`** — drives device apps using a unified `env.conf` supporting both backend environments (`-Denv=qa/prod`) and platform profiles (`-Dplatform=ios-17`). Test execution can be targeted via dedicated TestNG suite XML files using `-DintegrationSuiteXmlFile=<suite-name>` (e.g., `android-smoke-suite`, `ios-smoke-suite`).
+- **`mobile`** — drives device apps using a unified `env.conf` supporting both backend environments (`-Denv=qa/prod`) and platform profiles (`-Dplatform=ios`). Test execution can be targeted via dedicated TestNG suite XML files using `-DintegrationSuiteXmlFile=<suite-name>` (e.g., `android-smoke-suite`, `ios-smoke-suite`).

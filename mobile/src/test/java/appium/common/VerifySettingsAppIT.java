@@ -1,6 +1,5 @@
 package appium.common;
 
-import appium.BaseMobileTest;
 import com.google.inject.Inject;
 import factory.AppiumDriverProvider;
 import io.qameta.allure.Allure;

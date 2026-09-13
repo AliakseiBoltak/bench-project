@@ -223,5 +223,14 @@ The repository contains specific configurations and operational rules for Anthro
 *   **Skills (`skills/`)**: Contains executable workflows such as `run-tests` (smart execution of modules, handling required dependencies like `core` installation and test flags), `run-mobile-tests`, and `allure-report` (managing Allure histories and generating reports).
 *   **Conventions (`conventions/`)**: Detailed architectural descriptions outlining module boundaries, Dependency Injection (Guice) rules, and test-writing standards. This ensures Claude maintains the strict stylistic and architectural consistency of the framework when helping with codebase modifications.
 
+### 4. MCP Configuration and Integration
+
+The project integrates with MCP (Multi-Context Platform) configurations to enhance automation capabilities across different tools and frameworks. MCP provides a centralized configuration file (`mcp.json`) and project specific settings for Appium, Selenide, and Playwright
+
+#### `mcp.json` File
+The `mcp.json` file is the core configuration file for MCP. It contains:
+- **Global Settings:** Shared configurations across all modules.
+- **Module-Specific Settings:** Custom configurations for Appium, Selenide, and Playwright.
+
 **Note:**  
 For detailed info check README files in a particular module.

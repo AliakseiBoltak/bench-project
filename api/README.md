@@ -8,7 +8,7 @@ This module contains REST API automation tests utilizing REST Assured, TestNG, G
 api/
 ├── src/main/java/
 │   ├── constants/        # Endpoint paths, headers, and static values (Constants)
-│   └── model/            # Request/response DTOs
+│   └── model/            # Request/Response DTOs
 │       ├── requests/      # Lombok-based request bodies (e.g., CreateUserRequest)
 │       └── responses/     # Lombok-based response bodies (e.g., CreateUserResponse)
 └── src/test/java/         # TestNG test classes, live in the default (unnamed) package

@@ -1,7 +1,7 @@
 package appium.android;
 
 import actions.DeviceActions;
-import appium.BaseMobileTest;
+import appium.common.BaseMobileTest;
 import com.google.inject.Inject;
 import config.MobileConfigLoader;
 import factory.AppiumDriverProvider;

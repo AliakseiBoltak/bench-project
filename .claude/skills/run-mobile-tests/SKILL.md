@@ -32,9 +32,8 @@ Always build core first if any shared configuration classes changed:
 mvn -f core/pom.xml clean install -q
 
 Run tests using explicit platform profiles and suite files:
-mvn -f mobile/pom.xml clean verify -Dplatform=android-17
-mvn -f mobile/pom.xml clean verify -Dplatform=android-16 -DintegrationSuiteXmlFile=smoke-suite
-mvn -f mobile/pom.xml clean verify -Denv=qa -Dplatform=android-17
+mvn -f mobile/pom.xml clean verify -Dplatform=android
+mvn -f mobile/pom.xml clean verify -Dplatform=android -DintegrationSuiteXmlFile=android-smoke-suite
 
 ## Troubleshooting
 

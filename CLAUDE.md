@@ -81,7 +81,7 @@ Each module has its own base class that handles lifecycle setup/teardown:
 - `ui/` → `BaseUiTest`
 - `db/` → `BaseDBTest`
 - `ui-playwright/` → `GitHubBaseTest`
-- `mobile/` → `appium.BaseMobileTest`
+- `mobile/` → `appium.common.BaseMobileTest`
 
 ### Page Object Model
 Used in both `ui` (Selenide) and `ui-playwright` (Playwright). Pages live in each module's `src/main/java/pages/`.
