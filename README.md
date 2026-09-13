@@ -229,7 +229,7 @@ The project integrates with MCP (Multi-Context Platform) configurations to enhan
 
 #### `mcp.json` File
 The `mcp.json` file is the core configuration file for MCP. It contains:
-- **Global Settings:** Shared configurations across all modules.
+- **Global Settings:** Shared configurations across all modules (GitHub Copilot MCP).
 - **Module-Specific Settings:** Custom configurations for Appium, Selenide, and Playwright.
 
 **Note:**  
