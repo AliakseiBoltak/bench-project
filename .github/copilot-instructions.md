@@ -1,6 +1,6 @@
 # Copilot Instructions
 
-Multi-module Maven test automation framework, Java 17. Follow the conventions below — they describe what is already in this repo, not aspirational best practice. Match existing code rather than introducing new patterns.
+Multi-module Maven test automation framework, Java 21. Follow the conventions below — they describe what is already in this repo, not aspirational best practice. Match existing code rather than introducing new patterns.
 
 ## Modules
 
@@ -71,7 +71,7 @@ mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="sh
 
 ## Writing tests
 
-TestNG (not JUnit) + Allure + Guice.
+TestNG + Allure + Guice.
 
 - Class names describe the scenario and end in `Test`; methods are descriptive camelCase.
 - Always set `@Test(description = "...")` with a plain-English sentence — it feeds Allure. Omit only if every other test in that file already omits it (inconsistent today, but prefer adding it for new tests).
