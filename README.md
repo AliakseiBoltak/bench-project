@@ -164,15 +164,15 @@ This opens a report immediately with results from just the current run, with no 
 
       **For Android/IOS (Common suite):**
 
-          mvn -f mobile/pom.xml clean verify -Dplatform=<android|ios>
+          mvn clean verify -Dplatform=<android|ios>
 
       **For Android (Android Specific Suite):**
 
-          mvn -f mobile/pom.xml clean verify -Dplatform=android -DintegrationSuiteXmlFile=android-smoke-suite
+          mvn clean verify -Dplatform=android -DintegrationSuiteXmlFile=android-smoke-suite
 
       **For iOS (iOS Specific Suite):**
 
-          mvn -f mobile/pom.xml clean verify -Dplatform=ios -DintegrationSuiteXmlFile=ios-smoke-suite
+          mvn clean verify -Dplatform=ios -DintegrationSuiteXmlFile=ios-smoke-suite
 
 **Why use `verify` instead of `test` for Mobile?**
 The `mobile` module strictly separates fast architectural unit tests from heavy Appium UI integration tests using Maven's lifecycle phases:
