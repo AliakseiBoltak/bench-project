@@ -57,9 +57,10 @@ Execute the `init_test_db.sql` script in your local MySQL instance. This script 
 ### 2. Running Tests
 The module uses a dedicated TestNG suite named `DB Suite` configured for parallel execution at the class level (`parallel="classes"`). The suite automatically registers `AllureListener` to capture test execution steps
 
-Run the tests via Maven:
-
-    mvn clean test -DsuiteXmlFile=db-suite.xml
+```sh
+cd core && mvn clean install               # required first / after any core change
+mvn clean test
+```
 
 ### Reporting
 

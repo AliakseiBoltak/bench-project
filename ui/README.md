@@ -36,9 +36,10 @@ This module contains browser-based UI automation tests utilizing Selenide, TestN
 
 The module executes tests in parallel at the class level via `ui-suite.xml`[cite: 27]. The default `baseUrl` points to `https://github.com/`, but setting the environment profile to `test` changes it to `https://test.github.com/`[cite: 28].
 
-Run the default suite via Maven:
-
-    mvn clean test
+```sh
+cd core && mvn clean install               # required first / after any core change
+mvn clean test
+```
 
 ### Common JVM Overrides
 

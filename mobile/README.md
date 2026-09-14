@@ -87,6 +87,11 @@ Locally running the mobile module requires an active Android Emulator/Real Devic
 
 ### Command Examples
 
+```sh
+cd core && mvn clean install               # required first / after any core change
+
+```
+
 1. Run Appium tests on Android or IOS (Common suite):
 
    mvn clean verify -Dplatform=android
