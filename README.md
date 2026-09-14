@@ -151,11 +151,12 @@ This opens a report immediately with results from just the current run, with no 
            # For iOS testing, XCUITest driver is required:
            appium driver install xcuitest
 
-  2. Start an Android emulator/IOS Simulator or connect a physical device with USB debugging enabled:
+  2. Start an Android emulator/IOS Simulator or connect a physical device with USB debugging enabled
  
   3.  Confirm it's visible before running tests:
 
-           adb devices or xcrun simctl list devices
+           adb devices  # For Android devices
+           xcrun simctl list devices  # For iOS devices
 
   4. Ensure your device configuration matches a platform block in `env.conf` (e.g.,`android`, `ios`), where you configure `deviceName` and `platformVersion`.
 
