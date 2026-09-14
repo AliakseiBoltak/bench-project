@@ -85,8 +85,6 @@ Locally running the mobile module requires an active Android Emulator/Real Devic
 - -Dplatform: Specifies the device/OS profile from env.conf (e.g., android, ios).
 - -DintegrationSuiteXmlFile: Specifies the TestNG suite XML file located in src/test/resources/suites/ (e.g., android-smoke-suite, common-mobile-smoke-suite).
 
-### Command Examples
-
 ```sh
 cd core && mvn clean install               # required first / after any core change
 
@@ -94,17 +92,22 @@ cd core && mvn clean install               # required first / after any core cha
 
 1. Run Appium tests on Android or IOS (Common suite):
 
+```sh
    mvn clean verify -Dplatform=android
    mvn clean verify -Dplatform=ios
+```
 
 2. Run Android specific tests:
 
+```sh
    mvn clean verify -Dplatform=android -DintegrationSuiteXmlFile=android-smoke-suite
-
+```
+   
 3. Run IOS specific tests:
 
+```sh
    mvn clean verify -Dplatform=ios -DintegrationSuiteXmlFile=ios-smoke-suite
-
+```   
 
 ### Reporting
 Allure history/trend graphs are stored in `mobile/allure-history/` and must be restored/saved around report generation (see root `README.md` for the full explanation of why `allure:report`, not `allure:serve`, is required before saving history):
