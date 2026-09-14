@@ -143,7 +143,7 @@ This opens a report immediately with results from just the current run, with no 
 - **Mobile (Appium/Android/iOS) Tests:**  
   The `mobile` module drives a real Android device/emulator or iOS device/simulator via Appium and needs some one-time setup before running the tests will work:
 
-    1. Install Node.js, then Appium and its drivers:
+    1. First install Node.js, then Appium and its drivers by running the following commands:
 
            npm install -g appium
            # For Android testing, UIAutomator2 driver is required:
@@ -152,18 +152,10 @@ This opens a report immediately with results from just the current run, with no 
            appium driver install xcuitest
 
   2. Start an Android emulator/IOS Simulator or connect a physical device with USB debugging enabled:
+ 
+  3.  Confirm it's visible before running tests:
 
-       ```sh
-       emulator -avd <your_avd_name>          # list AVDs with: emulator -list-avds
-       ```
-
-       *(Note: iOS testing requires a macOS machine and an active iOS Simulator via Xcode or connected IOS device).*
-
-  3.  Confirm it's visible to ADB before running tests:
-
-           adb devices
-
-       You should see a line like `emulator-5554   device` (not `offline`/`unauthorized`).
+           adb devices or xcrun simctl list devices
 
   4. Ensure your device configuration matches a platform block in `env.conf` (e.g.,`android`, `ios`), where you configure `deviceName` and `platformVersion`.
 
@@ -190,7 +182,7 @@ The `mobile` module strictly separates fast architectural unit tests from heavy 
 
 This project is fully integrated with **GitHub Actions** to provide automated testing and reporting on every push and pull request to the `default` branch.
 
-* **Automated Pipeline:** The CI pipeline automatically sets up JDK 17, installs project dependencies (including Playwright browsers), builds the `core` module, and runs the test suites (e.g., `ui-playwright`).
+* **Automated Pipeline:** The CI pipeline automatically sets up JDK 21, installs project dependencies (including Playwright browsers), builds the `core` module, and runs the test suites (e.g., `ui-playwright`).
 * **Allure Report Deployment:** After tests run, the pipeline automatically generates an Allure report. It dynamically restores previous test execution history to maintain test trend statistics, and finally deploys the generated interactive report directly to **GitHub Pages** for easy viewing.
 
 ### 📊 Hosted Reports
@@ -225,11 +217,11 @@ The repository contains specific configurations and operational rules for Anthro
 
 ### 4. MCP Configuration and Integration
 
-The project integrates with MCP (Multi-Context Platform) configurations to enhance automation capabilities across different tools and frameworks. MCP provides a centralized configuration file (`mcp.json`) and project specific settings for Appium, Selenide, and Playwright
+The project integrates with MCP (Model Context Platform) configurations to enhance automation capabilities across different tools and frameworks. MCP provides a centralized configuration file (`mcp.json`) and settings for Appium, Selenide, and Playwright
 
 #### `mcp.json` File
 The `mcp.json` file is the core configuration file for MCP. It contains:
-- **Global Settings:** Shared configurations across all modules (GitHub Copilot MCP).
+- **Global Settings:** Shared configurations across all modules (GitHub Copilot).
 - **Module-Specific Settings:** Custom configurations for Appium, Selenide, and Playwright.
 
 **Note:**  
