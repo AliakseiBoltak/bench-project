@@ -9,7 +9,6 @@ import io.qameta.allure.Allure;
 import model.SmsData;
 import org.testng.annotations.*;
 import org.example.loader.JSONDataLoader;
-import pages.interfaces.SettingsPage;
 import steps.android.AndroidSmsNotificationsSteps;
 
 import java.util.Arrays;
