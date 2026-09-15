@@ -9,11 +9,17 @@ import io.qameta.allure.Allure;
 import model.SmsData;
 import org.testng.annotations.*;
 import org.example.loader.JSONDataLoader;
+import pages.interfaces.SettingsPage;
 import steps.android.AndroidSmsNotificationsSteps;
 
 import java.util.Arrays;
 
 import static constants.Constants.SMS_DATA_PATH;
+
+/**
+ * This test is designed to run exclusively on an Android Emulator
+ * It will not work on a real device because the feature to send SMS is only supported on the Android Emulator.
+ */
 
 public class VerifySmsForAndroidIT extends BaseMobileTest {
 
